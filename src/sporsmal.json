@@ -1,0 +1,114 @@
+[
+  {
+    "sporsmal_id": 0,
+    "type": "mc",
+    "sporsmal_tekst": "Hva er din sivilstatus?",
+    "svar": [
+      {
+        "tekst": "Gift",
+        "goto": 1
+      },
+      {
+        "tekst": "Samboer",
+        "goto": 2
+      },
+      {
+        "tekst": "Skilt, separert eller ugift",
+        "goto": 3
+      },
+      {
+        "tekst": "Gjenlevende ektefelle eller samboer",
+        "goto": 2
+      },
+      {
+        "tekst": "Gjenlevende tidligere ektefelle eller samboer",
+        "goto": 1
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 1,
+    "type": "mc",
+    "sporsmal_tekst": "Hvilken situasjon passer best?",
+    "svar": [
+      {
+        "tekst": "Vi har vært samboere i under 12 måneder",
+        "goto": 0
+      },
+      {
+        "tekst": "Vi har vært samboere i over 12 måneder og/eller vi har barn sammen",
+        "goto": 2
+      },
+      {
+        "tekst": "Samboeren min har vært fengslet i minst 6 måneder",
+        "goto": 2
+      },
+      {
+        "tekst": "Samboeren min er forsvunnet",
+        "goto": 2
+      },
+      {
+        "tekst": "Vi har vært faktisk separert i minst 6 måneder",
+        "goto": 5
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 2,
+    "type": "mc",
+    "sporsmal_tekst": "Hvilken situasjon passer best?",
+    "svar": [
+      {
+        "tekst": "Vi bor sammen",
+        "goto": 0
+      },
+      {
+        "tekst": "Ektefellen min har vært fengslet i minst 6 måneder",
+        "goto": 2
+      },
+      {
+        "tekst": "Ektefellen min er forsvunnet",
+        "goto": 0
+      },
+      {
+        "tekst": "Vi har vært faktisk separert i minst 6 måneder",
+        "goto": 3
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 3,
+    "type": "mc",
+    "sporsmal_tekst": "Er barna du har ansvar for deres felles barn?",
+    "svar": [
+      {
+        "tekst": "Ja",
+        "goto": 0
+      },
+      {
+        "tekst": "Nei, det er avdødes særkullsbarn",
+        "goto": 1
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 4,
+    "type": "date",
+    "sporsmal_tekst": "Når er ditt yngste barn født?"
+  },
+  {
+    "sporsmal_id": 5,
+    "type": "mc",
+    "sporsmal_tekst": "Hvordan er arbeidssituasjonen din?",
+    "svar": [
+      {
+        "tekst": "Er minst 50% i arbeid",
+        "goto": 2
+      },
+      {
+        "tekst": "Er selvstendig næringsdrivende",
+        "goto": 4
+      }
+    ]
+  }
+]
