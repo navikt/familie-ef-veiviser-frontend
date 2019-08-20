@@ -23,3 +23,7 @@ export const parseDate = (str: string, format: string = 'DD.MM.YYYY', locale: st
 
     return undefined;
 };
+
+export const beregnAlderFraFodselsdato = (date: Date) => {
+    return moment().diff(moment(date), 'years')
+};

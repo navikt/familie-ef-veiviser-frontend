@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-import { STANDARD_DATOFORMAT, GYLDIGE_DATOFORMAT, formatDate, parseDate } from '../utils/dato';
+import {STANDARD_DATOFORMAT, GYLDIGE_DATOFORMAT, formatDate, parseDate, beregnAlderFraFodselsdato} from '../utils/dato';
 import moment from 'moment';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
@@ -16,7 +16,7 @@ const Sporsmal = () => {
     const detteSporsmalet = sporsmal[steg];
 
     const handleInputChange = (day: Date): void => {
-        settAlder(moment().diff(moment(day), 'years'));
+        settAlder(beregnAlderFraFodselsdato(day));
     };
 
     return (
