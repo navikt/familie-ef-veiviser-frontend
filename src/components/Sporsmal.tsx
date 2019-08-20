@@ -53,13 +53,15 @@ const Sporsmal = () => {
                 </div>)
             })}
             {detteSporsmalet.type === 'dato' && <div>
-                <DayPickerInput
-                    formatDate={formatDate}
-                    parseDate={parseDate}
-                    format={'YYYY.MM.DD'}
-                    placeholder={`${formatDate(new Date(), 'nb')}`}
-                    onDayChange={handleInputChange}
-                />
+                <div className="datovelger-wrapper">
+                    <DayPickerInput
+                        formatDate={formatDate}
+                        parseDate={parseDate}
+                        format={'YYYY.MM.DD'}
+                        placeholder={`${formatDate(new Date(), 'nb')}`}
+                        onDayChange={handleInputChange}
+                    />
+                </div>
                 <Knapp
                     className="neste-knapp"
                     onClick={() => settSteg(steg + 1)}>
