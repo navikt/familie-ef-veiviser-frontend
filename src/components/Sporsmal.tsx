@@ -1,43 +1,22 @@
 import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import { STANDARD_DATOFORMAT, GYLDIGE_DATOFORMAT, formatDate, parseDate } from '../utils/dato';
+import moment from 'moment';
+import MomentLocaleUtils from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
 
-import 'moment/locale/nb';
-import moment from 'moment';
-
 import sporsmal from '../sporsmal.json';
-
-const DEFAULT_DATEPICKER_FORMAT = 'DD.MM.YYYY';
-const VALID_DATEPICKER_FORMATS = ['DD.MM.YYYY', 'DDMMYYYY', 'DD.MM.YY', 'DDMMYY'];
 
 const Sporsmal = () => {
 
     const [steg, settSteg] = useState<number>(0);
-    const [fodselsdato, settFodselsdato] = useState<Date>(new Date());
+    const [alder, settAlder] = useState<number>(0);
 
     const detteSporsmalet = sporsmal[steg];
 
     const handleInputChange = (day: Date): void => {
-        settFodselsdato(day);
-    };
-
-    const formatDate = (date: Date, locale: string = 'nb') => {
-        const format = DEFAULT_DATEPICKER_FORMAT;
-
-        return moment(date)
-            .locale(locale)
-            .format(Array.isArray(format) ? format[0] : format);
-    };
-
-    const parseDate = (str: string, format: string = 'DD.MM.YYYY', locale: string = 'nb') => {
-        const m = moment(str, VALID_DATEPICKER_FORMATS, locale, true);
-
-        if (m.isValid()) {
-            return m.toDate();
-        }
-
-        return undefined;
+        settAlder(moment().diff(moment(day), 'years'));
     };
 
     return (
@@ -60,6 +39,10 @@ const Sporsmal = () => {
                         format={'YYYY.MM.DD'}
                         placeholder={`${formatDate(new Date(), 'nb')}`}
                         onDayChange={handleInputChange}
+                        dayPickerProps={{
+                            locale: 'nb',
+                            localeUtils: MomentLocaleUtils
+                        }}
                     />
                 </div>
                 <Knapp
