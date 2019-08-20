@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import './App.scss';
 import { Knapp } from 'nav-frontend-knapper';
 
-import sporsmal from './sporsmal.json';
+import sporsmal from '../sporsmal.json';
 
 const Sporsmal = () => {
 

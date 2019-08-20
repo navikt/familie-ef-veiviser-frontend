@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './App.scss';
-import Sporsmal from './Sporsmal';
+import Sporsmal from './components/Sporsmal';
 
 const App = () => {
   return (
