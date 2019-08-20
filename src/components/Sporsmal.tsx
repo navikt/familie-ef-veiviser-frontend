@@ -11,15 +11,18 @@ const Sporsmal = () => {
     const detteSporsmalet = sporsmal[steg];
 
     return (
-        <div className="Question">
+        <>
             <h1>{detteSporsmalet.sporsmal_tekst}</h1>
             {detteSporsmalet.type === 'mc' && detteSporsmalet.svar && detteSporsmalet.svar.map((s, i) => {
                 return (
                     <div key={i}>
-                    <Knapp onClick={() => settSteg(s.goto)}>{s.tekst}</Knapp>
+                    <Knapp
+                        className="sporsmal-knapp"
+                        onClick={() => settSteg(s.goto)}>{s.tekst}
+                        </Knapp>
                 </div>)
             })}
-        </div>
+        </>
     );
 };
 

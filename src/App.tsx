@@ -3,8 +3,8 @@ import Sporsmal from './components/Sporsmal';
 
 const App = () => {
   return (
-    <div className="App">
-      <div className="question-container">
+    <div className="app">
+      <div className="sporsmal-container">
           <Sporsmal />
       </div>
     </div>
