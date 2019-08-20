@@ -1,7 +1,7 @@
 [
   {
     "sporsmal_id": 0,
-    "type": "mc",
+    "type": "flervalg",
     "sporsmal_tekst": "Hva er din sivilstatus?",
     "svar": [
       {
@@ -22,13 +22,13 @@
       },
       {
         "tekst": "Gjenlevende tidligere ektefelle eller samboer",
-        "goto": 1
+        "goto": 4
       }
     ]
   },
   {
     "sporsmal_id": 1,
-    "type": "mc",
+    "type": "flervalg",
     "sporsmal_tekst": "Hvilken situasjon passer best?",
     "svar": [
       {
@@ -55,7 +55,7 @@
   },
   {
     "sporsmal_id": 2,
-    "type": "mc",
+    "type": "flervalg",
     "sporsmal_tekst": "Hvilken situasjon passer best?",
     "svar": [
       {
@@ -78,7 +78,7 @@
   },
   {
     "sporsmal_id": 3,
-    "type": "mc",
+    "type": "flervalg",
     "sporsmal_tekst": "Er barna du har ansvar for deres felles barn?",
     "svar": [
       {
@@ -93,12 +93,12 @@
   },
   {
     "sporsmal_id": 4,
-    "type": "date",
+    "type": "dato",
     "sporsmal_tekst": "Når er ditt yngste barn født?"
   },
   {
     "sporsmal_id": 5,
-    "type": "mc",
+    "type": "flervalg",
     "sporsmal_tekst": "Hvordan er arbeidssituasjonen din?",
     "svar": [
       {
