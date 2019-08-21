@@ -1,12 +1,12 @@
 [
   {
-    "sporsmal_id": 0,
+    "sporsmal_id": 1,
     "type": "flervalg",
     "sporsmal_tekst": "Hva er din sivilstatus?",
     "svar": [
       {
         "tekst": "Gift",
-        "goto": 1
+        "goto": 3
       },
       {
         "tekst": "Samboer",
@@ -14,20 +14,20 @@
       },
       {
         "tekst": "Skilt, separert eller ugift",
-        "goto": 3
-      },
-      {
-        "tekst": "Gjenlevende ektefelle eller samboer",
         "goto": 7
       },
       {
+        "tekst": "Gjenlevende ektefelle eller samboer",
+        "goto": 4
+      },
+      {
         "tekst": "Gjenlevende tidligere ektefelle eller samboer",
-        "goto": 6
+        "goto": 4
       }
     ]
   },
   {
-    "sporsmal_id": 1,
+    "sporsmal_id": 2,
     "type": "flervalg",
     "sporsmal_tekst": "Hvilken situasjon passer best?",
     "svar": [
@@ -54,7 +54,7 @@
     ]
   },
   {
-    "sporsmal_id": 2,
+    "sporsmal_id": 3,
     "type": "flervalg",
     "sporsmal_tekst": "Hvilken situasjon passer best?",
     "svar": [
@@ -77,7 +77,7 @@
     ]
   },
   {
-    "sporsmal_id": 3,
+    "sporsmal_id": 4,
     "type": "flervalg",
     "sporsmal_tekst": "Er barna du har ansvar for deres felles barn?",
     "svar": [
@@ -92,7 +92,7 @@
     ]
   },
   {
-    "sporsmal_id": 4,
+    "sporsmal_id": 5,
     "type": "flervalg",
     "sporsmal_tekst": "Har du daglig omsorg for særkullsbarna som startet før dødsfallet og har fortsatt uten opphold?",
     "svar": [
@@ -107,7 +107,7 @@
     ]
   },
   {
-    "sporsmal_id": 5,
+    "sporsmal_id": 6,
     "type": "flervalg",
     "sporsmal_tekst": "Hvor lenge varte ekteskapet og den daglige omsorgen?",
     "svar": [
@@ -122,27 +122,88 @@
     ]
   },
   {
-    "sporsmal_id": 6,
+    "sporsmal_id": 7,
     "type": "input",
     "sporsmal_tekst": "Hva er den månedlige inntekten din før skatt?"
   },
   {
-    "sporsmal_id": 7,
+    "sporsmal_id": 8,
     "type": "dato",
     "sporsmal_tekst": "Når er ditt yngste barn født?"
   },
   {
-    "sporsmal_id": 8,
+    "sporsmal_id": 9,
+    "type": "flervalg",
+    "sporsmal_tekst": "Bor barnet fast hos deg?",
+    "svar": [
+      {
+        "tekst": "Ja",
+        "goto": 0
+      },
+      {
+        "tekst": "Nei",
+        "goto": 1
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 10,
+    "type": "flervalg",
+    "sporsmal_tekst": "Har barnet/barna delt fast bosted?",
+    "svar": [
+      {
+        "tekst": "Ja",
+        "goto": 0
+      },
+      {
+        "tekst": "Nei",
+        "goto": 1
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 11,
+    "type": "flervalg",
+    "sporsmal_tekst": "Har du minst 60% av den daglige omsorgen?",
+    "svar": [
+      {
+        "tekst": "Ja",
+        "goto": 0
+      },
+      {
+        "tekst": "Nei",
+        "goto": 1
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 12,
     "type": "flervalg",
     "sporsmal_tekst": "Hvordan er arbeidssituasjonen din?",
     "svar": [
       {
         "tekst": "Er minst 50% i arbeid",
-        "goto": 2
+        "goto": 0
       },
       {
         "tekst": "Er selvstendig næringsdrivende",
-        "goto": 4
+        "goto": 1
+      },
+      {
+        "tekst": "Er minst 50% i utdanning",
+        "goto": 0
+      },
+      {
+        "tekst": "Er registrert hos NAV som arbeidssøker",
+        "goto": 1
+      },
+      {
+        "tekst": "Er ikke i arbeid eller utdanning på grunn av særlig tilsynskrevende barn, sykt barn, egen sykdom eller fordi jeg mangler barnetilsyn",
+        "goto": 0
+      },
+      {
+        "tekst": "Ingen av delene",
+        "goto": 1
       }
     ]
   }
