@@ -4,6 +4,7 @@ import { Input } from 'nav-frontend-skjema';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate, beregnAlderFraFodselsdato } from '../utils/dato';
 import MomentLocaleUtils from 'react-day-picker/moment';
+import Informasjonstekst from './Informasjonstekst';
 import 'react-day-picker/lib/style.css';
 
 import sporsmal from '../sporsmal.json';
@@ -24,6 +25,10 @@ const Sporsmal = () => {
         settInntekt(event.target.value);
     };
 
+    const handleFlervalgKlikk = (goto: number): void => {
+        settSteg(goto);
+    };
+
     return (
         <>
             <h1>{detteSporsmalet.sporsmal_tekst}</h1>
@@ -32,7 +37,7 @@ const Sporsmal = () => {
                     <div key={i}>
                     <Knapp
                         className="sporsmal-knapp"
-                        onClick={() => settSteg(s.goto)}>{s.tekst}
+                        onClick={() => handleFlervalgKlikk(s.goto)}>{s.tekst}
                         </Knapp>
                 </div>)
             })}
@@ -69,6 +74,9 @@ const Sporsmal = () => {
                     Neste
                 </Knapp>
             </div>}
+            {
+                <Informasjonstekst steg={steg} />
+            }
         </>
     );
 };
