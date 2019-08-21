@@ -18,11 +18,11 @@
       },
       {
         "tekst": "Gjenlevende ektefelle eller samboer",
-        "goto": 2
+        "goto": 7
       },
       {
         "tekst": "Gjenlevende tidligere ektefelle eller samboer",
-        "goto": 4
+        "goto": 6
       }
     ]
   },
@@ -93,11 +93,46 @@
   },
   {
     "sporsmal_id": 4,
+    "type": "flervalg",
+    "sporsmal_tekst": "Har du daglig omsorg for særkullsbarna som startet før dødsfallet og har fortsatt uten opphold?",
+    "svar": [
+      {
+        "tekst": "Ja",
+        "goto": 0
+      },
+      {
+        "tekst": "Nei",
+        "goto": 1
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 5,
+    "type": "flervalg",
+    "sporsmal_tekst": "Hvor lenge varte ekteskapet og den daglige omsorgen?",
+    "svar": [
+      {
+        "tekst": "Under 5 år",
+        "goto": 0
+      },
+      {
+        "tekst": "Over 5 år",
+        "goto": 1
+      }
+    ]
+  },
+  {
+    "sporsmal_id": 6,
+    "type": "input",
+    "sporsmal_tekst": "Hva er den månedlige inntekten din før skatt?"
+  },
+  {
+    "sporsmal_id": 7,
     "type": "dato",
     "sporsmal_tekst": "Når er ditt yngste barn født?"
   },
   {
-    "sporsmal_id": 5,
+    "sporsmal_id": 8,
     "type": "flervalg",
     "sporsmal_tekst": "Hvordan er arbeidssituasjonen din?",
     "svar": [

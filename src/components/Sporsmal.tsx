@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
+import { Input } from 'nav-frontend-skjema';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-import {STANDARD_DATOFORMAT, GYLDIGE_DATOFORMAT, formatDate, parseDate, beregnAlderFraFodselsdato} from '../utils/dato';
-import moment from 'moment';
+import { formatDate, parseDate, beregnAlderFraFodselsdato } from '../utils/dato';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'react-day-picker/lib/style.css';
 
@@ -12,11 +12,16 @@ const Sporsmal = () => {
 
     const [steg, settSteg] = useState<number>(0);
     const [alder, settAlder] = useState<number>(0);
+    const [inntekt, settInntekt] = useState<number>(0);
 
     const detteSporsmalet = sporsmal[steg];
 
-    const handleInputChange = (day: Date): void => {
+    const handleDateInputChange = (day: Date): void => {
         settAlder(beregnAlderFraFodselsdato(day));
+    };
+
+    const handleInputChange = (event: any): void => {
+        settInntekt(event.target.value);
     };
 
     return (
@@ -38,13 +43,26 @@ const Sporsmal = () => {
                         parseDate={parseDate}
                         format={'YYYY.MM.DD'}
                         placeholder={`${formatDate(new Date(), 'nb')}`}
-                        onDayChange={handleInputChange}
+                        onDayChange={handleDateInputChange}
                         dayPickerProps={{
                             locale: 'nb',
                             localeUtils: MomentLocaleUtils
                         }}
                     />
                 </div>
+                <Knapp
+                    className="neste-knapp"
+                    onClick={() => settSteg(steg + 1)}>
+                    Neste
+                </Knapp>
+            </div>}
+            {detteSporsmalet.type === 'input' && <div>
+                <Input
+                    label={''}
+                    bredde="M"
+                    type="number"
+                    onChange={handleInputChange}
+                />
                 <Knapp
                     className="neste-knapp"
                     onClick={() => settSteg(steg + 1)}>

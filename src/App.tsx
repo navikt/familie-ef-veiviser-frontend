@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sporsmal from './components/Sporsmal';
 
 const App = () => {
