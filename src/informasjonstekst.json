@@ -1,0 +1,10 @@
+[
+  {
+    "svar_id": 1,
+    "body": "<h2>Det ser ut til at du kan ha tilgang på</h2>"
+  },
+  {
+    "svar_id": 2,
+    "body": "<h2>Det ser ikke ut til at du har tilgang på</h2>"
+  }
+]

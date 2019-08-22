@@ -4,17 +4,22 @@ import { Input } from 'nav-frontend-skjema';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate, beregnAlderFraFodselsdato } from '../utils/dato';
 import MomentLocaleUtils from 'react-day-picker/moment';
+import Informasjonstekst from './Informasjonstekst';
 import 'react-day-picker/lib/style.css';
 
 import sporsmal from '../sporsmal.json';
 
-const Sporsmal = () => {
+interface SporsmalProps {
+    steg: number,
+    settSteg: (active: number) => void,
+    settAlder: (alder: number) => void,
+    settFerdig: (ferdig: boolean) => void,
+    settInntekt: (inntekt: number) => void
+}
 
-    const [steg, settSteg] = useState<number>(0);
-    const [alder, settAlder] = useState<number>(0);
-    const [inntekt, settInntekt] = useState<number>(0);
+const Sporsmal: React.FC<SporsmalProps> = ({ steg, settSteg, settAlder, settInntekt, settFerdig }) => {
 
-    const detteSporsmalet = sporsmal[steg];
+    const detteSporsmalet = sporsmal.find((s) => s.sporsmal_id === steg) || sporsmal[0];
 
     const handleDateInputChange = (day: Date): void => {
         settAlder(beregnAlderFraFodselsdato(day));
@@ -22,6 +27,16 @@ const Sporsmal = () => {
 
     const handleInputChange = (event: any): void => {
         settInntekt(event.target.value);
+    };
+
+    const handleFlervalgKlikk = (svar: any): void => {
+        if (svar.ferdig) {
+            settFerdig(true);
+        }
+
+        const nesteSteg = svar.goto || steg + 1;
+
+        settSteg(nesteSteg);
     };
 
     return (
@@ -32,7 +47,7 @@ const Sporsmal = () => {
                     <div key={i}>
                     <Knapp
                         className="sporsmal-knapp"
-                        onClick={() => settSteg(s.goto)}>{s.tekst}
+                        onClick={() => handleFlervalgKlikk(s)}>{s.tekst}
                         </Knapp>
                 </div>)
             })}
