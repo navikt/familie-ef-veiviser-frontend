@@ -11,7 +11,7 @@ const App = () => {
 
     return (
         <div className="app">
-            <div className="sporsmal-container">
+            <div className="innholdscontainer">
                 {ferdig ?
                     <Informasjonstekst
                         steg={steg}

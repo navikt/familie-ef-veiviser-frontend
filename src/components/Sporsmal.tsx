@@ -4,7 +4,6 @@ import { Input } from 'nav-frontend-skjema';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate, beregnAlderFraFodselsdato } from '../utils/dato';
 import MomentLocaleUtils from 'react-day-picker/moment';
-import Informasjonstekst from './Informasjonstekst';
 import 'react-day-picker/lib/style.css';
 
 import sporsmal from '../sporsmal.json';
@@ -29,7 +28,7 @@ const Sporsmal: React.FC<SporsmalProps> = ({ steg, settSteg, settAlder, settInnt
         settInntekt(event.target.value);
     };
 
-    const handleFlervalgKlikk = (svar: any): void => {
+    const handleNesteKlikk = (svar: any): void => {
         if (svar.ferdig) {
             settFerdig(true);
         }
@@ -47,7 +46,7 @@ const Sporsmal: React.FC<SporsmalProps> = ({ steg, settSteg, settAlder, settInnt
                     <div key={i}>
                     <Knapp
                         className="sporsmal-knapp"
-                        onClick={() => handleFlervalgKlikk(s)}>{s.tekst}
+                        onClick={() => handleNesteKlikk(s)}>{s.tekst}
                         </Knapp>
                 </div>)
             })}
@@ -67,7 +66,7 @@ const Sporsmal: React.FC<SporsmalProps> = ({ steg, settSteg, settAlder, settInnt
                 </div>
                 <Knapp
                     className="neste-knapp"
-                    onClick={() => settSteg(steg + 1)}>
+                    onClick={() => handleNesteKlikk(detteSporsmalet)}>
                     Neste
                 </Knapp>
             </div>}
@@ -80,7 +79,7 @@ const Sporsmal: React.FC<SporsmalProps> = ({ steg, settSteg, settAlder, settInnt
                 />
                 <Knapp
                     className="neste-knapp"
-                    onClick={() => settSteg(steg + 1)}>
+                    onClick={() => handleNesteKlikk(detteSporsmalet)}>
                     Neste
                 </Knapp>
             </div>}
