@@ -18,11 +18,11 @@
       },
       {
         "tekst": "Gjenlevende ektefelle eller samboer",
-        "goto": 4
+        "goto": 7
       },
       {
         "tekst": "Gjenlevende tidligere ektefelle eller samboer",
-        "goto": 4
+        "goto": 8
       }
     ]
   },
@@ -33,7 +33,7 @@
     "svar": [
       {
         "tekst": "Vi har vært samboere i under 12 måneder",
-        "goto": 0
+        "goto": 1
       },
       {
         "tekst": "Vi har vært samboere i over 12 måneder og/eller vi har barn sammen",
@@ -60,7 +60,7 @@
     "svar": [
       {
         "tekst": "Vi bor sammen",
-        "goto": 0
+        "goto": 1
       },
       {
         "tekst": "Ektefellen min har vært fengslet i minst 6 måneder",
@@ -83,7 +83,7 @@
     "svar": [
       {
         "tekst": "Ja",
-        "goto": 0
+        "goto": 3
       },
       {
         "tekst": "Nei, det er avdødes særkullsbarn",
@@ -98,7 +98,7 @@
     "svar": [
       {
         "tekst": "Ja",
-        "goto": 0
+        "goto": 2
       },
       {
         "tekst": "Nei",
@@ -113,7 +113,7 @@
     "svar": [
       {
         "tekst": "Under 5 år",
-        "goto": 0
+        "goto": 5
       },
       {
         "tekst": "Over 5 år",
@@ -124,12 +124,14 @@
   {
     "sporsmal_id": 7,
     "type": "input",
-    "sporsmal_tekst": "Hva er den månedlige inntekten din før skatt?"
+    "sporsmal_tekst": "Hva er den månedlige inntekten din før skatt?",
+    "goto": 8
   },
   {
     "sporsmal_id": 8,
     "type": "dato",
-    "sporsmal_tekst": "Når er ditt yngste barn født?"
+    "sporsmal_tekst": "Når er ditt yngste barn født?",
+    "goto": 10
   },
   {
     "sporsmal_id": 9,
@@ -138,7 +140,8 @@
     "svar": [
       {
         "tekst": "Ja",
-        "goto": 0
+        "goto": 2,
+        "ferdig": true
       },
       {
         "tekst": "Nei",
@@ -153,7 +156,7 @@
     "svar": [
       {
         "tekst": "Ja",
-        "goto": 0
+        "goto": 2
       },
       {
         "tekst": "Nei",
@@ -168,7 +171,7 @@
     "svar": [
       {
         "tekst": "Ja",
-        "goto": 0
+        "goto": 3
       },
       {
         "tekst": "Nei",
@@ -183,7 +186,7 @@
     "svar": [
       {
         "tekst": "Er minst 50% i arbeid",
-        "goto": 0
+        "goto": 3
       },
       {
         "tekst": "Er selvstendig næringsdrivende",
@@ -199,7 +202,7 @@
       },
       {
         "tekst": "Er ikke i arbeid eller utdanning på grunn av særlig tilsynskrevende barn, sykt barn, egen sykdom eller fordi jeg mangler barnetilsyn",
-        "goto": 0
+        "goto": 4
       },
       {
         "tekst": "Ingen av delene",
