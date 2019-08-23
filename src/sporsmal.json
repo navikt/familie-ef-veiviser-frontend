@@ -6,7 +6,7 @@
     "svar": [
       {
         "tekst": "Gift",
-        "goto": 3
+        "goto": 2
       },
       {
         "tekst": "Samboer",
@@ -37,15 +37,16 @@
       },
       {
         "tekst": "Vi har vært samboere i over 12 måneder og/eller vi har barn sammen",
-        "goto": 2
+        "goto": 1,
+        "ferdig": true
       },
       {
         "tekst": "Samboeren min har vært fengslet i minst 6 måneder",
-        "goto": 2
+        "goto": 3
       },
       {
         "tekst": "Samboeren min er forsvunnet",
-        "goto": 2
+        "goto": 4
       },
       {
         "tekst": "Vi har vært faktisk separert i minst 6 måneder",
