@@ -24,6 +24,7 @@ const App = () => {
                         settInntekt={settInntekt}
                         settFerdig={settFerdig}
                         steg={steg}
+                        inntekt={inntekt}
                     />}
             </div>
         </div>

@@ -10,13 +10,14 @@ import sporsmal from '../sporsmal.json';
 
 interface SporsmalProps {
     steg: number,
+    inntekt: number,
     settSteg: (active: number) => void,
     settAlder: (alder: number) => void,
     settFerdig: (ferdig: boolean) => void,
     settInntekt: (inntekt: number) => void
 }
 
-const Sporsmal: React.FC<SporsmalProps> = ({ steg, settSteg, settAlder, settInntekt, settFerdig }) => {
+const Sporsmal: React.FC<SporsmalProps> = ({ inntekt, steg, settSteg, settAlder, settInntekt, settFerdig }) => {
 
     const detteSporsmalet = sporsmal.find((s) => s.sporsmal_id === steg) || sporsmal[0];
 
@@ -72,6 +73,7 @@ const Sporsmal: React.FC<SporsmalProps> = ({ steg, settSteg, settAlder, settInnt
             </div>}
             {detteSporsmalet.type === 'input' && <div>
                 <Input
+                    value={inntekt}
                     label={''}
                     bredde="M"
                     type="number"
