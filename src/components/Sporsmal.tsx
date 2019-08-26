@@ -75,6 +75,7 @@ const Sporsmal: React.FC<SporsmalProps> = ({ inntekt, steg, settSteg, settAlder,
                 <Input
                     value={inntekt}
                     label={''}
+                    step={10000}
                     bredde="M"
                     type="number"
                     onChange={handleInputChange}
