@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import 'react-day-picker/lib/style.css';
+import React from 'react';
 import Tekstomrade from 'nav-frontend-tekstomrade';
 import { Panel } from 'nav-frontend-paneler';
 import informasjonstekst from '../informasjonstekst.json';
 
 interface InformasjonstekstProps {
-    steg: number,
-    alder: number,
-    inntekt: number
+    steg: number
 }
 
-const Informasjonstekst: React.FC<InformasjonstekstProps> = ({ steg, alder, inntekt }) => {
+const Informasjonstekst: React.FC<InformasjonstekstProps> = ({ steg }) => {
 
     const infotekst = informasjonstekst.find((s) => s.svar_id === steg) || informasjonstekst[0];
 

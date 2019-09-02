@@ -1,7 +1,6 @@
 [
   {
     "sporsmal_id": 1,
-    "type": "flervalg",
     "sporsmal_tekst": "Hva er din sivilstatus?",
     "svar": [
       {
@@ -28,7 +27,6 @@
   },
   {
     "sporsmal_id": 2,
-    "type": "flervalg",
     "sporsmal_tekst": "Hvilken situasjon passer best?",
     "svar": [
       {
@@ -56,7 +54,6 @@
   },
   {
     "sporsmal_id": 3,
-    "type": "flervalg",
     "sporsmal_tekst": "Hvilken situasjon passer best?",
     "svar": [
       {
@@ -79,7 +76,6 @@
   },
   {
     "sporsmal_id": 4,
-    "type": "flervalg",
     "sporsmal_tekst": "Er barna du har ansvar for deres felles barn?",
     "svar": [
       {
@@ -94,7 +90,6 @@
   },
   {
     "sporsmal_id": 5,
-    "type": "flervalg",
     "sporsmal_tekst": "Har du daglig omsorg for særkullsbarna som startet før dødsfallet og har fortsatt uten opphold?",
     "svar": [
       {
@@ -109,7 +104,6 @@
   },
   {
     "sporsmal_id": 6,
-    "type": "flervalg",
     "sporsmal_tekst": "Hvor lenge varte ekteskapet og den daglige omsorgen?",
     "svar": [
       {
@@ -123,20 +117,7 @@
     ]
   },
   {
-    "sporsmal_id": 7,
-    "type": "input",
-    "sporsmal_tekst": "Hva er den månedlige inntekten din før skatt?",
-    "goto": 8
-  },
-  {
-    "sporsmal_id": 8,
-    "type": "dato",
-    "sporsmal_tekst": "Når er ditt yngste barn født?",
-    "goto": 10
-  },
-  {
     "sporsmal_id": 9,
-    "type": "flervalg",
     "sporsmal_tekst": "Bor barnet fast hos deg?",
     "svar": [
       {
@@ -152,7 +133,6 @@
   },
   {
     "sporsmal_id": 10,
-    "type": "flervalg",
     "sporsmal_tekst": "Har barnet/barna delt fast bosted?",
     "svar": [
       {
@@ -167,7 +147,6 @@
   },
   {
     "sporsmal_id": 11,
-    "type": "flervalg",
     "sporsmal_tekst": "Har du minst 60% av den daglige omsorgen?",
     "svar": [
       {
@@ -182,7 +161,6 @@
   },
   {
     "sporsmal_id": 12,
-    "type": "flervalg",
     "sporsmal_tekst": "Hvordan er arbeidssituasjonen din?",
     "svar": [
       {
