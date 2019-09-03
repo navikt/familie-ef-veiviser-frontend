@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Sporsmal from './components/Sporsmal';
 import Informasjonstekst from './components/Informasjonstekst';
+import NavFrontendSpinner from 'nav-frontend-spinner';
+import Feilside from './components/Feilside';
+import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 
 const sanityClient = require('@sanity/client');
 
@@ -14,46 +17,59 @@ const App = () => {
     const [sporsmalListe, settSporsmalListe] = useState<any>([]);
     const [ferdig, settFerdig] = useState<boolean>(false);
     const [steg, settSteg] = useState<number>(1);
+    const [fetching, settFetching] = useState<boolean>(true);
+    const [error, settError] = useState<boolean>(false);
 
     useEffect(() => {
-        client
-            .fetch(
-                '*[_type == $type]',
-                {type: 'question'}
-            )
-            .then((res: any) => {
-                settSporsmalListe(res);
-            })
-            .catch((err: any) => {
-                console.error('Oh no, error occured: ', err)
-            })
-    });
+        const fetchData = () => {
+            client
+                .fetch(
+                    '*[_type == $type]',
+                    {type: 'question'}
+                )
+                .then((res: any) => {
+                    settError(true);
+                    settSporsmalListe(res);
+                })
+                .catch((err: any) => {
+                    console.error('Oh no, error occured: ', err);
+                    settError(true);
+                });
 
-    if (sporsmalListe && sporsmalListe.length) {
-        console.log("liste");
-        console.log(sporsmalListe);
+            settFetching(false);
+        };
 
+        fetchData();
+    }, []);
+
+    if (fetching) {
         return (
-            <div className="app">
-                <div className="innholdscontainer">
-                    {ferdig ?
-                        <Informasjonstekst
-                            steg={steg}
-                        /> :
-                        <Sporsmal
-                            sporsmal={sporsmalListe}
-                            settSteg={settSteg}
-                            settFerdig={settFerdig}
-                            steg={steg}
-                        />}
-                </div>
-            </div>
-        );
-    } else {
-        return (
-            <div>Venter</div>
+            <NavFrontendSpinner className="spinner" />
         )
     }
+
+    if (!error && sporsmalListe && sporsmalListe.length) {
+            return (
+                <div className="app">
+                    <div className="innholdscontainer">
+                        {ferdig ?
+                            <Informasjonstekst
+                                steg={steg}
+                            /> :
+                            <Sporsmal
+                                sporsmal={sporsmalListe}
+                                settSteg={settSteg}
+                                settFerdig={settFerdig}
+                                steg={steg}
+                            />}
+                    </div>
+                </div>
+    );
+    } else if (error) {
+        return <Feilside />
+    }
+
+    return null;
 };
 
 export default App;
