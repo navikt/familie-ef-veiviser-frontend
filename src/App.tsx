@@ -3,7 +3,6 @@ import Sporsmal from './components/Sporsmal';
 import Informasjonstekst from './components/Informasjonstekst';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/Feilside';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 
 const sanityClient = require('@sanity/client');
 
@@ -28,7 +27,6 @@ const App = () => {
                     {type: 'question'}
                 )
                 .then((res: any) => {
-                    settError(true);
                     settSporsmalListe(res);
                 })
                 .catch((err: any) => {
