@@ -3,11 +3,11 @@ import Tekstomrade from 'nav-frontend-tekstomrade';
 import { Panel } from 'nav-frontend-paneler';
 import informasjonstekst from '../informasjonstekst.json';
 
-interface InformasjonstekstProps {
+interface IInformasjonstekstProps {
     steg: number
 }
 
-const Informasjonstekst: React.FC<InformasjonstekstProps> = ({ steg }) => {
+const Informasjonstekst: React.FC<IInformasjonstekstProps> = ({ steg }) => {
 
     const infotekst = informasjonstekst.find((s) => s.svar_id === steg) || informasjonstekst[0];
 

@@ -1,18 +1,19 @@
 import React from 'react';
 import { Knapp } from 'nav-frontend-knapper';
+import { ISporsmal, ISvar } from '../models/Sporsmal';
 
-interface SporsmalProps {
+interface ISporsmalProps {
     steg: number,
     settSteg: (active: number) => void,
     settFerdig: (ferdig: boolean) => void,
-    sporsmal: any
+    sporsmalListe: ISporsmal[]
 }
 
-const Sporsmal: React.FC<SporsmalProps> = ({ sporsmal, steg, settSteg, settFerdig }) => {
+const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, settFerdig }) => {
 
-    const detteSporsmalet = sporsmal.find((s: any) => s.sporsmal_id === steg) || sporsmal[0];
+    const detteSporsmalet = sporsmalListe.find((sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg) || sporsmalListe[0];
 
-    const handleNesteKlikk = (svar: any): void => {
+    const handleNesteKlikk = (svar: ISvar): void => {
         if (svar.ferdig) {
             settFerdig(true);
         }
@@ -25,7 +26,7 @@ const Sporsmal: React.FC<SporsmalProps> = ({ sporsmal, steg, settSteg, settFerdi
     return (
         <>
             <h1>{detteSporsmalet.sporsmal_tekst}</h1>
-            {detteSporsmalet.svarliste.map((svar: any, i: any) => {
+            {detteSporsmalet.svarliste.map((svar: ISvar, i: number) => {
                 return (
                     <div key={i}>
                     <Knapp

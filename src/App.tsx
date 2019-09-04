@@ -55,7 +55,7 @@ const App = () => {
                                 steg={steg}
                             /> :
                             <Sporsmal
-                                sporsmal={sporsmalListe}
+                                sporsmalListe={sporsmalListe}
                                 settSteg={settSteg}
                                 settFerdig={settFerdig}
                                 steg={steg}
