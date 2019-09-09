@@ -12,7 +12,8 @@ interface ISporsmalProps {
 const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, settFerdig }) => {
 
     const [state, settState]: any = useState({
-        sporsmalPath: []
+        sporsmalPath: [],
+        radioCheckedStatus: {}
     });
 
     const detteSporsmalet = sporsmalListe.find((sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg) || sporsmalListe[0];
@@ -20,9 +21,15 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
     state.sporsmalPath.push(detteSporsmalet);
 
     const handleNesteKlikk = (e: any, sporsmal: ISporsmal, svar: ISvar): void => {
+        const radioCheckedStatus: any = {};
+
+        sporsmal.svarliste.forEach((svarElement) => {
+            radioCheckedStatus[svarElement.tekst] = svarElement.tekst === svar.tekst;
+        });
+
         settState({
             ...state,
-            [e.target.name]: e.target.checked
+            radioCheckedStatus
         });
 
         const sporsmalIndeks = state.sporsmalPath.findIndex((s: any) => s.sporsmal_id === sporsmal.sporsmal_id);
@@ -38,10 +45,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
         settSteg(nesteSteg);
     };
 
-    console.log(state.sporsmalPath);
-
     return (state.sporsmalPath.map((sporsmal: any) => {
-
         return (
             <div className="sporsmal-element">
                 <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
@@ -55,7 +59,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
                                 value={svar.tekst}
                                 label={svar.tekst}
                                 name={svar.tekst}
-                                checked={state[svar.tekst]}
+                                checked={state.radioCheckedStatus[svar.tekst]}
                                 onChange={(e) => handleNesteKlikk(e, sporsmal, svar)} />
                         </div>)
                 })}
