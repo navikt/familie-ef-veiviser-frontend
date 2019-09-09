@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Knapp } from 'nav-frontend-knapper';
 import { ISporsmal, ISvar } from '../models/Sporsmal';
+import { RadioPanel } from 'nav-frontend-skjema';
 
 interface ISporsmalProps {
     steg: number,
@@ -11,16 +11,23 @@ interface ISporsmalProps {
 
 const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, settFerdig }) => {
 
-    const [sporsmalPath, settSporsmalPath] = useState<any>([]);
+    const [state, settState]: any = useState({
+        sporsmalPath: []
+    });
 
     const detteSporsmalet = sporsmalListe.find((sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg) || sporsmalListe[0];
 
-    sporsmalPath.push(detteSporsmalet);
+    state.sporsmalPath.push(detteSporsmalet);
 
-    const handleNesteKlikk = (sporsmal: ISporsmal, svar: ISvar): void => {
-        const sporsmalIndeks = sporsmalPath.findIndex((s: any) => s.sporsmal_id === sporsmal.sporsmal_id);
+    const handleNesteKlikk = (e: any, sporsmal: ISporsmal, svar: ISvar): void => {
+        settState({
+            ...state,
+            [e.target.name]: e.target.checked
+        });
 
-        sporsmalPath.length = sporsmalIndeks + 1;
+        const sporsmalIndeks = state.sporsmalPath.findIndex((s: any) => s.sporsmal_id === sporsmal.sporsmal_id);
+
+        state.sporsmalPath.length = sporsmalIndeks + 1;
 
         if (svar.ferdig) {
             settFerdig(true);
@@ -31,20 +38,28 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
         settSteg(nesteSteg);
     };
 
-    return (sporsmalPath.map((sporsmal: any) => {
+    console.log(state.sporsmalPath);
+
+    return (state.sporsmalPath.map((sporsmal: any) => {
+
         return (
-            <>
-                <h1>{sporsmal.sporsmal_tekst}</h1>
+            <div className="sporsmal-element">
+                <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
                 {sporsmal.svarliste.map((svar: ISvar, i: number) => {
                     return (
-                        <div key={i}>
-                            <Knapp
-                                className="sporsmal-knapp"
-                                onClick={() => handleNesteKlikk(sporsmal, svar)}>{svar.tekst}
-                            </Knapp>
+                        <div
+                            key={i}
+                            className="radioknapp-wrapper"
+                        >
+                            <RadioPanel
+                                value={svar.tekst}
+                                label={svar.tekst}
+                                name={svar.tekst}
+                                checked={state[svar.tekst]}
+                                onChange={(e) => handleNesteKlikk(e, sporsmal, svar)} />
                         </div>)
                 })}
-            </>
+            </div>
         );
     }));
 };
