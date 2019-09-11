@@ -9,9 +9,18 @@ interface ISporsmalProps {
     sporsmalListe: ISporsmal[],
 }
 
+interface IRadioCheckedStatus {
+    [key: string]: boolean;
+}
+
+interface ISporsmalState {
+    sporsmalPath: ISporsmal[],
+    radioCheckedStatus: IRadioCheckedStatus
+}
+
 const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, settFerdig }) => {
 
-    const [state, settState]: any = useState({
+    const [state, settState] = useState<any>({
         sporsmalPath: [],
         radioCheckedStatus: {}
     });
@@ -21,16 +30,19 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
     state.sporsmalPath.push(detteSporsmalet);
 
     const handleNesteKlikk = (e: any, sporsmal: ISporsmal, svar: ISvar): void => {
-        const radioCheckedStatus: any = {};
+        const newRadioCheckedStatus: any = {};
 
         sporsmal.svarliste.forEach((svarElement) => {
-            radioCheckedStatus[svarElement.tekst] = svarElement.tekst === svar.tekst;
+            newRadioCheckedStatus[svarElement._key] = svarElement._key === svar._key;
         });
 
-        settState({
-            ...state,
-            radioCheckedStatus
-        });
+        settState((prevState: ISporsmalState) => ({
+            ...prevState,
+            radioCheckedStatus: {
+                ...newRadioCheckedStatus,
+                ...prevState.radioCheckedStatus
+            }
+        }));
 
         const sporsmalIndeks = state.sporsmalPath.findIndex((s: any) => s.sporsmal_id === sporsmal.sporsmal_id);
 
@@ -59,7 +71,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
                                 value={svar.tekst}
                                 label={svar.tekst}
                                 name={svar.tekst}
-                                checked={state.radioCheckedStatus[svar.tekst]}
+                                checked={state.radioCheckedStatus[svar._key]}
                                 onChange={(e) => handleNesteKlikk(e, sporsmal, svar)} />
                         </div>)
                 })}

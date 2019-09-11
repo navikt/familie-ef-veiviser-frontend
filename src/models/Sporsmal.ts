@@ -5,6 +5,7 @@ export interface ISporsmal {
 }
 
 export interface ISvar {
+    _key: string,
     goto: number,
     tekst: string
     ferdig?: boolean
