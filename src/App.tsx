@@ -3,6 +3,8 @@ import Sporsmal from './components/Sporsmal';
 import Informasjonstekst from './components/Informasjonstekst';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/Feilside';
+import Header from './components/Header';
+import { Panel } from 'nav-frontend-paneler';
 
 const sanityClient = require('@sanity/client');
 
@@ -49,18 +51,21 @@ const App = () => {
     if (!error && sporsmalListe && sporsmalListe.length) {
             return (
                 <div className="app">
-                    <div className="innholdscontainer">
-                        {ferdig ?
-                            <Informasjonstekst
-                                steg={steg}
-                            /> :
-                            <Sporsmal
-                                sporsmalListe={sporsmalListe}
-                                settSteg={settSteg}
-                                settFerdig={settFerdig}
-                                steg={steg}
-                            />}
-                    </div>
+                    <Panel className="innholdspanel">
+                        <div className="innholdscontainer">
+                        <Header />
+                            {ferdig ?
+                                <Informasjonstekst
+                                    steg={steg}
+                                /> :
+                                <Sporsmal
+                                    sporsmalListe={sporsmalListe}
+                                    settSteg={settSteg}
+                                    settFerdig={settFerdig}
+                                    steg={steg}
+                                />}
+                        </div>
+                    </Panel>
                 </div>
     );
     } else if (error) {
