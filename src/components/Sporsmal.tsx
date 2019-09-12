@@ -25,7 +25,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
         radioCheckedStatus: {}
     });
 
-    const detteSporsmalet = sporsmalListe.find((sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg) || sporsmalListe[0];
+    const detteSporsmalet = sporsmalListe.find((sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg);
 
     state.sporsmalPath.push(detteSporsmalet);
 
@@ -59,18 +59,18 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
 
     return (state.sporsmalPath.map((sporsmal: any) => {
         return (
-            <div className="sporsmal-element">
+            <div key={sporsmal._key} className="sporsmal-element">
                 <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
-                {sporsmal.svarliste.map((svar: ISvar, i: number) => {
+                {sporsmal.svarliste.map((svar: ISvar) => {
                     return (
                         <div
-                            key={i}
+                            key={svar._key}
                             className="radioknapp-wrapper"
                         >
                             <RadioPanel
                                 value={svar.tekst}
                                 label={svar.tekst}
-                                name={svar.tekst}
+                                name={svar._key}
                                 checked={state.radioCheckedStatus[svar._key]}
                                 onChange={(e) => handleNesteKlikk(e, sporsmal, svar)} />
                         </div>)

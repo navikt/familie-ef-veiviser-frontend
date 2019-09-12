@@ -10,7 +10,8 @@ const sanityClient = require('@sanity/client');
 
 const client = sanityClient({
     projectId: process.env.REACT_APP_SANITY_ID,
-    dataset: process.env.REACT_APP_SANITY_DATASET
+    dataset: process.env.REACT_APP_SANITY_DATASET,
+    useCdn: true
 });
 
 const App = () => {
