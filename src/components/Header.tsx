@@ -2,6 +2,11 @@ import React, {useEffect, useState} from 'react';
 import CustomSVG from '../utils/CustomSVG';
 import SvgMask from "./svg-mask/SvgMask";
 import { client } from '../utils/sanity';
+import NavFrontendSpinner from "nav-frontend-spinner";
+import {Panel} from "nav-frontend-paneler";
+import Informasjonstekst from "./Informasjonstekst";
+import Sporsmal from "./Sporsmal";
+import Feilside from "./Feilside";
 
 const signSVG = require('../assets/icons/ark-veiviser.svg');
 
@@ -15,7 +20,7 @@ const Header = () => {
         const fetchData = () => {
             client
                 .fetch(
-                    '*[_type == $type]',
+                    '*[_type == $type][0]',
                     {type: 'header'}
                 )
                 .then((res: any) => {
@@ -32,14 +37,27 @@ const Header = () => {
         fetchData();
     }, []);
 
-    return (
-        <div className="veiviser-header">
-            <h2>Kan jeg søke stønad som enslig mor eller far?</h2>
-            <hr />
-            <p>Som enslig mor eller far, kan du få overgangsstønad og stønad til barnetilsyn. I forbindelse med arbeidssøking og utdanning, kan du også få stønad til skolepenger, læremidler og reise.</p>
-            <p>Sjekk hvilke av disse du kan søke om i din situasjon.</p>
-        </div>
-    );
+    if (fetching) {
+        return (
+            <NavFrontendSpinner className="spinner" />
+        )
+    }
+
+    if (!error && info && info.ingress && info.overskrift) {
+        const ingressLinjer = info.ingress.split(/\r?\n/);
+
+        return (
+            <div className="veiviser-header">
+                <h2>{info.overskrift}</h2>
+                <hr />
+                {ingressLinjer.map((linje: string) => <p key={linje}>{linje}</p>)}
+            </div>
+        );
+    } else if (error) {
+        return <Feilside />
+    }
+
+    return null;
 };
 
 export default Header;
