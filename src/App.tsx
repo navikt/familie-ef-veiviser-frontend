@@ -5,14 +5,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/Feilside';
 import Header from './components/Header';
 import { Panel } from 'nav-frontend-paneler';
-
-const sanityClient = require('@sanity/client');
-
-const client = sanityClient({
-    projectId: process.env.REACT_APP_SANITY_ID,
-    dataset: process.env.REACT_APP_SANITY_DATASET,
-    useCdn: true
-});
+import { client } from './utils/sanity';
 
 const App = () => {
 

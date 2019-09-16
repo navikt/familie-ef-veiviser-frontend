@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { ISporsmal, ISvar } from '../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
 
@@ -52,14 +52,12 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
             settFerdig(true);
         }
 
-        const nesteSteg = svar.goto || steg + 1;
-
-        settSteg(nesteSteg);
+        settSteg(svar.goto);
     };
 
     return (state.sporsmalPath.map((sporsmal: any) => {
         return (
-            <div key={sporsmal._key} className="sporsmal-element">
+            <div key={sporsmal._id} className="sporsmal-element">
                 <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
                 {sporsmal.svarliste.map((svar: ISvar) => {
                     return (
