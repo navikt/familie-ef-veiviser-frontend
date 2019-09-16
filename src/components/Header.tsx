@@ -3,10 +3,8 @@ import CustomSVG from '../utils/CustomSVG';
 import SvgMask from "./svg-mask/SvgMask";
 import { client } from '../utils/sanity';
 import NavFrontendSpinner from "nav-frontend-spinner";
-import {Panel} from "nav-frontend-paneler";
-import Informasjonstekst from "./Informasjonstekst";
-import Sporsmal from "./Sporsmal";
 import Feilside from "./Feilside";
+import MarkdownViewer from './MarkdownViewer';
 
 const signSVG = require('../assets/icons/ark-veiviser.svg');
 
@@ -44,13 +42,11 @@ const Header = () => {
     }
 
     if (!error && info && info.ingress && info.overskrift) {
-        const ingressLinjer = info.ingress.split(/\r?\n/);
-
         return (
             <div className="veiviser-header">
                 <h2>{info.overskrift}</h2>
                 <hr />
-                {ingressLinjer.map((linje: string) => <p key={linje}>{linje}</p>)}
+                <MarkdownViewer markdown={info.ingress} />
             </div>
         );
     } else if (error) {
