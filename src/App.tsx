@@ -51,16 +51,13 @@ const App = () => {
                     <Panel className="innholdspanel">
                         <div className="innholdscontainer">
                         <Header />
-                            {ferdig ?
-                                <Informasjonstekst
-                                    steg={steg}
-                                /> :
-                                <Sporsmal
-                                    sporsmalListe={sporsmalListe}
-                                    settSteg={settSteg}
-                                    settFerdig={settFerdig}
-                                    steg={steg}
-                                />}
+                            <Sporsmal
+                                sporsmalListe={sporsmalListe}
+                                settSteg={settSteg}
+                                settFerdig={settFerdig}
+                                ferdig={ferdig}
+                                steg={steg}
+                            />
                         </div>
                     </Panel>
                 </div>
