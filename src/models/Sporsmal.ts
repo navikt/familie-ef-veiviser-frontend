@@ -8,5 +8,5 @@ export interface ISvar {
     _key: string,
     goto: number,
     tekst: string
-    ferdig?: boolean
+    done?: boolean
 }

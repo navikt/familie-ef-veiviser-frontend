@@ -23,6 +23,7 @@ const App = () => {
                     {type: 'question'}
                 )
                 .then((res: any) => {
+                    console.log(res);
                     settSporsmalListe(res);
                 })
                 .catch((err: any) => {
@@ -41,6 +42,8 @@ const App = () => {
             <NavFrontendSpinner className="spinner" />
         )
     }
+
+    console.log(ferdig);
 
     if (!error && sporsmalListe && sporsmalListe.length) {
             return (

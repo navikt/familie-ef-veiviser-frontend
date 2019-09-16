@@ -30,6 +30,10 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
     state.sporsmalPath.push(detteSporsmalet);
 
     const handleNesteKlikk = (e: any, sporsmal: ISporsmal, svar: ISvar): void => {
+        if (svar.done) {
+            settFerdig(true);
+        }
+
         const newRadioCheckedStatus: any = {};
 
         sporsmal.svarliste.forEach((svarElement) => {
@@ -47,10 +51,6 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
         const sporsmalIndeks = state.sporsmalPath.findIndex((s: any) => s.sporsmal_id === sporsmal.sporsmal_id);
 
         state.sporsmalPath.length = sporsmalIndeks + 1;
-
-        if (svar.ferdig) {
-            settFerdig(true);
-        }
 
         settSteg(svar.goto);
     };
