@@ -1,7 +1,8 @@
-import React from 'react';
-import Tekstomrade from 'nav-frontend-tekstomrade';
+import React, {useEffect, useState} from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import informasjonstekst from '../informasjonstekst.json';
+import {client} from "../utils/sanity";
+import MarkdownViewer from "./MarkdownViewer";
+import NavFrontendSpinner from "nav-frontend-spinner";
 
 interface IInformasjonstekstProps {
     steg: number
@@ -9,22 +10,48 @@ interface IInformasjonstekstProps {
 
 const Informasjonstekst: React.FC<IInformasjonstekstProps> = ({ steg }) => {
 
-    const infotekst = informasjonstekst.find((s) => s.svar_id === steg) || informasjonstekst[0];
+    const [fetching, settFetching] = useState<boolean>(true);
+    const [info, settInfo] = useState<any>([]);
+    const [error, settError] = useState<boolean>(false);
 
-    return (
-        <>
-            <h2>{infotekst.header}</h2>
-            <h3>{infotekst.header2}</h3>
-            <div className="tekst-wrapper">
+    useEffect(() => {
+        const fetchData = () => {
+            client
+                .fetch(
+                    '*[_type == $type && information_id == $id][0]',
+                    {type: 'information', id: 2}
+                )
+                .then((res: any) => {
+                    settInfo(res);
+                })
+                .catch((err: any) => {
+                    console.error('Oh no, error occured: ', err);
+                    settError(true);
+                });
+
+            settFetching(false);
+        };
+
+        fetchData();
+    }, []);
+
+    if (fetching) {
+        return (
+            <NavFrontendSpinner className="spinner" />
+        )
+    }
+
+    if (info && info.informasjonsfelt) {
+        return (
+            <>
                 <Panel>
-                    <Tekstomrade>
-                        {`${infotekst.body}`}
-                    </Tekstomrade>
+                    <MarkdownViewer markdown={info.informasjonsfelt} />
                 </Panel>
-            </div>
-        </>
-    );
+            </>
+        );
+    }
 
+    return null;
 };
 
 export default Informasjonstekst;

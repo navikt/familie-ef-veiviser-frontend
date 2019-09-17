@@ -43,8 +43,6 @@ const App = () => {
         )
     }
 
-    console.log(ferdig);
-
     if (!error && sporsmalListe && sporsmalListe.length) {
             return (
                 <div className="app">
