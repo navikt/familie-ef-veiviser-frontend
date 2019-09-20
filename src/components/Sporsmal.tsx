@@ -69,7 +69,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({ sporsmalListe, steg, settSteg, set
                     return (
                         <div
                             key={svar._key}
-                            className="radioknapp-wrapper"
+                            className="radioknapp-wrapper blur-in"
                         >
                             <RadioPanel
                                 value={svar.tekst}

@@ -19,7 +19,7 @@ const Informasjonstekst: React.FC<IInformasjonstekstProps> = ({ steg }) => {
             client
                 .fetch(
                     '*[_type == $type && information_id == $id][0]',
-                    {type: 'information', id: 2}
+                    {type: 'information', id: steg}
                 )
                 .then((res: any) => {
                     settInfo(res);
@@ -44,9 +44,9 @@ const Informasjonstekst: React.FC<IInformasjonstekstProps> = ({ steg }) => {
     if (info && info.informasjonsfelt) {
         return (
             <>
-                <Panel>
+                <div className="informasjonsboks blur-in">
                     <MarkdownViewer markdown={info.informasjonsfelt} />
-                </Panel>
+                </div>
             </>
         );
     }
