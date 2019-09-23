@@ -13,11 +13,14 @@ const Informasjonstekst: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   const [info, settInfo] = useState<any>([]);
   const [error, settError] = useState<boolean>(false);
 
+  const sanityQuery =
+    '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, brodtekster[]->{body}}}';
+
   useEffect(() => {
     const fetchData = () => {
       client
-        .fetch('*[_type == $type && information_id == $id][0]', {
-          type: 'information',
+        .fetch(sanityQuery, {
+          type: 'informasjonsboks',
           id: steg,
         })
         .then((res: any) => {

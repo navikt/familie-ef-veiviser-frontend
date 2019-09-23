@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = () => {
       client
-        .fetch('*[_type == $type]', { type: 'question' })
+        .fetch('*[_type == $type]', { type: 'sporsmal' })
         .then((res: any) => {
           console.log(res);
           settSporsmalListe(res);

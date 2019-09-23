@@ -9,15 +9,16 @@ import MarkdownViewer from './MarkdownViewer';
 const signSVG = require('../assets/icons/ark-veiviser.svg');
 
 const Header = () => {
-  console.log(signSVG);
   const [fetching, settFetching] = useState<boolean>(true);
   const [info, settInfo] = useState<any>([]);
   const [error, settError] = useState<boolean>(false);
 
+  const sanityQuery = '*[_type == $type][0]{ingress, overskrift}';
+
   useEffect(() => {
     const fetchData = () => {
       client
-        .fetch('*[_type == $type][0]', { type: 'header' })
+        .fetch(sanityQuery, { type: 'header' })
         .then((res: any) => {
           settInfo(res);
         })
