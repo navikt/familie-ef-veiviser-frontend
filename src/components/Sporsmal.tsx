@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ISporsmal, ISvar } from '../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
-import Informasjonstekst from './Informasjonstekst';
+import Informasjonsboks from './informasjonsboks/Informasjonsboks';
 
 interface ISporsmalProps {
   steg: number;
@@ -91,7 +91,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
           </div>
         );
       })}
-      {ferdig ? <Informasjonstekst steg={steg} /> : null}
+      {ferdig ? <Informasjonsboks steg={steg} /> : null}
     </div>
   );
 };

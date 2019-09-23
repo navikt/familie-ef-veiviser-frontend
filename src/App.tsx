@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Sporsmal from './components/Sporsmal';
-import Informasjonstekst from './components/Informasjonstekst';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/Feilside';
 import Header from './components/Header';

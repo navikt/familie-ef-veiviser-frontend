@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import { client } from '../utils/sanity';
-import MarkdownViewer from './MarkdownViewer';
+import { client } from '../../utils/sanity';
+import MarkdownViewer from '../MarkdownViewer';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import RettTilListe from './RettTilListe';
 
 interface IInformasjonstekstProps {
   steg: number;
 }
 
-const Informasjonstekst: React.FC<IInformasjonstekstProps> = ({ steg }) => {
+const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   const [fetching, settFetching] = useState<boolean>(true);
   const [info, settInfo] = useState<any>([]);
   const [error, settError] = useState<boolean>(false);
@@ -37,15 +38,17 @@ const Informasjonstekst: React.FC<IInformasjonstekstProps> = ({ steg }) => {
     fetchData();
   }, []);
 
+  console.log(info);
+
   if (fetching) {
     return <NavFrontendSpinner className="spinner" />;
   }
 
-  if (info && info.informasjonsfelt) {
+  if (info) {
     return (
       <>
         <div className="informasjonsboks blur-in">
-          <MarkdownViewer markdown={info.informasjonsfelt} />
+          <RettTilListe />
         </div>
       </>
     );
@@ -54,4 +57,4 @@ const Informasjonstekst: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   return null;
 };
 
-export default Informasjonstekst;
+export default Informasjonsboks;
