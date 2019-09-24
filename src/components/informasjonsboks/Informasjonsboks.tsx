@@ -3,6 +3,7 @@ import { client } from '../../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import RettTilListe from './RettTilListe';
 import { IUndertittel } from '../../models/Informasjonsboks';
+import UndertitlerPanel from './UndertitlerPanel';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -37,29 +38,28 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
     fetchData();
   }, []);
 
-  if (fetching) {
+  if (fetching || !(info && info.undertitler)) {
     return <NavFrontendSpinner className="spinner" />;
   }
 
-  if (info && info.undertitler) {
-    const tekster_i_liste = info.undertitler.reduce(
-      (tekster: string[], undertittel: IUndertittel) => {
-        if (undertittel.tekst_i_liste) tekster.push(undertittel.tekst_i_liste);
-        return tekster;
-      },
-      []
-    );
+  const tekster_i_liste = info.undertitler.reduce(
+    (tekster: string[], undertittel: IUndertittel) => {
+      if (undertittel.tekst_i_liste) tekster.push(undertittel.tekst_i_liste);
+      return tekster;
+    },
+    []
+  );
 
-    return (
-      <>
-        <div className="informasjonsboks blur-in">
+  return (
+    <>
+      <div className="informasjonsboks blur-in">
+        {tekster_i_liste.length ? (
           <RettTilListe tekster_i_liste={tekster_i_liste} />
-        </div>
-      </>
-    );
-  }
-
-  return null;
+        ) : null}
+        <UndertitlerPanel undertitler={info.undertitler} />
+      </div>
+    </>
+  );
 };
 
 export default Informasjonsboks;
