@@ -42,8 +42,12 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   }
 
   if (info && info.undertitler) {
-    const tekster_i_liste = info.undertitler.map(
-      (undertittel: IUndertittel) => undertittel.tekst_i_liste
+    const tekster_i_liste = info.undertitler.reduce(
+      (tekster: string[], undertittel: IUndertittel) => {
+        if (undertittel.tekst_i_liste) tekster.push(undertittel.tekst_i_liste);
+        return tekster;
+      },
+      []
     );
 
     return (
