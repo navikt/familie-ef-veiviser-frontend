@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Panel } from 'nav-frontend-paneler';
 import { client } from '../../utils/sanity';
-import MarkdownViewer from '../MarkdownViewer';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import RettTilListe from './RettTilListe';
+import { IUndertittel } from '../../models/Informasjonsboks';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -38,17 +37,19 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
     fetchData();
   }, []);
 
-  console.log(info);
-
   if (fetching) {
     return <NavFrontendSpinner className="spinner" />;
   }
 
-  if (info) {
+  if (info && info.undertitler) {
+    const tekster_i_liste = info.undertitler.map(
+      (undertittel: IUndertittel) => undertittel.tekst_i_liste
+    );
+
     return (
       <>
         <div className="informasjonsboks blur-in">
-          <RettTilListe />
+          <RettTilListe tekster_i_liste={tekster_i_liste} />
         </div>
       </>
     );

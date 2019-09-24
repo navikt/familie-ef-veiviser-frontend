@@ -43,7 +43,6 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
   const handleNesteKlikk = (e: any, sporsmal: ISporsmal, svar: ISvar): void => {
     if (svar.done) {
       settFerdig(true);
-      return;
     }
 
     const newRadioCheckedStatus: any = {};
