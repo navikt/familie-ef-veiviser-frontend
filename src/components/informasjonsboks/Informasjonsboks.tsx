@@ -15,7 +15,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   const [error, settError] = useState<boolean>(false);
 
   const sanityQuery =
-    '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, brodtekster[]->{body}}}';
+    '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, brodtekster[]->{body}}}';
 
   useEffect(() => {
     const fetchData = () => {

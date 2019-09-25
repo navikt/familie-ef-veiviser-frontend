@@ -1,6 +1,4 @@
 import React from 'react';
-import Ikon from 'nav-frontend-ikoner-assets';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { IUndertittel } from '../../models/Informasjonsboks';
 import MarkdownViewer from '../MarkdownViewer';
 
@@ -20,6 +18,9 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
             {undertittel.brodtekster.map((brodtekst: any, i: number) => {
               return <MarkdownViewer key={i} markdown={brodtekst.body} />;
             })}
+            {undertittel.knapp ? (
+              <a href={undertittel.knapp.lenke}>{undertittel.knapp.tekst}</a>
+            ) : null}
           </div>
         );
       })}
