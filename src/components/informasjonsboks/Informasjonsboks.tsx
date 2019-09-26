@@ -51,14 +51,12 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   );
 
   return (
-    <>
-      <div className="informasjonsboks blur-in">
-        {tekster_i_liste.length ? (
-          <RettTilListe tekster_i_liste={tekster_i_liste} />
-        ) : null}
-        <UndertitlerPanel undertitler={info.undertitler} />
-      </div>
-    </>
+    <div className="informasjonsboks blur-in">
+      {tekster_i_liste.length ? (
+        <RettTilListe tekster_i_liste={tekster_i_liste} />
+      ) : null}
+      <UndertitlerPanel undertitler={info.undertitler} />
+    </div>
   );
 };
 

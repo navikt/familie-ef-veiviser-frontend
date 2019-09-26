@@ -19,7 +19,9 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
               return <MarkdownViewer key={i} markdown={brodtekst.body} />;
             })}
             {undertittel.knapp ? (
-              <a href={undertittel.knapp.lenke}>{undertittel.knapp.tekst}</a>
+              <a href={undertittel.knapp.lenke} className="knapp">
+                {undertittel.knapp.tekst}
+              </a>
             ) : null}
           </div>
         );

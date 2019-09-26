@@ -1,6 +1,16 @@
 body {
   background-color: @navLysGra;
   margin: 0;
+
+  a {
+    color: @navBla;
+  }
+
+  a:focus {
+    color: @navMorkGra;
+    text-decoration: none;
+    background-color: @orangeFocus;
+  }
 }
 
 .app {
@@ -19,6 +29,33 @@ body {
   width: 55%;
 }
 
-.blur-in{-webkit-animation:text-focus-in .25s cubic-bezier(.55,.085,.68,.53) both;animation:text-focus-in .25s cubic-bezier(.55,.085,.68,.53) both}
+.blur-in {
+  -webkit-animation: text-focus-in 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
+  animation: text-focus-in 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
 
-@-webkit-keyframes blur-in{0%{-webkit-filter:blur(12px);filter:blur(12px);opacity:0}100%{-webkit-filter:blur(0);filter:blur(0);opacity:1}}@keyframes text-focus-in{0%{-webkit-filter:blur(12px);filter:blur(12px);opacity:0}100%{-webkit-filter:blur(0);filter:blur(0);opacity:1}}
+@-webkit-keyframes blur-in {
+  0% {
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
