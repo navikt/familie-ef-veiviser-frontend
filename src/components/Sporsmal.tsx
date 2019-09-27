@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ISporsmal, ISvar } from '../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from './informasjonsboks/Informasjonsboks';
+import Lesmerpanel from 'nav-frontend-lesmerpanel';
 
 interface ISporsmalProps {
   steg: number;
@@ -74,6 +75,14 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
         return (
           <div key={sporsmal._id} className="sporsmal-element">
             <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
+            {sporsmal && sporsmal.hjelpetekst_overskrift ? (
+              <Lesmerpanel
+                className="hjelpetekst"
+                apneTekst={sporsmal.hjelpetekst_overskrift}
+              >
+                <p>{sporsmal.hjelpetekst}</p>
+              </Lesmerpanel>
+            ) : null}
             {sporsmal.svarliste.map((svar: ISvar) => {
               return (
                 <div key={svar._key} className="radioknapp-wrapper">
