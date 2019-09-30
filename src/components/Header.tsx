@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import CustomSVG from '../utils/CustomSVG';
-import SvgMask from './svg-mask/SvgMask';
 import { client } from '../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './Feilside';
 import MarkdownViewer from './MarkdownViewer';
-
-const signSVG = require('../assets/icons/ark-veiviser.svg');
+import Veiviserikon from '../assets/icons/VeiviserIkon';
 
 const Header = () => {
   const [fetching, settFetching] = useState<boolean>(true);
@@ -40,6 +37,7 @@ const Header = () => {
   if (!error && info && info.ingress && info.overskrift) {
     return (
       <div className="veiviser-header">
+        <Veiviserikon />
         <h2>{info.overskrift}</h2>
         <hr />
         <MarkdownViewer markdown={info.ingress} />
