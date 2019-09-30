@@ -4,6 +4,13 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import RettTilListe from './RettTilListe';
 import { IUndertittel } from '../../models/Informasjonsboks';
 import UndertitlerPanel from './UndertitlerPanel';
+import BallIkon from '../../assets/icons/BallIkon';
+import BamseIkon from '../../assets/icons/BamseIkon';
+import BordIkon from '../../assets/icons/BordIkon';
+import BarnIkon from '../../assets/icons/BarnIkon';
+import Barn2Ikon from '../../assets/icons/Barn2Ikon';
+import BrodskiveIkon from '../../assets/icons/BrodskiveIkon';
+import TaateflaskeIkon from '../../assets/icons/TaateflaskeIkon';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -52,10 +59,21 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
 
   return (
     <div className="informasjonsboks blur-in">
-      {tekster_i_liste.length ? (
-        <RettTilListe tekster_i_liste={tekster_i_liste} />
-      ) : null}
-      <UndertitlerPanel undertitler={info.undertitler} />
+      <div className="informasjonsboks-header">
+        <BallIkon className="ball-ikon" />
+        <BamseIkon className="bamse-ikon" />
+        <BarnIkon className="barn-ikon" />
+        <Barn2Ikon className="barn2-ikon" />
+        <BordIkon className="bord-ikon" />
+        <BrodskiveIkon className="brodskive-ikon" />
+        <TaateflaskeIkon className="taateflaske-ikon" />
+      </div>
+      <div className="informasjonsboks-innhold">
+        {tekster_i_liste.length ? (
+          <RettTilListe tekster_i_liste={tekster_i_liste} />
+        ) : null}
+        <UndertitlerPanel undertitler={info.undertitler} />
+      </div>
     </div>
   );
 };

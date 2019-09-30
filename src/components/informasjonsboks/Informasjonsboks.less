@@ -6,14 +6,13 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
 
   margin-top: 4rem;
   background-color: @navLysGra;
   width: 100%;
   min-height: 5rem;
-  padding: 5rem;
-  padding-left: 10rem;
-  padding-right: 10rem;
 
   ul {
     padding: 0;
@@ -35,5 +34,63 @@
 
   .undertittel-panel {
     margin-top: 4rem;
+  }
+
+  .informasjonsboks-header {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    border-bottom: 0.4rem @familie-border solid;
+    background-color: @familie-bakgrunn;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+
+    .ball-ikon {
+      position: absolute;
+      top: 149px;
+      left: 18%;
+    }
+
+    .bamse-ikon {
+      position: absolute;
+      top: 140px;
+      left: 13%;
+    }
+
+    .bord-ikon {
+      position: absolute;
+      top: 160px;
+      left: 55%;
+    }
+
+    .barn-ikon {
+      position: absolute;
+      top: 90px;
+      left: 70%;
+    }
+
+    .barn2-ikon {
+      position: absolute;
+      top: 110px;
+      left: 60%;
+    }
+
+    .brodskive-ikon {
+      position: absolute;
+      top: 145px;
+      left: 72%;
+    }
+
+    .taateflaske-ikon {
+      position: absolute;
+      top: 131px;
+      left: 59%;
+    }
+  }
+
+  .informasjonsboks-innhold {
+    padding: 5rem 10rem;
   }
 }

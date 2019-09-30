@@ -37,7 +37,7 @@ const Header = () => {
   if (!error && info && info.ingress && info.overskrift) {
     return (
       <div className="veiviser-header">
-        <Veiviserikon />
+        <Veiviserikon className="veiviser-ikon" />
         <h2>{info.overskrift}</h2>
         <hr />
         <MarkdownViewer markdown={info.ingress} />

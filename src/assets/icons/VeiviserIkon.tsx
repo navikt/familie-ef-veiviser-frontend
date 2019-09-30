@@ -1,8 +1,12 @@
 import React from 'react';
 
-export default function Veiviserikon() {
+interface IVeiviserIkonProps {
+  className?: string;
+}
+
+const VeiviserIkon: React.FC<IVeiviserIkonProps> = ({ className }) => {
   return (
-    <div className="veiviser-ikon-wrapper">
+    <div className={className}>
       <svg width="100px" height="100px" viewBox="0 -7 48 58">
         <title>Veiviser</title>
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -73,4 +77,6 @@ export default function Veiviserikon() {
       </svg>
     </div>
   );
-}
+};
+
+export default VeiviserIkon;
