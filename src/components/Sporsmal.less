@@ -3,7 +3,15 @@
 
   padding: 2rem;
 
+  @media @mobile {
+    padding: 0;
+  }
+
   .sporsmal-element {
+    @media @tablet {
+      padding-left: 2rem;
+    }
+
     margin-top: 4rem;
 
     .sporsmal-tekst {
@@ -11,12 +19,20 @@
       font-weight: bold;
       font-size: 20px;
       text-align: left;
+
+      @media @mobile {
+        padding: 0;
+      }
     }
 
     .hjelpetekst {
       .lesMerPanel__toggle {
         justify-content: flex-start;
         padding-left: 3rem;
+
+        @media @mobile {
+          padding-left: 0;
+        }
       }
 
       .lesMerPanel__togglelink {
@@ -39,6 +55,10 @@
     p {
       padding-left: 3rem;
       max-width: 500px;
+
+      @media @mobile {
+        padding-left: 0;
+      }
     }
   }
 
@@ -46,6 +66,13 @@
     padding-left: 2rem;
     margin: 1rem;
     max-width: 450px;
+
+    @media @mobile {
+      padding-left: 0;
+      margin-left: 0;
+
+      max-width: 300px;
+    }
   }
 
   .sporsmal-knapp {
