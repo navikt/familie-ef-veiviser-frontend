@@ -17,9 +17,9 @@ interface IInformasjonstekstProps {
 }
 
 const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
-  const [fetching, settFetching] = useState<boolean>(true);
-  const [info, settInfo] = useState<any>([]);
-  const [error, settError] = useState<boolean>(false);
+  const [fetching, setFetching] = useState<boolean>(true);
+  const [info, setInfo] = useState<any>([]);
+  const [error, setError] = useState<boolean>(false);
 
   const sanityQuery =
     '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, brodtekster[]->{body}}}';
@@ -32,14 +32,14 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
           id: steg,
         })
         .then((res: any) => {
-          settInfo(res);
+          setInfo(res);
         })
         .catch((err: any) => {
           console.error('Oh no, error occured: ', err);
-          settError(true);
+          setError(true);
         });
 
-      settFetching(false);
+      setFetching(false);
     };
 
     fetchData();

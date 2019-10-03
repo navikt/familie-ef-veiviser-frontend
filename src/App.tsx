@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import Sporsmal from './components/Sporsmal';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import Feilside from './components/Feilside';
+import Feilside from './components/feilside/Feilside';
 import Header from './components/Header';
 import { Panel } from 'nav-frontend-paneler';
 import { client } from './utils/sanity';
 
 const App = () => {
-  const [sporsmalListe, settSporsmalListe] = useState<any>([]);
-  const [ferdig, settFerdig] = useState<boolean>(false);
-  const [steg, settSteg] = useState<number>(1);
-  const [fetching, settFetching] = useState<boolean>(true);
-  const [error, settError] = useState<boolean>(false);
+  const [sporsmalListe, setSporsmalListe] = useState<any>([]);
+  const [ferdig, setFerdig] = useState<boolean>(false);
+  const [steg, setSteg] = useState<number>(1);
+  const [fetching, setFetching] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = () => {
       client
         .fetch('*[_type == $type]', { type: 'sporsmal' })
         .then((res: any) => {
-          console.log(res);
-          settSporsmalListe(res);
+          setSporsmalListe(res);
         })
         .catch((err: any) => {
           console.error('Oh no, error occured: ', err);
-          settError(true);
+          setError(true);
         });
 
-      settFetching(false);
+      setFetching(false);
     };
 
     fetchData();
@@ -44,8 +43,8 @@ const App = () => {
             <Header />
             <Sporsmal
               sporsmalListe={sporsmalListe}
-              settSteg={settSteg}
-              settFerdig={settFerdig}
+              setSteg={setSteg}
+              setFerdig={setFerdig}
               ferdig={ferdig}
               steg={steg}
             />

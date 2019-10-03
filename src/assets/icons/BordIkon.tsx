@@ -11,16 +11,16 @@ const BordIkon: React.FC<IBordIkonProps> = ({ className }) => {
         <g
           id="Page-1"
           stroke="none"
-          stroke-width="1"
+          strokeWidth="1"
           fill="none"
-          fill-rule="evenodd"
+          fillRule="evenodd"
         >
           <g id="gjenstander/familie/bord">
             <g id="Group">
               <rect
                 id="Rectangle"
                 fill="#D87F0A"
-                fill-rule="nonzero"
+                fillRule="nonzero"
                 x="0"
                 y="0"
                 width="182"
@@ -29,7 +29,7 @@ const BordIkon: React.FC<IBordIkonProps> = ({ className }) => {
               <rect
                 id="Rectangle-Copy"
                 fill="#B26D14"
-                fill-rule="nonzero"
+                fillRule="nonzero"
                 x="13"
                 y="8"
                 width="156"
@@ -38,7 +38,7 @@ const BordIkon: React.FC<IBordIkonProps> = ({ className }) => {
               <rect
                 id="Rectangle-Copy-2"
                 fill="#D87F0A"
-                fill-rule="nonzero"
+                fillRule="nonzero"
                 x="13"
                 y="11"
                 width="14"
@@ -47,7 +47,7 @@ const BordIkon: React.FC<IBordIkonProps> = ({ className }) => {
               <rect
                 id="Rectangle-Copy-3"
                 fill="#D87F0A"
-                fill-rule="nonzero"
+                fillRule="nonzero"
                 x="155"
                 y="11"
                 width="14"
