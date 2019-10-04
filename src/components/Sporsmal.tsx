@@ -1,8 +1,16 @@
-import React, { useState, SyntheticEvent, FormEvent, ChangeEvent } from 'react';
+import React, {
+  useState,
+  SyntheticEvent,
+  FormEvent,
+  ChangeEvent,
+  useRef,
+  RefObject,
+} from 'react';
 import { ISporsmal, ISvar } from '../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from './informasjonsboks/Informasjonsboks';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
+import { scrollTilRef } from '../utils/utils';
 
 interface ISporsmalProps {
   steg: number;
@@ -32,6 +40,8 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
     sporsmalPath: [],
     radioCheckedStatus: {},
   });
+
+  const scrollPunkt = useRef(null);
 
   const detteSporsmalet = sporsmalListe.find(
     (sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg
@@ -73,6 +83,8 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
     }));
 
     setSteg(svar.goto);
+
+    setTimeout(() => scrollTilRef(scrollPunkt), 120);
   };
 
   return (
@@ -105,6 +117,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
           </div>
         );
       })}
+      <div ref={scrollPunkt} />
       {ferdig ? <Informasjonsboks steg={steg} /> : null}
     </div>
   );
