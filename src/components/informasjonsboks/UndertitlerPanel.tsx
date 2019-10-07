@@ -9,11 +9,14 @@ interface IUndertitlerPanelProps {
 const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
   undertitler,
 }) => {
+  const undertittelClass =
+    undertitler.length > 1 ? 'undertittel-flere' : 'undertittel-singel';
+
   return (
     <>
       {undertitler.map((undertittel: IUndertittel, i: number) => {
         return (
-          <div className="undertittel-panel" key={i}>
+          <div className={undertittelClass} key={i}>
             {undertittel.tekst_i_panel ? (
               <h2>{undertittel.tekst_i_panel}</h2>
             ) : null}
