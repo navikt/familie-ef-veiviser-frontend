@@ -1,16 +1,9 @@
-import React, {
-  useState,
-  SyntheticEvent,
-  FormEvent,
-  ChangeEvent,
-  useRef,
-  RefObject,
-} from 'react';
-import { ISporsmal, ISvar } from '../models/Sporsmal';
+import React, { useState, SyntheticEvent, useRef } from 'react';
+import { ISporsmal, ISvar } from '../../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
-import Informasjonsboks from './informasjonsboks/Informasjonsboks';
+import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import { scrollTilRef } from '../utils/utils';
+import { scrollTilRef } from '../../utils/utils';
 
 interface ISporsmalProps {
   steg: number;
@@ -20,14 +13,7 @@ interface ISporsmalProps {
   sporsmalListe: ISporsmal[];
 }
 
-interface IRadioCheckedStatus {
-  [key: string]: boolean;
-}
-
-interface ISporsmalState {
-  sporsmalPath: ISporsmal[];
-  radioCheckedStatus: IRadioCheckedStatus;
-}
+const checkSvarRadioknapper = () => {};
 
 const Sporsmal: React.FC<ISporsmalProps> = ({
   sporsmalListe,
@@ -37,8 +23,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
   ferdig,
 }) => {
   const [state, setState] = useState<any>({
-    sporsmalPath: [],
-    radioCheckedStatus: {},
+    sporsmalSti: [],
   });
 
   const scrollPunkt = useRef(null);
@@ -48,7 +33,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
   );
 
   if (!ferdig) {
-    state.sporsmalPath.push(detteSporsmalet);
+    state.sporsmalSti.push(detteSporsmalet);
   }
 
   const handleNesteKlikk = (
@@ -62,26 +47,29 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       setFerdig(false);
     }
 
-    const sporsmalIndeks = state.sporsmalPath.findIndex(
-      (s: any) => s.sporsmal_id === sporsmal.sporsmal_id
+    const sporsmalIndeks = state.sporsmalSti.findIndex(
+      (s: ISporsmal) => s.sporsmal_id === sporsmal.sporsmal_id
     );
 
-    state.sporsmalPath.length = sporsmalIndeks + 1;
+    state.sporsmalSti.length = sporsmalIndeks + 1;
 
-    const newRadioCheckedStatus: any = {};
+    const nySporsmalSti = state.sporsmalSti.map((s: ISporsmal) => {
+      if (s.sporsmal_id === sporsmal.sporsmal_id) {
+        const nySvarliste = s.svarliste.map((sv: ISvar) => {
+          if (sv._key === svar._key) {
+            return { ...sv, checked: true };
+          } else {
+            return { ...sv, checked: false };
+          }
+        });
 
-    sporsmal.svarliste.forEach((svarElement) => {
-      newRadioCheckedStatus[svarElement._key] = svarElement._key === svar._key;
+        return { ...sporsmal, svarliste: nySvarliste };
+      }
+
+      return s;
     });
 
-    setState((prevState: ISporsmalState) => ({
-      ...prevState,
-      radioCheckedStatus: {
-        ...newRadioCheckedStatus,
-        ...prevState.radioCheckedStatus,
-      },
-    }));
-
+    setState({ sporsmalSti: nySporsmalSti });
     setSteg(svar.goto);
 
     setTimeout(() => scrollTilRef(scrollPunkt), 120);
@@ -89,7 +77,8 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
 
   return (
     <div>
-      {state.sporsmalPath.map((sporsmal: any) => {
+      {state.sporsmalSti.map((sporsmal: ISporsmal) => {
+        console.log(sporsmal);
         return (
           <div key={sporsmal._id} className="sporsmal-element">
             <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
@@ -108,7 +97,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
                     value={svar.tekst}
                     label={svar.tekst}
                     name={svar._key}
-                    checked={state.radioCheckedStatus[svar._key]}
+                    checked={svar.checked ? svar.checked : false}
                     onChange={(e) => handleNesteKlikk(e, sporsmal, svar)}
                   />
                 </div>

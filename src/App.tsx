@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Sporsmal from './components/Sporsmal';
+import Sporsmal from './components/sporsmal/Sporsmal';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
-import Header from './components/Header';
+import Header from './components/header/Header';
 import { Panel } from 'nav-frontend-paneler';
 import { client } from './utils/sanity';
 

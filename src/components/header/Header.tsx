@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { client } from '../utils/sanity';
+import { client } from '../../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import Feilside from './feilside/Feilside';
-import MarkdownViewer from './MarkdownViewer';
-import Veiviserikon from '../assets/icons/VeiviserIkon';
+import Feilside from '../feilside/Feilside';
+import MarkdownViewer from '../utils/MarkdownViewer';
+import Veiviserikon from '../../assets/icons/VeiviserIkon';
 
 const Header = () => {
   const [fetching, setFetching] = useState<boolean>(true);

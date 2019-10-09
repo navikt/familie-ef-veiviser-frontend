@@ -1,6 +1,6 @@
 import React from 'react';
 import { IUndertittel } from '../../models/Informasjonsboks';
-import MarkdownViewer from '../MarkdownViewer';
+import MarkdownViewer from '../utils/MarkdownViewer';
 
 interface IUndertitlerPanelProps {
   undertitler: IUndertittel[];
