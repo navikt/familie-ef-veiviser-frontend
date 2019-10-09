@@ -13,8 +13,6 @@ interface ISporsmalProps {
   sporsmalListe: ISporsmal[];
 }
 
-const checkSvarRadioknapper = () => {};
-
 const Sporsmal: React.FC<ISporsmalProps> = ({
   sporsmalListe,
   steg,
@@ -78,7 +76,6 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
   return (
     <div>
       {state.sporsmalSti.map((sporsmal: ISporsmal) => {
-        console.log(sporsmal);
         return (
           <div key={sporsmal._id} className="sporsmal-element">
             <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
