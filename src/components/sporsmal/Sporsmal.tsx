@@ -13,6 +13,11 @@ interface ISporsmalProps {
   sporsmalListe: ISporsmal[];
 }
 
+interface ISporsmalState {
+  sporsmalSti: [];
+  svarSti: [];
+}
+
 const Sporsmal: React.FC<ISporsmalProps> = ({
   sporsmalListe,
   steg,
@@ -22,6 +27,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
 }) => {
   const [state, setState] = useState<any>({
     sporsmalSti: [],
+    svarSti: [],
   });
 
   const scrollPunkt = useRef(null);
@@ -67,8 +73,23 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       return s;
     });
 
-    setState({ sporsmalSti: nySporsmalSti });
+    setState((prevState: any) => ({
+      ...prevState,
+      sporsmalSti: nySporsmalSti,
+    }));
+
     setSteg(svar.goto);
+
+    if (ferdig) {
+      const svarListe = state.sporsmalSti.map((sporsmal: ISporsmal) => {
+        return sporsmal.svarliste.find((svar: ISvar) => svar.checked);
+      });
+
+      setState((prevState: any) => ({
+        ...prevState,
+        svarSti: svarListe,
+      }));
+    }
 
     setTimeout(() => scrollTilRef(scrollPunkt), 120);
   };
