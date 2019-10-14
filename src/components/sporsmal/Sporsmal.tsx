@@ -60,7 +60,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
     const nySporsmalSti = state.sporsmalSti.map((s: ISporsmal) => {
       if (s.sporsmal_id === sporsmal.sporsmal_id) {
         const nySvarliste = s.svarliste.map((sv: ISvar) => {
-          if (sv._key === svar._key) {
+          if (sv._id === svar._id) {
             return { ...sv, checked: true };
           } else {
             return { ...sv, checked: false };
@@ -110,11 +110,11 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
             ) : null}
             {sporsmal.svarliste.map((svar: ISvar) => {
               return (
-                <div key={svar._key} className="radioknapp-wrapper">
+                <div key={svar._id} className="radioknapp-wrapper">
                   <RadioPanel
                     value={svar.tekst}
                     label={svar.tekst}
-                    name={svar._key}
+                    name={svar._id}
                     checked={svar.checked ? svar.checked : false}
                     onChange={(e) => handleNesteKlikk(e, sporsmal, svar)}
                   />

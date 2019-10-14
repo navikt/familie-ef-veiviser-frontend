@@ -13,10 +13,13 @@ const App = () => {
   const [fetching, setFetching] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
+  const sanityQuery =
+    '*[_type == $type]{sporsmal_id, sporsmal_tekst, svarliste[]->, _createdAt, _id, _rev, _type, _updatedAt}';
+
   useEffect(() => {
     const fetchData = () => {
       client
-        .fetch('*[_type == $type]', { type: 'sporsmal' })
+        .fetch(sanityQuery, { type: 'sporsmal' })
         .then((res: any) => {
           setSporsmalListe(res);
         })

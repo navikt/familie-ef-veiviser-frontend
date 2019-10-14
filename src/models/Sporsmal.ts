@@ -8,7 +8,7 @@ export interface ISporsmal {
 }
 
 export interface ISvar {
-  _key: string;
+  _id: string;
   goto: number;
   tekst: string;
   done?: boolean;
