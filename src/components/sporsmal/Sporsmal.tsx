@@ -1,4 +1,4 @@
-import React, { useState, SyntheticEvent, useRef } from 'react';
+import React, { useState, SyntheticEvent, useRef, useEffect } from 'react';
 import { ISporsmal, ISvar } from '../../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
@@ -11,6 +11,7 @@ interface ISporsmalProps {
   setFerdig: (ferdig: boolean) => void;
   ferdig: boolean;
   sporsmalListe: ISporsmal[];
+  infoMapping: any;
 }
 
 interface ISporsmalState {
@@ -24,6 +25,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
   setSteg,
   setFerdig,
   ferdig,
+  infoMapping,
 }) => {
   const [state, setState] = useState<any>({
     sporsmalSti: [],
@@ -36,7 +38,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
     (sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg
   );
 
-  if (!ferdig) {
+  if (!ferdig && !state.sporsmalSti.includes(detteSporsmalet)) {
     state.sporsmalSti.push(detteSporsmalet);
   }
 
@@ -78,17 +80,41 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       sporsmalSti: nySporsmalSti,
     }));
 
-    setSteg(svar.goto);
-
-    if (ferdig) {
-      const svarListe = state.sporsmalSti.map((sporsmal: ISporsmal) => {
-        return sporsmal.svarliste.find((svar: ISvar) => svar.checked);
-      });
+    if (svar.done_complete) {
+      const svarListe = state.sporsmalSti
+        .map((sporsmal: ISporsmal) => {
+          return sporsmal.svarliste.find((svar: ISvar) => svar.checked);
+        })
+        .filter((svar: ISvar) => svar);
 
       setState((prevState: any) => ({
         ...prevState,
         svarSti: svarListe,
       }));
+
+      const svarIder = svarListe.map((svar: ISvar) => svar._id);
+
+      let lengsteMatchId = null;
+      let lengsteMatchLengde = 0;
+
+      for (let i = 0; i < infoMapping.length; i++) {
+        const mapping = infoMapping[i];
+
+        if (!mapping.svarsti || !mapping.svarsti.length) continue;
+
+        const svarstiIder = mapping.svarsti.map((svar: ISvar) => svar._id);
+
+        if (svarstiIder.every((val: string) => svarIder.includes(val))) {
+          if (svarstiIder.length > lengsteMatchLengde) {
+            lengsteMatchLengde = svarstiIder.length;
+            lengsteMatchId = mapping.information_id;
+          }
+        }
+      }
+
+      setSteg(lengsteMatchId);
+    } else {
+      setSteg(svar.goto);
     }
 
     setTimeout(() => scrollTilRef(scrollPunkt), 120);

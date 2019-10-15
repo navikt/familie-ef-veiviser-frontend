@@ -12,5 +12,6 @@ export interface ISvar {
   goto: number;
   tekst: string;
   done?: boolean;
+  done_complete?: boolean;
   checked?: boolean;
 }

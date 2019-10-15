@@ -12,14 +12,31 @@ const App = () => {
   const [steg, setSteg] = useState<number>(1);
   const [fetching, setFetching] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const [infoMapping, setInfoMapping] = useState<any>();
 
-  const sanityQuery =
+  const sporsmalQuery =
     '*[_type == $type]{sporsmal_id, sporsmal_tekst, svarliste[]->, _createdAt, _id, _rev, _type, _updatedAt}';
 
+  const infoMappingQuery =
+    '*[_type == $type]{information_id, svarsti[]->{_id, tekst}}';
+
   useEffect(() => {
-    const fetchData = () => {
+    const fetchInfoMapping = () => {
       client
-        .fetch(sanityQuery, { type: 'sporsmal' })
+        .fetch(infoMappingQuery, {
+          type: 'informasjonsboks',
+        })
+        .then((res: any) => {
+          setInfoMapping(res);
+        })
+        .catch((err: any) => {
+          console.error('Oh no, error occured: ', err);
+        });
+    };
+
+    const fetchSporsmal = () => {
+      client
+        .fetch(sporsmalQuery, { type: 'sporsmal' })
         .then((res: any) => {
           setSporsmalListe(res);
         })
@@ -31,7 +48,8 @@ const App = () => {
       setFetching(false);
     };
 
-    fetchData();
+    fetchSporsmal();
+    fetchInfoMapping();
   }, []);
 
   if (fetching) {
@@ -50,6 +68,7 @@ const App = () => {
               setFerdig={setFerdig}
               ferdig={ferdig}
               steg={steg}
+              infoMapping={infoMapping}
             />
           </div>
         </Panel>
