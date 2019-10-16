@@ -67,13 +67,24 @@
   .radioknapp-wrapper {
     padding-left: 2rem;
     margin: 1rem;
-    max-width: 450px;
 
     @media @mobile {
       padding-left: 0;
       margin-left: 0;
 
       max-width: 300px;
+    }
+
+    @media @desktop {
+      .inputPanel {
+        width: 596px;
+      }
+    }
+
+    @media @tablet {
+      .inputPanel {
+        max-width: 596px;
+      }
     }
   }
 
