@@ -15,7 +15,7 @@ const App = () => {
   const [infoMapping, setInfoMapping] = useState<any>();
 
   const sporsmalQuery =
-    '*[_type == $type]{sporsmal_id, sporsmal_tekst, svarliste[]->, _createdAt, _id, _rev, _type, _updatedAt}';
+    '*[_type == $type]{sporsmal_id, sporsmal_tekst, hjelpetekst_overskrift, hjelpetekst, svarliste[]->, _createdAt, _id, _rev, _type, _updatedAt}';
 
   const infoMappingQuery =
     '*[_type == $type]{information_id, svarsti[]->{_id, tekst}}';
