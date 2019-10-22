@@ -30,6 +30,11 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
                 {undertittel.knapp.tekst}
               </a>
             ) : null}
+            {i === undertitler.length - 2 &&
+            undertitler[undertitler.length - 1].tekst_i_panel ===
+              'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn' ? (
+              <hr />
+            ) : null}
           </div>
         );
       })}
