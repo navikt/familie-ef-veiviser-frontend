@@ -1,4 +1,5 @@
 {
+  "homepage": "https://navikt.github.io/familie-ef-veiviser",
   "name": "veiviser",
   "version": "0.1.0",
   "private": true,
@@ -18,6 +19,7 @@
     "classnames": "^2.2.6",
     "craco-less": "^1.14.4",
     "dotenv": "^8.1.0",
+    "gh-pages": "^2.1.1",
     "lodash.throttle": "^4.1.1",
     "marked": "^0.7.0",
     "moment": "^2.24.0",
@@ -60,7 +62,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "craco build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

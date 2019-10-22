@@ -8,7 +8,7 @@ interface IMarkdownViewerProps {
 const MarkdownViewer: React.FC<IMarkdownViewerProps> = ({ markdown }) => {
   const md = marked.parse(markdown);
 
-  return <div dangerouslySetInnerHTML={{ __html: md }} />;
+  return <div className="markdown" dangerouslySetInnerHTML={{ __html: md }} />;
 };
 
 export default MarkdownViewer;
