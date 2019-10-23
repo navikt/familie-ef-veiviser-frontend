@@ -8,7 +8,7 @@ interface IRettTilListeProps {
 
 const RettTilListe: React.FC<IRettTilListeProps> = ({ tekster_i_liste }) => {
   return (
-    <div>
+    <div className="rett-til-liste">
       <h2>Du kan ha rett til</h2>
       <ul>
         {tekster_i_liste.map((tekst: string) => (
