@@ -15,14 +15,15 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
   return (
     <>
       {undertitler.map((undertittel: IUndertittel, i: number) => {
+        if (!undertittel.tekst_i_panel) return null;
+
         return (
           <div className={undertittelClass} key={i}>
-            {undertittel.tekst_i_panel ? (
-              <h2>{undertittel.tekst_i_panel}</h2>
-            ) : null}
-            {undertittel.brodtekster.map((brodtekst: any, i: number) => {
-              return <MarkdownViewer key={i} markdown={brodtekst.body} />;
-            })}
+            <h2>{undertittel.tekst_i_panel}</h2>
+            {undertittel.brodtekster &&
+              undertittel.brodtekster.map((brodtekst: any, i: number) => {
+                return <MarkdownViewer key={i} markdown={brodtekst.body} />;
+              })}
             {undertittel.knapp &&
             undertittel.knapp.tekst &&
             undertittel.knapp.lenke ? (

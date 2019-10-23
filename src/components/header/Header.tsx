@@ -4,6 +4,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from '../feilside/Feilside';
 import MarkdownViewer from '../utils/MarkdownViewer';
 import Veiviserikon from '../../assets/icons/VeiviserIkon';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 const Header = () => {
   const [fetching, setFetching] = useState<boolean>(true);
@@ -37,6 +38,9 @@ const Header = () => {
   if (!error && info && info.ingress && info.overskrift) {
     return (
       <div className="veiviser-header">
+        <AlertStripe type="advarsel" style={{ marginBottom: '2.5rem' }}>
+          Dette er en <b>demoversjon</b> av veiviseren for enslig mor eller far.
+        </AlertStripe>
         <Veiviserikon className="veiviser-ikon" />
         <h2>{info.overskrift}</h2>
         <hr />
