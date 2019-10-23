@@ -5,6 +5,7 @@ import Feilside from './components/feilside/Feilside';
 import Header from './components/header/Header';
 import { Panel } from 'nav-frontend-paneler';
 import { client } from './utils/sanity';
+import header from './assets/header.png';
 
 const App = () => {
   const [sporsmalListe, setSporsmalListe] = useState<any>([]);
@@ -59,6 +60,11 @@ const App = () => {
   if (!error && sporsmalListe && sporsmalListe.length) {
     return (
       <div className="app">
+        <div style={{ width: '100%', margin: '0 auto', overflow: 'visible' }}>
+          <div style={{ position: 'relative', float: 'right', right: '50%' }}>
+            <img src={header} style={{ position: 'relative', right: '-50%' }} />
+          </div>
+        </div>
         <Panel className="innholdspanel">
           <div className="innholdscontainer">
             <Header />
