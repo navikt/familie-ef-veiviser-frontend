@@ -3,16 +3,24 @@
 }
 
 .informasjonsboks {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
   border-radius: 8px;
   -webkit-border-radius: 8px;
 
-  margin-top: 4rem;
   background-color: @navLysGra;
-  width: 100%;
+  width: 596px;
   min-height: 5rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+
+  @media @tablet {
+    max-width: 596px;
+    width: 100%;
+  }
+
+  @media @mobile {
+    padding-left: 0;
+    margin-left: 0;
+  }
 
   ul {
     padding: 0;
@@ -38,8 +46,20 @@
     margin-left: 1rem;
   }
 
-  .undertittel-flere {
+  .undertittel-flere,
+  .undertittel-singel {
     margin-top: 4rem;
+
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+
+  .undertittel-singel {
+    padding-bottom: 6rem;
+  }
+
+  .undertittel-flere:last-of-type {
+    padding-bottom: 6rem;
   }
 
   .informasjonsboks-header {
@@ -113,7 +133,12 @@
   }
 
   .informasjonsboks-innhold {
-    padding: 5rem 10rem;
+    padding: 0rem 0rem 0 rem 0 rem;
+
+    h2 {
+      margin-block-start: 4rem;
+      margin-block-end: 0;
+    }
 
     @media @mobile {
       padding: 3rem 2rem;
