@@ -9,14 +9,16 @@ interface IUndertitlerPanelProps {
 const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
   undertitler,
 }) => {
+  const undertitlerIPanel = undertitler.filter(
+    (undertittel) => undertittel.tekst_i_panel
+  );
+
   const undertittelClass =
-    undertitler.length > 1 ? 'undertittel-flere' : 'undertittel-singel';
+    undertitlerIPanel.length > 1 ? 'undertittel-flere' : 'undertittel-singel';
 
   return (
     <>
-      {undertitler.map((undertittel: IUndertittel, i: number) => {
-        if (!undertittel.tekst_i_panel) return null;
-
+      {undertitlerIPanel.map((undertittel: IUndertittel, i: number) => {
         return (
           <div className={undertittelClass} key={i}>
             <h2>{undertittel.tekst_i_panel}</h2>
@@ -31,8 +33,8 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
                 {undertittel.knapp.tekst}
               </a>
             ) : null}
-            {i === undertitler.length - 2 &&
-            undertitler[undertitler.length - 1].tekst_i_panel ===
+            {i === undertitlerIPanel.length - 2 &&
+            undertitlerIPanel[undertitlerIPanel.length - 1].tekst_i_panel ===
               'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn' ? (
               <hr />
             ) : null}
