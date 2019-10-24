@@ -1,4 +1,4 @@
-import React, { useState, SyntheticEvent, useRef, useEffect } from 'react';
+import React, { useState, SyntheticEvent, useRef } from 'react';
 import { ISporsmal, ISvar } from '../../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
@@ -140,7 +140,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
                   <RadioPanel
                     value={svar.tekst}
                     label={svar.tekst}
-                    name={svar._id}
+                    name={sporsmal._id}
                     checked={svar.checked ? svar.checked : false}
                     onChange={(e) => handleNesteKlikk(e, sporsmal, svar)}
                   />

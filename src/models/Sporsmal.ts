@@ -1,5 +1,5 @@
 export interface ISporsmal {
-  _id?: string;
+  _id: string;
   sporsmal_id: number;
   sporsmal_tekst: string;
   svarliste: ISvar[];
