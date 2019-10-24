@@ -32,18 +32,23 @@
   }
 
   hr {
-    margin-top: 3rem;
-    margin-bottom: -2rem;
+    margin-top: 4rem;
     border: solid 0.5px #151515;
   }
 
   .liste-med-ikon {
     display: inline;
+
+    p {
+      position: absolute;
+      margin-top: 0.1rem;
+    }
   }
 
   .liste-element {
     display: inline;
     margin-left: 1rem;
+    margin-right: 1rem;
   }
 
   .undertittel-flere,
@@ -145,6 +150,10 @@
 
     .rett-til-liste {
       padding-left: 6rem;
+
+      @media @mobile {
+        padding-left: 2rem;
+      }
     }
 
     @media @mobile {
