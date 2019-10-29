@@ -43,7 +43,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
     };
 
     fetchData();
-  }, [steg]);
+  }, [error]);
 
   if (fetching || !(info && info.undertitler)) {
     return <NavFrontendSpinner className="spinner" />;

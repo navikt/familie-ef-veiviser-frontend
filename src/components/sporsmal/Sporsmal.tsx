@@ -14,11 +14,6 @@ interface ISporsmalProps {
   infoMapping: any;
 }
 
-interface ISporsmalState {
-  sporsmalSti: [];
-  svarSti: [];
-}
-
 const Sporsmal: React.FC<ISporsmalProps> = ({
   sporsmalListe,
   steg,
@@ -27,10 +22,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
   ferdig,
   infoMapping,
 }) => {
-  const [state, setState] = useState<any>({
-    sporsmalSti: [],
-    svarSti: [],
-  });
+  const [sporsmalSti, setSporsmalSti] = useState<any>([]);
 
   const scrollPunkt = useRef(null);
 
@@ -38,8 +30,8 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
     (sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg
   );
 
-  if (!ferdig && !state.sporsmalSti.includes(detteSporsmalet)) {
-    state.sporsmalSti.push(detteSporsmalet);
+  if (!ferdig && !sporsmalSti.includes(detteSporsmalet)) {
+    sporsmalSti.push(detteSporsmalet);
   }
 
   const handleNesteKlikk = (
@@ -53,13 +45,13 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       setFerdig(false);
     }
 
-    const sporsmalIndeks = state.sporsmalSti.findIndex(
+    const sporsmalIndeks = sporsmalSti.findIndex(
       (s: ISporsmal) => s.sporsmal_id === sporsmal.sporsmal_id
     );
 
-    state.sporsmalSti.length = sporsmalIndeks + 1;
+    sporsmalSti.length = sporsmalIndeks + 1;
 
-    const nySporsmalSti = state.sporsmalSti.map((s: ISporsmal) => {
+    const nySporsmalSti = sporsmalSti.map((s: ISporsmal) => {
       if (s.sporsmal_id === sporsmal.sporsmal_id) {
         const nySvarliste = s.svarliste.map((sv: ISvar) => {
           if (sv._id === svar._id) {
@@ -75,22 +67,14 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       return s;
     });
 
-    setState((prevState: any) => ({
-      ...prevState,
-      sporsmalSti: nySporsmalSti,
-    }));
+    setSporsmalSti(nySporsmalSti);
 
     if (svar.done_complete) {
-      const svarListe = state.sporsmalSti
+      const svarListe = sporsmalSti
         .map((sporsmal: ISporsmal) => {
           return sporsmal.svarliste.find((svar: ISvar) => svar.checked);
         })
         .filter((svar: ISvar) => svar);
-
-      setState((prevState: any) => ({
-        ...prevState,
-        svarSti: svarListe,
-      }));
 
       const svarIder = svarListe.map((svar: ISvar) => svar._id);
 
@@ -122,9 +106,12 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
 
   return (
     <div>
-      {state.sporsmalSti.map((sporsmal: ISporsmal) => {
+      {sporsmalSti.map((sporsmal: ISporsmal, index: number) => {
         return (
           <div key={sporsmal._id} className="sporsmal-element">
+            {index === sporsmalSti.length - 1 && !ferdig ? (
+              <div ref={scrollPunkt} />
+            ) : null}
             <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
             {sporsmal && sporsmal.hjelpetekst_overskrift ? (
               <Lesmerpanel
@@ -150,8 +137,12 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
           </div>
         );
       })}
-      <div ref={scrollPunkt} />
-      {ferdig ? <Informasjonsboks steg={steg} /> : null}
+      {ferdig ? (
+        <>
+          <div ref={scrollPunkt} />
+          <Informasjonsboks steg={steg} />
+        </>
+      ) : null}
     </div>
   );
 };
