@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUndertittel } from '../../models/Informasjonsboks';
+import { IUndertittel, IBrodtekst } from '../../models/Informasjonsboks';
 import MarkdownViewer from '../utils/MarkdownViewer';
 
 interface IUndertitlerPanelProps {
@@ -23,9 +23,11 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
           <div className={undertittelClass} key={i}>
             <h2>{undertittel.tekst_i_panel}</h2>
             {undertittel.brodtekster &&
-              undertittel.brodtekster.map((brodtekst: any, i: number) => {
-                return <MarkdownViewer key={i} markdown={brodtekst.body} />;
-              })}
+              undertittel.brodtekster.map(
+                (brodtekst: IBrodtekst, i: number) => {
+                  return <MarkdownViewer key={i} markdown={brodtekst.body} />;
+                }
+              )}
             {undertittel.knapp &&
             undertittel.knapp.tekst &&
             undertittel.knapp.lenke ? (

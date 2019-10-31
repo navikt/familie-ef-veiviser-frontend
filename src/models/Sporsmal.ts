@@ -15,3 +15,8 @@ export interface ISvar {
   done_complete?: boolean;
   checked?: boolean;
 }
+
+export interface IInfoMapping {
+  information_id: number;
+  svarsti?: ISvar[];
+}

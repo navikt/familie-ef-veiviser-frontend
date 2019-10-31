@@ -2,7 +2,7 @@ import React from 'react';
 const marked = require('marked');
 
 interface IMarkdownViewerProps {
-  markdown: any;
+  markdown: string;
 }
 
 const MarkdownViewer: React.FC<IMarkdownViewerProps> = ({ markdown }) => {

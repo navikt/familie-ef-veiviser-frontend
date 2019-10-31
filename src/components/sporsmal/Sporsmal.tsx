@@ -1,5 +1,5 @@
 import React, { useState, SyntheticEvent, useRef } from 'react';
-import { ISporsmal, ISvar } from '../../models/Sporsmal';
+import { IInfoMapping, ISporsmal, ISvar } from '../../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
@@ -11,7 +11,7 @@ interface ISporsmalProps {
   setFerdig: (ferdig: boolean) => void;
   ferdig: boolean;
   sporsmalListe: ISporsmal[];
-  infoMapping: any;
+  infoMapping: IInfoMapping[];
 }
 
 const Sporsmal: React.FC<ISporsmalProps> = ({
@@ -78,7 +78,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
 
       const svarIder = svarListe.map((svar: ISvar) => svar._id);
 
-      let lengsteMatchId = null;
+      let lengsteMatchId = -1;
       let lengsteMatchLengde = 0;
 
       for (let i = 0; i < infoMapping.length; i++) {

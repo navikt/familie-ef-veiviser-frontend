@@ -5,6 +5,7 @@ import Feilside from '../feilside/Feilside';
 import MarkdownViewer from '../utils/MarkdownViewer';
 import Veiviserikon from '../../assets/icons/VeiviserIkon';
 import AlertStripe from 'nav-frontend-alertstriper';
+import { IHeader } from '../../models/Header';
 
 const Header = () => {
   const [fetching, setFetching] = useState<boolean>(true);
@@ -17,10 +18,10 @@ const Header = () => {
     const fetchData = () => {
       client
         .fetch(sanityQuery, { type: 'header' })
-        .then((res: any) => {
+        .then((res: IHeader) => {
           setInfo(res);
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
           console.error('Oh no, error occured: ', err);
           setError(true);
         });

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import RettTilListe from './RettTilListe';
-import { IUndertittel } from '../../models/Informasjonsboks';
+import { IInformasjonsboks, IUndertittel } from '../../models/Informasjonsboks';
 import UndertitlerPanel from './UndertitlerPanel';
 import BallIkon from '../../assets/icons/BallIkon';
 import BamseIkon from '../../assets/icons/BamseIkon';
@@ -11,6 +11,7 @@ import BarnIkon from '../../assets/icons/BarnIkon';
 import Barn2Ikon from '../../assets/icons/Barn2Ikon';
 import BrodskiveIkon from '../../assets/icons/BrodskiveIkon';
 import TaateflaskeIkon from '../../assets/icons/TaateflaskeIkon';
+import Feilside from '../feilside/Feilside';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -31,10 +32,10 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
           type: 'informasjonsboks',
           id: steg,
         })
-        .then((res: any) => {
+        .then((res: IInformasjonsboks) => {
           setInfo(res);
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
           console.error('Oh no, error occured: ', err);
           setError(true);
         });
@@ -43,10 +44,14 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
     };
 
     fetchData();
-  }, [error]);
+  }, [steg]);
 
   if (fetching || !(info && info.undertitler)) {
     return <NavFrontendSpinner className="spinner" />;
+  }
+
+  if (error) {
+    return <Feilside />;
   }
 
   const tekster_i_liste = info.undertitler.reduce(

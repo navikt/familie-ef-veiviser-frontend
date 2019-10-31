@@ -18,3 +18,7 @@ export interface IKnapp {
   lenke: string;
   tekst: string;
 }
+
+export interface IBrodtekst {
+  body: string;
+}

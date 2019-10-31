@@ -5,16 +5,17 @@ import Feilside from './components/feilside/Feilside';
 import Header from './components/header/Header';
 import { Panel } from 'nav-frontend-paneler';
 import { client } from './utils/sanity';
+import { IInfoMapping, ISporsmal } from './models/Sporsmal';
 import header from './assets/header.png';
 import footer from './assets/footer.png';
 
 const App = () => {
-  const [sporsmalListe, setSporsmalListe] = useState<any>([]);
+  const [sporsmalListe, setSporsmalListe] = useState<ISporsmal[]>([]);
   const [ferdig, setFerdig] = useState<boolean>(false);
   const [steg, setSteg] = useState<number>(1);
   const [fetching, setFetching] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const [infoMapping, setInfoMapping] = useState<any>();
+  const [infoMapping, setInfoMapping] = useState<IInfoMapping[]>([]);
 
   const sporsmalQuery =
     '*[_type == $type]{sporsmal_id, sporsmal_tekst, hjelpetekst_overskrift, hjelpetekst, svarliste[]->, _createdAt, _id, _rev, _type, _updatedAt}';
@@ -28,10 +29,11 @@ const App = () => {
         .fetch(infoMappingQuery, {
           type: 'informasjonsboks',
         })
-        .then((res: any) => {
+        .then((res: IInfoMapping[]) => {
           setInfoMapping(res);
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
+          console.log('err', err);
           console.error('Oh no, error occured: ', err);
         });
     };
@@ -39,10 +41,10 @@ const App = () => {
     const fetchSporsmal = () => {
       client
         .fetch(sporsmalQuery, { type: 'sporsmal' })
-        .then((res: any) => {
+        .then((res: ISporsmal[]) => {
           setSporsmalListe(res);
         })
-        .catch((err: any) => {
+        .catch((err: Error) => {
           console.error('Oh no, error occured: ', err);
           setError(true);
         });
@@ -63,7 +65,11 @@ const App = () => {
       <div className="app">
         <div style={{ width: '100%', margin: '0 auto', overflow: 'hidden' }}>
           <div style={{ position: 'relative', float: 'right', right: '50%' }}>
-            <img src={header} style={{ position: 'relative', right: '-50%' }} />
+            <img
+              alt="NAV dummyheader"
+              src={header}
+              style={{ position: 'relative', right: '-50%' }}
+            />
           </div>
         </div>
         <Panel className="innholdspanel">
@@ -81,7 +87,11 @@ const App = () => {
         </Panel>
         <div style={{ width: '100%', margin: '0 auto', overflow: 'hidden' }}>
           <div style={{ position: 'relative', float: 'right', right: '50%' }}>
-            <img src={footer} style={{ position: 'relative', right: '-50%' }} />
+            <img
+              alt="NAV dummyfooter"
+              src={footer}
+              style={{ position: 'relative', right: '-50%' }}
+            />
           </div>
         </div>
       </div>
