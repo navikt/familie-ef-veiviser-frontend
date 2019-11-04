@@ -115,14 +115,20 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
             ikke_rett_til={false}
           />
         ) : null}
-        <UndertitlerPanel undertitler={rett_til_undertitler} />
+        <UndertitlerPanel
+          undertitler={rett_til_undertitler}
+          antall_undertitler_totalt={info.undertitler.length}
+        />
         {ikke_rett_til_liste.length ? (
           <RettTilListe
             tekster_i_liste={ikke_rett_til_liste}
             ikke_rett_til={true}
           />
         ) : null}
-        <UndertitlerPanel undertitler={ikke_rett_til_undertitler} />
+        <UndertitlerPanel
+          undertitler={ikke_rett_til_undertitler}
+          antall_undertitler_totalt={info.undertitler.length}
+        />
         <hr />
         <UndertitlerPanel undertitler={andre_stonader} />
       </div>

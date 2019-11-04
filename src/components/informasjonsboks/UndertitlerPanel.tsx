@@ -4,10 +4,12 @@ import MarkdownViewer from '../utils/MarkdownViewer';
 
 interface IUndertitlerPanelProps {
   undertitler: IUndertittel[];
+  antall_undertitler_totalt?: number;
 }
 
 const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
   undertitler,
+  antall_undertitler_totalt,
 }) => {
   const undertitlerIPanel = undertitler.filter(
     (undertittel) => undertittel.tekst_i_panel
@@ -15,7 +17,7 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
 
   const undertittelClass = !undertitlerIPanel.length
     ? 'bare-brodtekst'
-    : undertitlerIPanel.length > 1
+    : antall_undertitler_totalt && antall_undertitler_totalt > 1
     ? 'undertittel-flere'
     : 'undertittel-singel';
 

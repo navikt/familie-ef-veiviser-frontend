@@ -9,6 +9,7 @@ export interface IUndertittel {
   tekst_i_panel: string;
   knapp: IKnapp;
   ikke_rett_til: boolean | undefined;
+  antall_undertitler_totalt?: number;
 }
 
 export interface IBrodtekst {
