@@ -25,6 +25,9 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   const sanityQuery =
     '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, ikke_rett_til, brodtekster[]->{body}}}';
 
+  const veiledende =
+    'PS! Veiviseren gir bare et veiledende svar. Hvis du søker vil vi vurdere flere aspekter ved situasjonen din, og svaret på søknaden kan være annerledes enn svaret du får i veiviseren.';
+
   useEffect(() => {
     const fetchData = () => {
       client
@@ -65,7 +68,11 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
 
   const ikke_rett_til_liste = info.undertitler.reduce(
     (tekster: string[], undertittel: IUndertittel) => {
-      if (undertittel.tekst_i_liste && undertittel.ikke_rett_til)
+      if (
+        undertittel.tekst_i_liste &&
+        (typeof undertittel.ikke_rett_til === 'boolean' &&
+          undertittel.ikke_rett_til)
+      )
         tekster.push(undertittel.tekst_i_liste);
       return tekster;
     },
@@ -74,7 +81,8 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
 
   const rett_til_undertitler = info.undertitler.filter(
     (undertittel: IUndertittel) =>
-      undertittel.ikke_rett_til &&
+      !undertittel.ikke_rett_til &&
+      (undertittel.tekst_i_panel || undertittel.brodtekster) &&
       !(
         undertittel.tekst_i_panel ===
         'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn'
@@ -83,8 +91,8 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
 
   const ikke_rett_til_undertitler = info.undertitler.filter(
     (undertittel: IUndertittel) =>
-      (typeof undertittel.ikke_rett_til === 'boolean' &&
-        !undertittel.ikke_rett_til) ||
+      typeof undertittel.ikke_rett_til === 'boolean' &&
+      undertittel.ikke_rett_til &&
       !(
         undertittel.tekst_i_panel ===
         'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn'
@@ -96,6 +104,15 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
       undertittel.tekst_i_panel ===
       'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn'
   );
+
+  console.log(rett_til_liste);
+
+  console.log(rett_til_undertitler);
+
+  console.log(ikke_rett_til_liste);
+
+  console.log('ikke rett til undertitler');
+  console.log(ikke_rett_til_undertitler);
 
   return (
     <div className="informasjonsboks blur-in">
@@ -129,6 +146,9 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
           undertitler={ikke_rett_til_undertitler}
           antall_undertitler_totalt={info.undertitler.length}
         />
+        <div className="bare-brodtekst">
+          <i>{veiledende}</i>
+        </div>
         <hr />
         <UndertitlerPanel undertitler={andre_stonader} />
       </div>
