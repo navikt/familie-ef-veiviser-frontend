@@ -9,22 +9,24 @@ interface IUndertitlerPanelProps {
 const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
   undertitler,
 }) => {
-  console.log('UNDERTITLER HER');
-  console.log(undertitler);
-
   const undertitlerIPanel = undertitler.filter(
     (undertittel) => undertittel.tekst_i_panel
   );
 
-  const undertittelClass =
-    undertitlerIPanel.length > 1 ? 'undertittel-flere' : 'undertittel-singel';
+  const undertittelClass = !undertitlerIPanel.length
+    ? 'bare-brodtekst'
+    : undertitlerIPanel.length > 1
+    ? 'undertittel-flere'
+    : 'undertittel-singel';
 
   return (
     <>
-      {undertitlerIPanel.map((undertittel: IUndertittel, i: number) => {
+      {undertitler.map((undertittel: IUndertittel, i: number) => {
         return (
           <div className={undertittelClass} key={i}>
-            <h2>{undertittel.tekst_i_panel}</h2>
+            {undertittel.tekst_i_panel ? (
+              <h2>{undertittel.tekst_i_panel}</h2>
+            ) : null}
             {undertittel.brodtekster &&
               undertittel.brodtekster.map(
                 (brodtekst: IBrodtekst, i: number) => {
