@@ -23,7 +23,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   const [error, setError] = useState<boolean>(false);
 
   const sanityQuery =
-    '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, brodtekster[]->{body}}}';
+    '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, ikke_rett_til, brodtekster[]->{body}}}';
 
   useEffect(() => {
     const fetchData = () => {
@@ -54,12 +54,47 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
     return <Feilside />;
   }
 
-  const tekster_i_liste = info.undertitler.reduce(
+  const rett_til_liste = info.undertitler.reduce(
     (tekster: string[], undertittel: IUndertittel) => {
-      if (undertittel.tekst_i_liste) tekster.push(undertittel.tekst_i_liste);
+      if (undertittel.tekst_i_liste && !undertittel.ikke_rett_til)
+        tekster.push(undertittel.tekst_i_liste);
       return tekster;
     },
     []
+  );
+
+  const ikke_rett_til_liste = info.undertitler.reduce(
+    (tekster: string[], undertittel: IUndertittel) => {
+      if (undertittel.tekst_i_liste && undertittel.ikke_rett_til)
+        tekster.push(undertittel.tekst_i_liste);
+      return tekster;
+    },
+    []
+  );
+
+  const rett_til_undertitler = info.undertitler.filter(
+    (undertittel: IUndertittel) =>
+      undertittel.ikke_rett_til &&
+      !(
+        undertittel.tekst_i_panel ===
+        'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn'
+      )
+  );
+
+  const ikke_rett_til_undertitler = info.undertitler.filter(
+    (undertittel: IUndertittel) =>
+      (typeof undertittel.ikke_rett_til === 'boolean' &&
+        !undertittel.ikke_rett_til) ||
+      !(
+        undertittel.tekst_i_panel ===
+        'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn'
+      )
+  );
+
+  const andre_stonader = info.undertitler.filter(
+    (undertittel: IUndertittel) =>
+      undertittel.tekst_i_panel ===
+      'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn'
   );
 
   return (
@@ -74,10 +109,22 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
         <TaateflaskeIkon className="taateflaske-ikon" />
       </div>
       <div className="informasjonsboks-innhold">
-        {tekster_i_liste.length ? (
-          <RettTilListe tekster_i_liste={tekster_i_liste} />
+        {rett_til_liste.length ? (
+          <RettTilListe
+            tekster_i_liste={rett_til_liste}
+            ikke_rett_til={false}
+          />
         ) : null}
-        <UndertitlerPanel undertitler={info.undertitler} />
+        <UndertitlerPanel undertitler={rett_til_undertitler} />
+        {ikke_rett_til_liste.length ? (
+          <RettTilListe
+            tekster_i_liste={ikke_rett_til_liste}
+            ikke_rett_til={true}
+          />
+        ) : null}
+        <UndertitlerPanel undertitler={ikke_rett_til_undertitler} />
+        <hr />
+        <UndertitlerPanel undertitler={andre_stonader} />
       </div>
     </div>
   );

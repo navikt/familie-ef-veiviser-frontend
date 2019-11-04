@@ -8,6 +8,7 @@ export interface IUndertittel {
   tekst_i_liste: string;
   tekst_i_panel: string;
   knapp: IKnapp;
+  ikke_rett_til: boolean | undefined;
 }
 
 export interface IBrodtekst {

@@ -9,6 +9,9 @@ interface IUndertitlerPanelProps {
 const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
   undertitler,
 }) => {
+  console.log('UNDERTITLER HER');
+  console.log(undertitler);
+
   const undertitlerIPanel = undertitler.filter(
     (undertittel) => undertittel.tekst_i_panel
   );
