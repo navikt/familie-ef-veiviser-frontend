@@ -146,11 +146,16 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
           undertitler={ikke_rett_til_undertitler}
           antall_undertitler_totalt={info.undertitler.length}
         />
-        <div className="bare-brodtekst">
+        <div className={`bare-brodtekst stonader-${andre_stonader.length}`}>
           <i>{veiledende}</i>
         </div>
-        <hr />
-        <UndertitlerPanel undertitler={andre_stonader} />
+        {andre_stonader.length ? (
+          <>
+            {' '}
+            <hr />
+            <UndertitlerPanel undertitler={andre_stonader} />
+          </>
+        ) : null}
       </div>
     </div>
   );
