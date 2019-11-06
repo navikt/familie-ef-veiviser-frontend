@@ -25,7 +25,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   const sanityQuery =
     '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, ikke_rett_til, brodtekster[]->{body}}}';
 
-  const veiledende =
+  const disclaimer =
     'PS! Veiviseren gir bare et veiledende svar. Hvis du søker vil vi vurdere flere aspekter ved situasjonen din, og svaret på søknaden kan være annerledes enn svaret du får i veiviseren.';
 
   useEffect(() => {
@@ -146,16 +146,15 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
           undertitler={ikke_rett_til_undertitler}
           antall_undertitler_totalt={info.undertitler.length}
         />
-        <div className={`bare-brodtekst stonader-${andre_stonader.length}`}>
-          <i>{veiledende}</i>
-        </div>
         {andre_stonader.length ? (
           <>
-            {' '}
             <hr />
             <UndertitlerPanel undertitler={andre_stonader} />
           </>
         ) : null}
+        <div className="disclaimer">
+          <i>{disclaimer}</i>
+        </div>
       </div>
     </div>
   );
