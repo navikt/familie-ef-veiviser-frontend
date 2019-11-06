@@ -38,7 +38,12 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
             {undertittel.knapp &&
             undertittel.knapp.tekst &&
             undertittel.knapp.lenke ? (
-              <a href={undertittel.knapp.lenke} className="knapp">
+              <a
+                href={undertittel.knapp.lenke}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="knapp"
+              >
                 {undertittel.knapp.tekst}
               </a>
             ) : null}
