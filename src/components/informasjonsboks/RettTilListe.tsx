@@ -21,7 +21,7 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
   );
 
   return (
-    <div className={ikke_rett_til ? 'rett-til-liste' : 'ikke-rett-til-liste'}>
+    <div className="rett-til-liste">
       <h2>{overskrift}</h2>
       <ul>
         {tekster_i_liste.map((tekst: string) => (
