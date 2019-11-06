@@ -25,7 +25,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
   const sanityQuery =
     '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, ikke_rett_til, brodtekster[]->{body}}}';
 
-  const disclaimer =
+  const veiledende =
     'PS! Veiviseren gir bare et veiledende svar. Hvis du søker vil vi vurdere flere aspekter ved situasjonen din, og svaret på søknaden kan være annerledes enn svaret du får i veiviseren.';
 
   useEffect(() => {
@@ -149,11 +149,14 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
         {andre_stonader.length ? (
           <>
             <hr />
-            <UndertitlerPanel undertitler={andre_stonader} />
+            <UndertitlerPanel
+              className="andre-stonader"
+              undertitler={andre_stonader}
+            />
           </>
         ) : null}
         <div className="disclaimer">
-          <i>{disclaimer}</i>
+          <i>{veiledende}</i>
         </div>
       </div>
     </div>

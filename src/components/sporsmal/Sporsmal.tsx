@@ -12,25 +12,27 @@ interface ISporsmalProps {
   ferdig: boolean;
   sporsmalListe: ISporsmal[];
   infoMapping: IInfoMapping[];
+  startet: boolean;
+  scrollPunkt: any;
 }
 
 const Sporsmal: React.FC<ISporsmalProps> = ({
+  scrollPunkt,
   sporsmalListe,
   steg,
   setSteg,
   setFerdig,
   ferdig,
   infoMapping,
+  startet,
 }) => {
   const [sporsmalSti, setSporsmalSti] = useState<any>([]);
-
-  const scrollPunkt = useRef(null);
 
   const detteSporsmalet = sporsmalListe.find(
     (sporsmal: ISporsmal) => sporsmal.sporsmal_id === steg
   );
 
-  if (!ferdig && !sporsmalSti.includes(detteSporsmalet)) {
+  if (!ferdig && !sporsmalSti.includes(detteSporsmalet) && startet) {
     sporsmalSti.push(detteSporsmalet);
   }
 
