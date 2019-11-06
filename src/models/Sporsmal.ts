@@ -1,4 +1,5 @@
 export interface ISporsmal {
+  startet: boolean;
   _id: string;
   sporsmal_id: number;
   sporsmal_tekst: string;

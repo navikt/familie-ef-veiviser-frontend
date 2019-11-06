@@ -1,4 +1,4 @@
-import React, { useState, SyntheticEvent, useRef } from 'react';
+import React, { useState, SyntheticEvent } from 'react';
 import { IInfoMapping, ISporsmal, ISvar } from '../../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
