@@ -39,9 +39,6 @@ const Header = () => {
   if (!error && info && info.ingress && info.overskrift) {
     return (
       <div className="veiviser-header">
-        <AlertStripe type="advarsel" style={{ marginBottom: '2.5rem' }}>
-          Dette er en <b>demoversjon</b> av veiviseren for enslig mor eller far.
-        </AlertStripe>
         <Veiviserikon className="veiviser-ikon" />
         <h2>{info.overskrift}</h2>
         <hr />

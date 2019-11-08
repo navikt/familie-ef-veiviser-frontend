@@ -14,6 +14,7 @@ import { scrollTilRef } from './utils/utils';
 const App = () => {
   const [sporsmalListe, setSporsmalListe] = useState<ISporsmal[]>([]);
   const [ferdig, setFerdig] = useState<boolean>(false);
+  const [disclaimer, setDisclaimer] = useState<string>('');
   const [steg, setSteg] = useState<number>(1);
   const [fetching, setFetching] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
@@ -26,6 +27,8 @@ const App = () => {
 
   const infoMappingQuery =
     '*[_type == $type]{information_id, svarsti[]->{_id, tekst}}';
+
+  const disclaimerQuery = '*[_type == $type][0]';
 
   useEffect(() => {
     const fetchInfoMapping = () => {
@@ -56,8 +59,21 @@ const App = () => {
       setFetching(false);
     };
 
+    const fetchDisclaimer = () => {
+      client
+        .fetch(disclaimerQuery, { type: 'disclaimer' })
+        .then((res: any) => {
+          setDisclaimer(res.disclaimer);
+        })
+        .catch((err: Error) => {
+          console.error('Oh no, error occured: ', err);
+          setError(true);
+        });
+    };
+
     fetchSporsmal();
     fetchInfoMapping();
+    fetchDisclaimer();
   }, []);
 
   const startVeiviser = () => {
@@ -85,9 +101,11 @@ const App = () => {
           <div className="innholdscontainer">
             <Header />
             {!startet ? (
-              <Knapp className="startknapp" onClick={startVeiviser}>
-                Start veiviser
-              </Knapp>
+              <div className="knappwrapper">
+                <Knapp className="startknapp" onClick={startVeiviser}>
+                  Start veiviseren
+                </Knapp>
+              </div>
             ) : null}
             <Sporsmal
               scrollPunkt={scrollPunkt}
@@ -98,6 +116,7 @@ const App = () => {
               ferdig={ferdig}
               steg={steg}
               infoMapping={infoMapping}
+              disclaimer={disclaimer}
             />
           </div>
         </Panel>

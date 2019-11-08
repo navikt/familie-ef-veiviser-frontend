@@ -4,6 +4,7 @@ import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { scrollTilRef } from '../../utils/utils';
+import MarkdownViewer from '../utils/MarkdownViewer';
 
 interface ISporsmalProps {
   steg: number;
@@ -14,6 +15,7 @@ interface ISporsmalProps {
   infoMapping: IInfoMapping[];
   startet: boolean;
   scrollPunkt: any;
+  disclaimer?: string;
 }
 
 const Sporsmal: React.FC<ISporsmalProps> = ({
@@ -25,6 +27,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
   ferdig,
   infoMapping,
   startet,
+  disclaimer,
 }) => {
   const [sporsmalSti, setSporsmalSti] = useState<any>([]);
 
@@ -115,12 +118,14 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
               <div ref={scrollPunkt} />
             ) : null}
             <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
-            {sporsmal && sporsmal.hjelpetekst_overskrift ? (
+            {sporsmal &&
+            sporsmal.hjelpetekst_overskrift &&
+            sporsmal.hjelpetekst ? (
               <Lesmerpanel
                 className="hjelpetekst"
                 apneTekst={sporsmal.hjelpetekst_overskrift}
               >
-                <p>{sporsmal.hjelpetekst}</p>
+                <MarkdownViewer markdown={sporsmal.hjelpetekst} />
               </Lesmerpanel>
             ) : null}
             {sporsmal.svarliste.map((svar: ISvar) => {
@@ -142,7 +147,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       {ferdig ? (
         <>
           <div ref={scrollPunkt} />
-          <Informasjonsboks steg={steg} />
+          <Informasjonsboks steg={steg} disclaimer={disclaimer} />
         </>
       ) : null}
     </div>

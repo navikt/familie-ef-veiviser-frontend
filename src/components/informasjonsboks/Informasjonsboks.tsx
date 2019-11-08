@@ -12,21 +12,23 @@ import Barn2Ikon from '../../assets/icons/Barn2Ikon';
 import BrodskiveIkon from '../../assets/icons/BrodskiveIkon';
 import TaateflaskeIkon from '../../assets/icons/TaateflaskeIkon';
 import Feilside from '../feilside/Feilside';
+import MarkdownViewer from '../utils/MarkdownViewer';
 
 interface IInformasjonstekstProps {
   steg: number;
+  disclaimer?: string;
 }
 
-const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
+const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
+  steg,
+  disclaimer,
+}) => {
   const [fetching, setFetching] = useState<boolean>(true);
   const [info, setInfo] = useState<any>([]);
   const [error, setError] = useState<boolean>(false);
 
   const sanityQuery =
     '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, ikke_rett_til, brodtekster[]->{body}}}';
-
-  const veiledende =
-    'PS! Veiviseren gir bare et veiledende svar. Hvis du søker vil vi vurdere flere aspekter ved situasjonen din, og svaret på søknaden kan være annerledes enn svaret du får i veiviseren.';
 
   useEffect(() => {
     const fetchData = () => {
@@ -99,21 +101,6 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
       )
   );
 
-  const andre_stonader = info.undertitler.filter(
-    (undertittel: IUndertittel) =>
-      undertittel.tekst_i_panel ===
-      'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn'
-  );
-
-  console.log(rett_til_liste);
-
-  console.log(rett_til_undertitler);
-
-  console.log(ikke_rett_til_liste);
-
-  console.log('ikke rett til undertitler');
-  console.log(ikke_rett_til_undertitler);
-
   return (
     <div className="informasjonsboks blur-in">
       <div className="informasjonsboks-header">
@@ -146,18 +133,11 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({ steg }) => {
           undertitler={ikke_rett_til_undertitler}
           antall_undertitler_totalt={info.undertitler.length}
         />
-        {andre_stonader.length ? (
-          <>
-            <hr />
-            <UndertitlerPanel
-              className="andre-stonader"
-              undertitler={andre_stonader}
-            />
-          </>
+        {disclaimer ? (
+          <div className="disclaimer">
+            <MarkdownViewer markdown={disclaimer} />
+          </div>
         ) : null}
-        <div className="disclaimer">
-          <i>{veiledende}</i>
-        </div>
       </div>
     </div>
   );
