@@ -94,6 +94,12 @@
   .bare-brodtekst-0 {
     padding-left: 6rem;
     padding-right: 6rem;
+
+    @media @mobile {
+      padding-top: 2rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   .undertittel-singel {
@@ -177,10 +183,12 @@
     }
 
     .disclaimer {
-      padding-right: 6rem;
-      padding-left: 6rem;
-      padding-bottom: 4rem;
-      padding-top: 2rem;
+      padding: 2rem 6rem 4rem 6rem;
+
+      @media @mobile {
+        padding-right: 2rem;
+        padding-left: 2rem;
+      }
     }
 
     .rett-til-liste {
