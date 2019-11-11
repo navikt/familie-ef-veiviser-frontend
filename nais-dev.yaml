@@ -1,0 +1,30 @@
+---
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: familie-ef-veiviser
+  namespace: default
+  labels:
+    team: teamfamilie
+spec:
+  image: navikt/familie-ef-veiviser:{{version}}
+  team: teamfamilie
+  port: 8080
+  ingresses:
+    - https://www-q0.nav.no/familie/alene-med-barn/veiviser
+  liveness:
+    path: /
+    initialDelay: 10
+  readiness:
+    path: /
+    initialDelay: 10
+  replicas:
+    min: 2
+    max: 4
+  webproxy: true
+  resources:
+    limits:
+      cpu: '3'
+      memory: 768Mi
+    requests:
+      memory: 512Mi
