@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Bygg React app
           command: |
-            craco build
+            npm run build
       - persist_to_workspace:
           root: .
           paths:
