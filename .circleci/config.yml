@@ -95,7 +95,7 @@ jobs:
             --key-base64=${GITHUB_PRIVATE_KEY} \
             --team=${TEAM} \
             --version=${VERSION} \
-            --resource=./nais-dev.yaml
+            --resource=./nais.config.yaml
   deploy_prod:
     executor: nais-deployer
     steps:
@@ -115,7 +115,7 @@ jobs:
             --key-base64=${GITHUB_PRIVATE_KEY} \
             --team=${TEAM} \
             --version=${VERSION} \
-            --resource=./nais-prod.yaml
+            --resource=./nais.config.yaml
 workflows:
   version: 2
   build_n_deploy:
