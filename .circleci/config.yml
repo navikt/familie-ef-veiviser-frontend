@@ -1,10 +1,38 @@
 version: 2.1
+orbs:
+  nais: 'navikt/nais-deployment@1.1.0'
+
+executors:
+  nais-deployer:
+    environment:
+      TEAM: teamfamilie
+    docker:
+      - image: navikt/deployment-cli:latest
+
 jobs:
   build:
     docker:
       - image: circleci/node:11.7.0
     steps:
+      - run:
+          name: Add github to known hosts
+          command: |
+            mkdir ~/.ssh
+            echo "github.com,140.82.118.3 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==" >> ~/.ssh/known_hosts
+      - add_ssh_keys:
+          fingerprints:
+            - 'd4:c2:10:f7:91:30:c2:f0:55:93:8b:8f:b5:cd:6c:49'
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Generate version number, github token and docker image tags
+          command: |
+            export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"
+            echo "export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"" >> /home/circleci/project/properties.env
+            echo "export DOCKER_TAG=\"$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$VERSION\"" >> /home/circleci/project/properties.env
+            cat properties.env >> $BASH_ENV
+            echo $BASH_ENV
       - run:
           name: Installer npm pakker
           command: |
@@ -14,125 +42,106 @@ jobs:
           command: |
             npm run build
       - persist_to_workspace:
-          root: .
+          root: /home/circleci/project
           paths:
-            - build/*
+            - .
 
-  deploy-til-dev:
+  deploy_docker:
     docker:
-      - image: navikt/deployment-cli:latest
+      - image: circleci/node:11.7.0
     steps:
-      - checkout
-      - sett-miljovariabler
-      - setup_remote_docker
       - attach_workspace:
-          at: .
+          at: /home/circleci/project
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Sett opp environment for docker
+          command: cat /home/circleci/project/properties.env >> $BASH_ENV
+      - run:
+          name: Slett test resources
+          command: rm -rf development
       - run:
           name: Bygger Docker image
           command: |
-            echo $IMAGE_NAME
-            docker build -t $IMAGE_NAME .
+            echo $DOCKER_TAG $VERSION
+            docker build -t $DOCKER_TAG .
       - run:
-          name: Pusher Docker image
+          name: Docker push
           command: |
-            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-            docker push $IMAGE_NAME
-      - deploy:
-          til: dev-sbs
-          ingress1: https://$REPO_NAME.nais.oera-q.local
-          ingress2: https://www-q0.nav.no/familie/$REPO_NAME
+            echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_LOGIN" --password-stdin
+            echo "Pushing with tag $DOCKER_TAG"
+            docker push $DOCKER_TAG
+      - persist_to_workspace:
+          root: /home/circleci/project
+          paths:
+            - properties.env
 
-  deploy-til-prod:
-    docker:
-      - image: navikt/deployment-cli:latest
+  deploy_dev:
+    executor: nais-deployer
     steps:
+      - attach_workspace:
+          at: /home/circleci/project
       - checkout
-      - sett-miljovariabler
-      - deploy:
-          til: prod-sbs
-          ingress1: https://$REPO_NAME.nais.oera.no
-          ingress2: https://www.nav.no/familie/$REPO_NAME
-
-commands:
-  deploy:
-    parameters:
-      til:
-        type: string
-      ingress1:
-        type: string
-      ingress2:
-        type: string
-    steps:
       - run:
-          name: Deployer til << parameters.til >>
+          name: Set up environment variables
+          command: cat /home/circleci/project/properties.env >> $BASH_ENV
+      - run:
+          name: Create github deployment for stable test
           command: |
-            echo $GH_DEPLOY_KEY | base64 -d | dos2unix > gh_deploy_key.pem
             deployment-cli deploy create \
-                --team=familie \
-                --resource=nais.config.yaml \
-                --cluster=<< parameters.til >> \
-                --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
-                --var baseurl=/familie/$REPO_NAME \
-                --var ingress1=<< parameters.ingress1 >> \
-                --var ingress2=<< parameters.ingress2 >> \
-                --var reponame=$REPO_NAME \
-                --var version=$IMAGE_VERSION \
-                --key=gh_deploy_key.pem \
-                --ref=$COMMIT_SHORT \
-                --appid=20250
-  sett-miljovariabler:
+            --cluster=dev-sbs \
+            --repository=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME \
+            --appid=${GITHUB_APP_ID} \
+            --key-base64=${GITHUB_PRIVATE_KEY} \
+            --team=${TEAM} \
+            --version=${VERSION} \
+            --resource=./nais-dev.yaml
+  deploy_prod:
+    executor: nais-deployer
     steps:
+      - attach_workspace:
+          at: /home/circleci/project
+      - checkout
       - run:
-          name: Definerer git-referanse, versjonsnummer og repo-navn
-          command: |
-            echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
-            echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
-            echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
+          name: Set up environment variables
+          command: cat /home/circleci/project/properties.env >> $BASH_ENV
       - run:
-          name: Definerer navn på docker-image
+          name: Create github deployment for stable test
           command: |
-            echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
+            deployment-cli deploy create \
+            --cluster=prod-sbs \
+            --repository=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME \
+            --appid=${GITHUB_APP_ID} \
+            --key-base64=${GITHUB_PRIVATE_KEY} \
+            --team=${TEAM} \
+            --version=${VERSION} \
+            --resource=./nais-prod.yaml
 workflows:
-  bygg-og-deploy:
+  version: 2
+  build_n_deploy:
     jobs:
       - build:
           filters:
             tags:
-              only: /.*/
-      - bekreft-deploy-til-dev:
-          type: approval
-          requires:
-            - build
-          filters:
-            branches:
-              ignore: master
-      - deploy-til-dev:
-          name: manuell-deploy-til-dev
-          requires:
-            - bekreft-deploy-til-dev
-      - deploy-til-dev:
-          name: automatisk-deploy-til-dev
+              only: /^v[0-9]+\.[0-9]+$/
+      - deploy_docker:
+          context: NAIS deployment
           requires:
             - build
           filters:
             tags:
-              only: /^v.*/
+              only: /^v[0-9]+\.[0-9]+$/
+      - deploy_dev:
+          context: familie-ci
+          requires:
+            - deploy_docker
+          filters:
+            branches:
+              only: /.*/
+      - deploy_prod:
+          context: familie-ci
+          requires:
+            - deploy_docker
+          filters:
             branches:
               only: master
-      - bekreft-deploy-til-prod:
-          type: approval
-          requires:
-            - automatisk-deploy-til-dev
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
-      - deploy-til-prod:
-          requires:
-            - bekreft-deploy-til-prod
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
