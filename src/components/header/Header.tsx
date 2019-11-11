@@ -4,7 +4,6 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from '../feilside/Feilside';
 import MarkdownViewer from '../utils/MarkdownViewer';
 import Veiviserikon from '../../assets/icons/VeiviserIkon';
-import AlertStripe from 'nav-frontend-alertstriper';
 import { IHeader } from '../../models/Header';
 
 const Header = () => {
