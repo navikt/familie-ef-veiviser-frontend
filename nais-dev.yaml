@@ -8,7 +8,7 @@ metadata:
 spec:
   image: navikt/familie-ef-veiviser:{{version}}
   team: teamfamilie
-  port: 3000
+  port: 8080
   ingresses:
     - https://www-q0.nav.no/familie/alene-med-barn/veiviser
   liveness:
