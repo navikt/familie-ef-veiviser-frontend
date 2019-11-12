@@ -22,9 +22,18 @@ spec:
     min: 2
     max: 4
   webproxy: true
+  env:
+    - name: APP_VERSION
+      value: '{{version}}'
+    - name: APPRES_CMS_URL
+      value: https://appres-q0.nav.no
+    - name: LOGINSERVICE_URL
+      value: https://loginservice-q.nav.no/login
+    - name: UNLEASH_API_URL
+      value: https://unleashproxy.nais.oera.no/api/
   resources:
     limits:
-      cpu: '3'
-      memory: 768Mi
+      cpu: 2000m
+      memory: 1024Mi
     requests:
       memory: 512Mi
