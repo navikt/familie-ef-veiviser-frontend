@@ -7,8 +7,6 @@ import { Panel } from 'nav-frontend-paneler';
 import { client } from './utils/sanity';
 import { Knapp } from 'nav-frontend-knapper';
 import { IInfoMapping, ISporsmal } from './models/Sporsmal';
-import header from './assets/header.png';
-import footer from './assets/footer.png';
 import { scrollTilRef } from './utils/utils';
 
 const App = () => {
@@ -88,15 +86,6 @@ const App = () => {
   if (!error && sporsmalListe && sporsmalListe.length) {
     return (
       <div className="app">
-        <div style={{ width: '100%', margin: '0 auto', overflow: 'hidden' }}>
-          <div style={{ position: 'relative', float: 'right', right: '50%' }}>
-            <img
-              alt="NAV dummyheader"
-              src={header}
-              style={{ position: 'relative', right: '-50%' }}
-            />
-          </div>
-        </div>
         <Panel className="innholdspanel">
           <div className="innholdscontainer">
             <Header />
@@ -120,15 +109,6 @@ const App = () => {
             />
           </div>
         </Panel>
-        <div style={{ width: '100%', margin: '0 auto', overflow: 'hidden' }}>
-          <div style={{ position: 'relative', float: 'right', right: '50%' }}>
-            <img
-              alt="NAV dummyfooter"
-              src={footer}
-              style={{ position: 'relative', right: '-50%' }}
-            />
-          </div>
-        </div>
       </div>
     );
   } else if (error) {
