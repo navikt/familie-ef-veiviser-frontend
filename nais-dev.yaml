@@ -12,9 +12,9 @@ spec:
   ingresses:
     - https://www-q0.nav.no/familie/alene-med-barn/veiviser
   liveness:
-    path: /
+    path: /familie/alene-med-barn/veiviser/
   readiness:
-    path: /
+    path: /familie/alene-med-barn/veiviser/
   prometheus:
     enabled: false
   replicas:
