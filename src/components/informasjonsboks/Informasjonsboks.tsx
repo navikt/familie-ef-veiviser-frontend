@@ -27,8 +27,13 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   const [info, setInfo] = useState<any>([]);
   const [error, setError] = useState<boolean>(false);
 
-  const sanityQuery =
-    '*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{tekst_i_liste, tekst_i_panel, knapp, ikke_rett_til, brodtekster[]->{body}}}';
+  const sanityQuery = `*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{
+      tekst_i_liste, 
+      tekst_i_panel, 
+      knapp, 
+      ikke_rett_til, 
+      "brodtekster": brodtekster[]->{body}
+      }}`;
 
   useEffect(() => {
     const fetchData = () => {
@@ -72,8 +77,8 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
     (tekster: string[], undertittel: IUndertittel) => {
       if (
         undertittel.tekst_i_liste &&
-        (typeof undertittel.ikke_rett_til === 'boolean' &&
-          undertittel.ikke_rett_til)
+        typeof undertittel.ikke_rett_til === 'boolean' &&
+          undertittel.ikke_rett_til
       )
         tekster.push(undertittel.tekst_i_liste);
       return tekster;
