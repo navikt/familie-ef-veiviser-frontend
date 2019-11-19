@@ -78,7 +78,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
       if (
         undertittel.tekst_i_liste &&
         typeof undertittel.ikke_rett_til === 'boolean' &&
-          undertittel.ikke_rett_til
+        undertittel.ikke_rett_til
       )
         tekster.push(undertittel.tekst_i_liste);
       return tekster;
@@ -107,7 +107,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   );
 
   return (
-    <div className="informasjonsboks blur-in">
+    <div className="informasjonsboks blur-in" id={`informasjonsboks-${steg}`}>
       <div className="informasjonsboks-header">
         <BallIkon className="ball-ikon" />
         <BamseIkon className="bamse-ikon" />

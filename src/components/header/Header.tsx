@@ -17,10 +17,10 @@ const Header = () => {
     const fetchData = () => {
       client
         .fetch(sanityQuery, { type: 'header' })
-        .then((res: IHeader) => {
+        .then((res: Error) => {
           setInfo(res);
         })
-        .catch((err: Error) => {
+        .catch((err: IHeader) => {
           console.error('Oh no, error occured: ', err);
           setError(true);
         });

@@ -132,6 +132,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
               return (
                 <div key={svar._id} className="radioknapp-wrapper">
                   <RadioPanel
+                    id={sporsmal.sporsmal_tekst + ' ' + svar.tekst}
                     value={svar.tekst}
                     label={svar.tekst}
                     name={sporsmal._id}
