@@ -54,6 +54,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
     };
 
     fetchData();
+    // eslint-disable-next-line
   }, [steg]);
 
   if (fetching || !(info && info.undertitler)) {
