@@ -8,6 +8,7 @@ import { client } from './utils/sanity';
 import { Knapp } from 'nav-frontend-knapper';
 import { IInfoMapping, ISporsmal } from './models/Sporsmal';
 import { scrollTilRef } from './utils/utils';
+import 'react-app-polyfill/ie11';
 
 const App = () => {
   const [sporsmalListe, setSporsmalListe] = useState<ISporsmal[]>([]);
