@@ -1,9 +1,13 @@
 import React, { useState, SyntheticEvent } from 'react';
-import { IInfoMapping, ISporsmal, ISvar } from '../../models/Sporsmal';
+import {
+  ISvarstiTilInformasjonsboksMapping,
+  ISporsmal,
+  ISvar,
+} from '../../models/Sporsmal';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import { scrollTilRef } from '../../utils/utils';
+import { scrollTilNesteSporsmal } from '../../utils/utils';
 import MarkdownViewer from '../utils/MarkdownViewer';
 
 interface ISporsmalProps {
@@ -12,20 +16,20 @@ interface ISporsmalProps {
   setFerdig: (ferdig: boolean) => void;
   ferdig: boolean;
   sporsmalListe: ISporsmal[];
-  infoMapping: IInfoMapping[];
+  svarstiTilInformasjonsboksMapping: ISvarstiTilInformasjonsboksMapping[];
   startet: boolean;
-  scrollPunkt: any;
+  nesteSporsmal: any;
   disclaimer?: string;
 }
 
 const Sporsmal: React.FC<ISporsmalProps> = ({
-  scrollPunkt,
+  nesteSporsmal,
   sporsmalListe,
   steg,
   setSteg,
   setFerdig,
   ferdig,
-  infoMapping,
+  svarstiTilInformasjonsboksMapping,
   startet,
   disclaimer,
 }) => {
@@ -39,6 +43,14 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
     sporsmalSti.push(detteSporsmalet);
   }
 
+  function hoppTilSporsmal(sporsmal: ISporsmal) {
+    const sporsmalIndeks = sporsmalSti.findIndex(
+      (s: ISporsmal) => s.sporsmal_id === sporsmal.sporsmal_id
+    );
+
+    sporsmalSti.length = sporsmalIndeks + 1;
+  }
+
   const handleNesteKlikk = (
     e: SyntheticEvent<EventTarget>,
     sporsmal: ISporsmal,
@@ -50,11 +62,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       setFerdig(false);
     }
 
-    const sporsmalIndeks = sporsmalSti.findIndex(
-      (s: ISporsmal) => s.sporsmal_id === sporsmal.sporsmal_id
-    );
-
-    sporsmalSti.length = sporsmalIndeks + 1;
+    hoppTilSporsmal(sporsmal);
 
     const nySporsmalSti = sporsmalSti.map((s: ISporsmal) => {
       if (s.sporsmal_id === sporsmal.sporsmal_id) {
@@ -86,8 +94,8 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       let lengsteMatchId = -1;
       let lengsteMatchLengde = 0;
 
-      for (let i = 0; i < infoMapping.length; i++) {
-        const mapping = infoMapping[i];
+      for (let i = 0; i < svarstiTilInformasjonsboksMapping.length; i++) {
+        const mapping = svarstiTilInformasjonsboksMapping[i];
 
         if (!mapping.svarsti || !mapping.svarsti.length) continue;
 
@@ -106,7 +114,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       setSteg(svar.goto);
     }
 
-    setTimeout(() => scrollTilRef(scrollPunkt), 120);
+    scrollTilNesteSporsmal(nesteSporsmal);
   };
 
   return (
@@ -115,7 +123,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
         return (
           <div key={sporsmal._id} className="sporsmal-element">
             {index === sporsmalSti.length - 1 && !ferdig ? (
-              <div ref={scrollPunkt} />
+              <div ref={nesteSporsmal} />
             ) : null}
             <span className="sporsmal-tekst">{sporsmal.sporsmal_tekst}</span>
             {sporsmal &&
@@ -147,7 +155,7 @@ const Sporsmal: React.FC<ISporsmalProps> = ({
       })}
       {ferdig ? (
         <>
-          <div ref={scrollPunkt} />
+          <div ref={nesteSporsmal} />
           <Informasjonsboks steg={steg} disclaimer={disclaimer} />
         </>
       ) : null}

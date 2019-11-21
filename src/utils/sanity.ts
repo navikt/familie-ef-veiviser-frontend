@@ -15,3 +15,14 @@ export const hentInformasjonsboksQuery = `*[_type == $type && information_id == 
       ikke_rett_til, 
       "brodtekster": brodtekster[]->{body}
       }}`;
+
+export const hentSporsmalQuery =
+  '*[_type == $type]{' +
+  'sporsmal_id,' +
+  'sporsmal_tekst,' +
+  'hjelpetekst_overskrift,' +
+  'hjelpetekst,' +
+  'svarliste[]->, _createdAt, _id, _rev, _type, _updatedAt}';
+
+export const svarstiTilInformasjonsboksQuery =
+  '*[_type == $type]{information_id, svarsti[]->{_id, tekst}}';

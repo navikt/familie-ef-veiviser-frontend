@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { client } from '../../utils/sanity';
+import { client, hentHeaderQuery } from '../../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from '../feilside/Feilside';
 import MarkdownViewer from '../utils/MarkdownViewer';
@@ -11,12 +11,10 @@ const Header = () => {
   const [info, setInfo] = useState<any>([]);
   const [error, setError] = useState<boolean>(false);
 
-  const sanityQuery = '*[_type == $type][0]{ingress, overskrift}';
-
   useEffect(() => {
     const fetchData = () => {
       client
-        .fetch(sanityQuery, { type: 'header' })
+        .fetch(hentHeaderQuery, { type: 'header' })
         .then((res: Error) => {
           setInfo(res);
         })

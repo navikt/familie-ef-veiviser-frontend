@@ -17,7 +17,7 @@ export interface ISvar {
   checked?: boolean;
 }
 
-export interface IInfoMapping {
+export interface ISvarstiTilInformasjonsboksMapping {
   information_id: number;
   svarsti?: ISvar[];
 }
