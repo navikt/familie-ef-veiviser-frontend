@@ -13,6 +13,7 @@ import BrodskiveIkon from '../../assets/icons/BrodskiveIkon';
 import TaateflaskeIkon from '../../assets/icons/TaateflaskeIkon';
 import Feilside from '../feilside/Feilside';
 import MarkdownViewer from '../utils/MarkdownViewer';
+import { hentInformasjonsboksQuery } from '../../utils/sanity';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -27,18 +28,10 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   const [info, setInfo] = useState<any>([]);
   const [error, setError] = useState<boolean>(false);
 
-  const sanityQuery = `*[_type == $type && information_id == $id][0]{information_id, undertitler[]->{
-      tekst_i_liste, 
-      tekst_i_panel, 
-      knapp, 
-      ikke_rett_til, 
-      "brodtekster": brodtekster[]->{body}
-      }}`;
-
   useEffect(() => {
     const fetchData = () => {
       client
-        .fetch(sanityQuery, {
+        .fetch(hentInformasjonsboksQuery, {
           type: 'informasjonsboks',
           id: steg,
         })
