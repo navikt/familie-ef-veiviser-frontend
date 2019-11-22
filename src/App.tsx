@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Sporsmal from './components/sporsmal/Sporsmal';
+import Spørsmål from './components/sporsmal/Spørsmål';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
 import Header from './components/header/Header';
 import { Panel } from 'nav-frontend-paneler';
 import {
   client,
-  hentSporsmalQuery,
+  hentSpørsmålQuery,
   svarstiTilInformasjonsboksQuery,
 } from './utils/sanity';
 import { Knapp } from 'nav-frontend-knapper';
@@ -17,7 +17,7 @@ import {
 import { scrollTilNesteSporsmal } from './utils/utils';
 
 const App = () => {
-  const [sporsmalListe, setSporsmalListe] = useState<ISporsmal[]>([]);
+  const [spørsmålListe, setSpørsmålListe] = useState<ISporsmal[]>([]);
   const [ferdig, setFerdig] = useState<boolean>(false);
   const [disclaimer, setDisclaimer] = useState<string>('');
   const [steg, setSteg] = useState<number>(1);
@@ -45,11 +45,11 @@ const App = () => {
         });
     };
 
-    const fetchSporsmal = () => {
+    const fetchSpørsmål = () => {
       client
-        .fetch(hentSporsmalQuery, { type: 'sporsmal' })
+        .fetch(hentSpørsmålQuery, { type: 'sporsmal' })
         .then((res: ISporsmal[]) => {
-          setSporsmalListe(res);
+          setSpørsmålListe(res);
         })
         .catch((err: Error) => {
           console.error('Oh no, error occured: ', err);
@@ -71,7 +71,7 @@ const App = () => {
         });
     };
 
-    fetchSporsmal();
+    fetchSpørsmål();
     fetchSvarstiTilInformasjonsboksMapping();
     fetchDisclaimer();
   }, []);
@@ -85,7 +85,7 @@ const App = () => {
     return <NavFrontendSpinner className="spinner" />;
   }
 
-  if (!error && sporsmalListe && sporsmalListe.length) {
+  if (!error && spørsmålListe && spørsmålListe.length) {
     return (
       <div className="app">
         <Panel className="innholdspanel">
@@ -98,10 +98,10 @@ const App = () => {
                 </Knapp>
               </div>
             ) : null}
-            <Sporsmal
+            <Spørsmål
               nesteSporsmal={nesteSporsmal}
               startet={startet}
-              sporsmalListe={sporsmalListe}
+              spørsmålListe={spørsmålListe}
               setSteg={setSteg}
               setFerdig={setFerdig}
               ferdig={ferdig}

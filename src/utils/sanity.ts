@@ -16,7 +16,7 @@ export const hentInformasjonsboksQuery = `*[_type == $type && information_id == 
       "brodtekster": brodtekster[]->{body}
       }}`;
 
-export const hentSporsmalQuery =
+export const hentSpørsmålQuery =
   '*[_type == $type]{' +
   'sporsmal_id,' +
   'sporsmal_tekst,' +
