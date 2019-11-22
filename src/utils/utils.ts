@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 
 const scrollTilRef = (ref: RefObject<HTMLDivElement>) => {
   if (!ref || !ref.current) return;
-  window.scrollTo(0, ref.current!.offsetTop);
+  window.scrollTo({ top: ref.current!.offsetTop, left: 0, behavior: 'smooth' });
 };
 
 export const scrollTilNesteSporsmal = (

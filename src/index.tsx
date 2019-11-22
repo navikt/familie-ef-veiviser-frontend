@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 import './index.less';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import smoothscroll from 'smoothscroll-polyfill';
+
+smoothscroll.polyfill();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
