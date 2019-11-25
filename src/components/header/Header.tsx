@@ -15,10 +15,10 @@ const Header = () => {
     const fetchData = () => {
       client
         .fetch(hentHeaderQuery, { type: 'header' })
-        .then((res: Error) => {
+        .then((res: IHeader) => {
           setInfo(res);
         })
-        .catch((err: IHeader) => {
+        .catch((err: Error) => {
           console.error('Oh no, error occured: ', err);
           setError(true);
         });
