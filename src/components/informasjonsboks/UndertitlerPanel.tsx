@@ -32,6 +32,12 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
       undertittel.knapp
   );
 
+  const visKnapp = (undertittel: IUndertittel) => {
+    return (
+      undertittel.knapp && undertittel.knapp.tekst && undertittel.knapp.lenke
+    );
+  };
+
   return (
     <>
       {undertitlerMedInnhold.map((undertittel: IUndertittel, i: number) => {
@@ -61,9 +67,7 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
                   );
                 }
               )}
-            {undertittel.knapp &&
-            undertittel.knapp.tekst &&
-            undertittel.knapp.lenke ? (
+            {visKnapp(undertittel) ? (
               <a
                 href={undertittel.knapp.lenke}
                 target="_blank"
@@ -72,11 +76,6 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
               >
                 {undertittel.knapp.tekst}
               </a>
-            ) : null}
-            {i === undertitlerIPanel.length - 2 &&
-            undertitlerIPanel[undertitlerIPanel.length - 1].tekst_i_panel ===
-              'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn' ? (
-              <hr />
             ) : null}
           </div>
         );
