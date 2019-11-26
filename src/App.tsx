@@ -98,7 +98,7 @@ const App = () => {
                 </Knapp>
               </div>
             ) : null}
-            <Spørsmål
+            <Spørsmål // eslint-disable-line
               nesteSpørsmål={nesteSpørsmål}
               startet={startet}
               spørsmålListe={spørsmålListe}
