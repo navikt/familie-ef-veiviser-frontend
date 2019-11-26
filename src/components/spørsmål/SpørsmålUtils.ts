@@ -1,15 +1,28 @@
-import {ISporsmal, ISvar} from "../../models/Sporsmal";
+import {ISpørsmål, ISvar} from "../../models/Spørsmål";
+import { RefObject } from 'react';
 
-export const hoppTilSpørsmål = (spørsmål: ISporsmal, spørsmålSti: ISporsmal[]) => {
+const scrollTilRef = (ref: RefObject<HTMLDivElement>) => {
+    if (!ref || !ref.current) return;
+    window.scrollTo({ top: ref.current!.offsetTop, left: 0, behavior: 'smooth' });
+};
+
+export const scrollTilNesteSpørsmal = (
+    nesteSporsmal: RefObject<HTMLDivElement>
+) => {
+    setTimeout(() => scrollTilRef(nesteSporsmal), 120);
+};
+
+
+export const hoppTilSpørsmål = (spørsmål: ISpørsmål, spørsmålSti: ISpørsmål[]) => {
     const spørsmålIndeks = spørsmålSti.findIndex(
-        (s: ISporsmal) => s.sporsmal_id === spørsmål.sporsmal_id
+        (s: ISpørsmål) => s.sporsmal_id === spørsmål.sporsmal_id
     );
 
     spørsmålSti.length = spørsmålIndeks + 1;
 };
 
-export const finnSpørsmålStiMedBesvarteSvar = (spørsmålSti: ISporsmal[], spørsmål: ISporsmal, svar: ISvar) => {
-    return spørsmålSti.map((s: ISporsmal) => {
+export const finnSpørsmålStiMedBesvarteSvar = (spørsmålSti: ISpørsmål[], spørsmål: ISpørsmål, svar: ISvar) => {
+    return spørsmålSti.map((s: ISpørsmål) => {
         if (s.sporsmal_id === spørsmål.sporsmal_id) {
             const nySvarliste = s.svarliste.map((sv: ISvar) => {
                 if (sv._id === svar._id) {
@@ -26,9 +39,9 @@ export const finnSpørsmålStiMedBesvarteSvar = (spørsmålSti: ISporsmal[], sp�
     });
 };
 
-export const besvarteSvar = (spørsmålSti: ISporsmal[]) => {
+export const besvarteSvar = (spørsmålSti: ISpørsmål[]) => {
     const svarListe = spørsmålSti
-        .map((spørsmål: ISporsmal) => {
+        .map((spørsmål: ISpørsmål) => {
             return spørsmål.svarliste.find((svar: ISvar) => svar.checked);
         })
         .filter((svar: ISvar | undefined) => svar);

@@ -1,4 +1,4 @@
-export interface ISporsmal {
+export interface ISpørsmål {
   startet: boolean;
   _id: string;
   sporsmal_id: number;

@@ -1,30 +1,30 @@
 import React, { useState, SyntheticEvent } from 'react';
 import {
   ISvarstiTilInformasjonsboksMapping,
-  ISporsmal,
+  ISpørsmål,
   ISvar,
-} from '../../models/Sporsmal';
+} from '../../models/Spørsmål';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import { scrollTilNesteSporsmal } from '../../utils/utils';
+import { scrollTilNesteSpørsmal } from './SpørsmålUtils';
 import MarkdownViewer from '../utils/MarkdownViewer';
 import { hoppTilSpørsmål, finnSpørsmålStiMedBesvarteSvar, besvarteSvar, finnInformasjonsboksMedFlestMatchendeSvar } from './SpørsmålUtils';
 
-interface ISporsmalProps {
+interface ISpørsmålProps {
   steg: number;
   setSteg: (active: number) => void;
   setFerdig: (ferdig: boolean) => void;
   ferdig: boolean;
-  spørsmålListe: ISporsmal[];
+  spørsmålListe: ISpørsmål[];
   svarstiTilInformasjonsboksMapping: ISvarstiTilInformasjonsboksMapping[];
   startet: boolean;
-  nesteSporsmal: any;
+  nesteSpørsmål: any;
   disclaimer?: string;
 }
 
-const Spørsmål: React.FC<ISporsmalProps> = ({
-  nesteSporsmal,
+const Spørsmål: React.FC<ISpørsmålProps> = ({
+  nesteSpørsmål,
   spørsmålListe,
   steg,
   setSteg,
@@ -37,7 +37,7 @@ const Spørsmål: React.FC<ISporsmalProps> = ({
   const [spørsmålSti, setSpørsmålSti] = useState<any>([]);
 
   const detteSporsmalet = spørsmålListe.find(
-    (spørsmål: ISporsmal) => spørsmål.sporsmal_id === steg
+    (spørsmål: ISpørsmål) => spørsmål.sporsmal_id === steg
   );
 
   if (!ferdig && !spørsmålSti.includes(detteSporsmalet) && startet) {
@@ -46,7 +46,7 @@ const Spørsmål: React.FC<ISporsmalProps> = ({
 
   const KlikkPåSvar = (
     e: SyntheticEvent<EventTarget>,
-    spørsmål: ISporsmal,
+    spørsmål: ISpørsmål,
     svar: ISvar
   ): void => {
     if (svar.done) {
@@ -69,18 +69,18 @@ const Spørsmål: React.FC<ISporsmalProps> = ({
       setSteg(svar.goto);
     }
 
-    scrollTilNesteSporsmal(nesteSporsmal);
+    scrollTilNesteSpørsmal(nesteSpørsmål);
   };
 
   return (
     <div>
-      {spørsmålSti.map((spørsmål: ISporsmal, index: number) => {
+      {spørsmålSti.map((spørsmål: ISpørsmål, index: number) => {
         return (
-          <div key={spørsmål._id} className="sporsmal-element">
+          <div key={spørsmål._id} className="spørsmål-element">
             {index === spørsmålSti.length - 1 && !ferdig ? (
-              <div ref={nesteSporsmal} />
+              <div ref={nesteSpørsmål} />
             ) : null}
-            <span className="sporsmal-tekst">{spørsmål.sporsmal_tekst}</span>
+            <span className="spørsmål-tekst">{spørsmål.sporsmal_tekst}</span>
             {spørsmål &&
             spørsmål.hjelpetekst_overskrift &&
             spørsmål.hjelpetekst ? (
@@ -110,7 +110,7 @@ const Spørsmål: React.FC<ISporsmalProps> = ({
       })}
       {ferdig ? (
         <>
-          <div ref={nesteSporsmal} />
+          <div ref={nesteSpørsmål} />
           <Informasjonsboks steg={steg} disclaimer={disclaimer} />
         </>
       ) : null}

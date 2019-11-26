@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Spørsmål from './components/sporsmal/Spørsmål';
+import Spørsmål from './components/spørsmål/Spørsmål';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
 import Header from './components/header/Header';
@@ -12,12 +12,12 @@ import {
 import { Knapp } from 'nav-frontend-knapper';
 import {
   ISvarstiTilInformasjonsboksMapping,
-  ISporsmal,
-} from './models/Sporsmal';
-import { scrollTilNesteSporsmal } from './utils/utils';
+  ISpørsmål,
+} from './models/Spørsmål';
+import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils';
 
 const App = () => {
-  const [spørsmålListe, setSpørsmålListe] = useState<ISporsmal[]>([]);
+  const [spørsmålListe, setSpørsmålListe] = useState<ISpørsmål[]>([]);
   const [ferdig, setFerdig] = useState<boolean>(false);
   const [disclaimer, setDisclaimer] = useState<string>('');
   const [steg, setSteg] = useState<number>(1);
@@ -28,7 +28,7 @@ const App = () => {
     setSvarstiTilInformasjonsboksMapping,
   ] = useState<ISvarstiTilInformasjonsboksMapping[]>([]);
   const [startet, setStartet] = useState<boolean>(false);
-  const nesteSporsmal = useRef(null);
+  const nesteSpørsmål = useRef(null);
 
   useEffect(() => {
     const fetchSvarstiTilInformasjonsboksMapping = () => {
@@ -48,7 +48,7 @@ const App = () => {
     const fetchSpørsmål = () => {
       client
         .fetch(hentSpørsmålQuery, { type: 'sporsmal' })
-        .then((res: ISporsmal[]) => {
+        .then((res: ISpørsmål[]) => {
           setSpørsmålListe(res);
         })
         .catch((err: Error) => {
@@ -78,7 +78,7 @@ const App = () => {
 
   const startVeiviser = () => {
     setStartet(true);
-    scrollTilNesteSporsmal(nesteSporsmal);
+    scrollTilNesteSpørsmal(nesteSpørsmål);
   };
 
   if (fetching) {
@@ -99,7 +99,7 @@ const App = () => {
               </div>
             ) : null}
             <Spørsmål
-              nesteSporsmal={nesteSporsmal}
+              nesteSpørsmål={nesteSpørsmål}
               startet={startet}
               spørsmålListe={spørsmålListe}
               setSteg={setSteg}
