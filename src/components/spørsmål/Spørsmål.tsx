@@ -13,8 +13,8 @@ import { hoppTilSpørsmål, finnSpørsmålStiMedBesvarteSvar, besvarteSvar, fin
 
 interface ISpørsmålProps {
   steg: number;
-  setSteg: (active: number) => void;
-  setFerdig: (ferdig: boolean) => void;
+  settSteg: (active: number) => void;
+  settFerdig: (ferdig: boolean) => void;
   ferdig: boolean;
   spørsmålListe: ISpørsmål[];
   svarstiTilInformasjonsboksMapping: ISvarstiTilInformasjonsboksMapping[];
@@ -27,8 +27,8 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
   nesteSpørsmål,
   spørsmålListe,
   steg,
-  setSteg,
-  setFerdig,
+  settSteg,
+  settFerdig,
   ferdig,
   svarstiTilInformasjonsboksMapping,
   startet,
@@ -50,9 +50,9 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     svar: ISvar
   ): void => {
     if (svar.done) {
-      setFerdig(true);
+      settFerdig(true);
     } else {
-      setFerdig(false);
+      settFerdig(false);
     }
 
     hoppTilSpørsmål(spørsmål, spørsmålSti);
@@ -63,9 +63,9 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
 
 
     if (svar.done_complete) {
-      setSteg(lengsteMatchId);
+      settSteg(lengsteMatchId);
     } else {
-      setSteg(svar.goto);
+      settSteg(svar.goto);
     }
 
     scrollTilNesteSpørsmal(nesteSpørsmål);

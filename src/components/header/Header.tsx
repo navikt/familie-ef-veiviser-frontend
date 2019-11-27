@@ -7,33 +7,33 @@ import Veiviserikon from '../../assets/icons/VeiviserIkon';
 import { IHeader } from '../../models/Header';
 
 const Header = () => {
-  const [fetching, setFetching] = useState<boolean>(true);
-  const [info, setInfo] = useState<any>([]);
-  const [error, setError] = useState<boolean>(false);
+  const [henter, settHenter] = useState<boolean>(true);
+  const [info, settInfo] = useState<any>([]);
+  const [feil, settFeil] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = () => {
       client
         .fetch(hentHeaderQuery, { type: 'header' })
         .then((res: IHeader) => {
-          setInfo(res);
+          settInfo(res);
         })
         .catch((err: Error) => {
-          console.error('Oh no, error occured: ', err);
-          setError(true);
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
         });
 
-      setFetching(false);
+      settHenter(false);
     };
 
     fetchData();
   }, []);
 
-  if (fetching) {
+  if (henter) {
     return <NavFrontendSpinner className="spinner" />;
   }
 
-  if (!error && info && info.ingress && info.overskrift) {
+  if (!feil && info && info.ingress && info.overskrift) {
     return (
       <div className="veiviser-header">
         <Veiviserikon className="veiviser-ikon" />
@@ -42,7 +42,7 @@ const Header = () => {
         <MarkdownViewer markdown={info.ingress} />
       </div>
     );
-  } else if (error) {
+  } else if (feil) {
     return <Feilside />;
   }
 

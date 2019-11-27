@@ -17,17 +17,17 @@ import {
 import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils';
 
 const App = () => {
-  const [spørsmålListe, setSpørsmålListe] = useState<ISpørsmål[]>([]);
-  const [ferdig, setFerdig] = useState<boolean>(false);
-  const [disclaimer, setDisclaimer] = useState<string>('');
-  const [steg, setSteg] = useState<number>(1);
-  const [fetching, setFetching] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const [spørsmålListe, settSpørsmålListe] = useState<ISpørsmål[]>([]);
+  const [ferdig, settFerdig] = useState<boolean>(false);
+  const [disclaimer, settDisclaimer] = useState<string>('');
+  const [steg, settSteg] = useState<number>(1);
+  const [henter, settHenter] = useState<boolean>(true);
+  const [feil, settFeil] = useState<boolean>(false);
   const [
     svarstiTilInformasjonsboksMapping,
-    setSvarstiTilInformasjonsboksMapping,
+    settSvarstiTilInformasjonsboksMapping,
   ] = useState<ISvarstiTilInformasjonsboksMapping[]>([]);
-  const [startet, setStartet] = useState<boolean>(false);
+  const [startet, settStartet] = useState<boolean>(false);
   const nesteSpørsmål = useRef(null);
 
   useEffect(() => {
@@ -37,11 +37,11 @@ const App = () => {
           type: 'informasjonsboks',
         })
         .then((res: ISvarstiTilInformasjonsboksMapping[]) => {
-          setSvarstiTilInformasjonsboksMapping(res);
+          settSvarstiTilInformasjonsboksMapping(res);
         })
         .catch((err: Error) => {
           console.log('err', err);
-          console.error('Oh no, error occured: ', err);
+          console.error('Oh no, feil occured: ', err);
         });
     };
 
@@ -49,25 +49,25 @@ const App = () => {
       client
         .fetch(hentSpørsmålQuery, { type: 'sporsmal' })
         .then((res: ISpørsmål[]) => {
-          setSpørsmålListe(res);
+          settSpørsmålListe(res);
         })
         .catch((err: Error) => {
-          console.error('Oh no, error occured: ', err);
-          setError(true);
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
         });
 
-      setFetching(false);
+      settHenter(false);
     };
 
     const fetchDisclaimer = () => {
       client
         .fetch('*[_type == $type][0]', { type: 'disclaimer' })
         .then((res: any) => {
-          setDisclaimer(res.disclaimer);
+          settDisclaimer(res.disclaimer);
         })
         .catch((err: Error) => {
-          console.error('Oh no, error occured: ', err);
-          setError(true);
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
         });
     };
 
@@ -77,15 +77,15 @@ const App = () => {
   }, []);
 
   const startVeiviser = () => {
-    setStartet(true);
+    settStartet(true);
     scrollTilNesteSpørsmal(nesteSpørsmål);
   };
 
-  if (fetching) {
+  if (henter) {
     return <NavFrontendSpinner className="spinner" />;
   }
 
-  if (!error && spørsmålListe && spørsmålListe.length) {
+  if (!feil && spørsmålListe && spørsmålListe.length) {
     return (
       <div className="app">
         <Panel className="innholdspanel">
@@ -102,8 +102,8 @@ const App = () => {
               nesteSpørsmål={nesteSpørsmål}
               startet={startet}
               spørsmålListe={spørsmålListe}
-              setSteg={setSteg}
-              setFerdig={setFerdig}
+              settSteg={settSteg}
+              settFerdig={settFerdig}
               ferdig={ferdig}
               steg={steg}
               svarstiTilInformasjonsboksMapping={
@@ -115,7 +115,7 @@ const App = () => {
         </Panel>
       </div>
     );
-  } else if (error) {
+  } else if (feil) {
     return <Feilside />;
   }
 

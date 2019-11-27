@@ -24,9 +24,9 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   steg,
   disclaimer,
 }) => {
-  const [fetching, setFetching] = useState<boolean>(true);
-  const [info, setInfo] = useState<any>([]);
-  const [error, setError] = useState<boolean>(false);
+  const [henter, settHenter] = useState<boolean>(true);
+  const [info, settInfo] = useState<any>([]);
+  const [feil, settFeil] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = () => {
@@ -36,25 +36,25 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
           id: steg,
         })
         .then((res: IInformasjonsboks) => {
-          setInfo(res);
+          settInfo(res);
         })
         .catch((err: Error) => {
-          console.error('Oh no, error occured: ', err);
-          setError(true);
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
         });
 
-      setFetching(false);
+      settHenter(false);
     };
 
     fetchData();
     // eslint-disable-next-line
   }, [steg]);
 
-  if (fetching || !(info && info.undertitler)) {
+  if (henter || !(info && info.undertitler)) {
     return <NavFrontendSpinner className="spinner" />;
   }
 
-  if (error) {
+  if (feil) {
     return <Feilside />;
   }
 
