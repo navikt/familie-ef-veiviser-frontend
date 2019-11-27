@@ -7,9 +7,9 @@ const scrollTilRef = (ref: RefObject<HTMLDivElement>) => {
 };
 
 export const scrollTilNesteSpørsmal = (
-    nesteSporsmal: RefObject<HTMLDivElement>
+    nesteSpørsmål: RefObject<HTMLDivElement>
 ) => {
-    setTimeout(() => scrollTilRef(nesteSporsmal), 120);
+    setTimeout(() => scrollTilRef(nesteSpørsmål), 120);
 };
 
 

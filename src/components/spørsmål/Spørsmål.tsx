@@ -36,12 +36,12 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
 }) => {
   const [spørsmålSti, setSpørsmålSti] = useState<any>([]);
 
-  const detteSporsmalet = spørsmålListe.find(
+  const detteSpørsmålet = spørsmålListe.find(
     (spørsmål: ISpørsmål) => spørsmål.sporsmal_id === steg
   );
 
-  if (!ferdig && !spørsmålSti.includes(detteSporsmalet) && startet) {
-    spørsmålSti.push(detteSporsmalet);
+  if (!ferdig && !spørsmålSti.includes(detteSpørsmålet) && startet) {
+    spørsmålSti.push(detteSpørsmålet);
   }
 
   const KlikkPåSvar = (
@@ -58,10 +58,9 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     hoppTilSpørsmål(spørsmål, spørsmålSti);
 
     setSpørsmålSti(finnSpørsmålStiMedBesvarteSvar(spørsmålSti, spørsmål, svar));
-
     const besvarteSvarIDer = besvarteSvar(spørsmålSti);
-
     let lengsteMatchId = finnInformasjonsboksMedFlestMatchendeSvar(svarstiTilInformasjonsboksMapping, besvarteSvarIDer);
+
 
     if (svar.done_complete) {
       setSteg(lengsteMatchId);
