@@ -9,7 +9,7 @@ import {
   hentSpørsmålQuery,
   svarstiTilInformasjonsboksQuery,
 } from './utils/sanity';
-import { Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import {
   ISvarstiTilInformasjonsboksMapping,
   ISpørsmål,
@@ -93,9 +93,9 @@ const App = () => {
             <Header />
             {!startet ? (
               <div className="knappwrapper">
-                <Knapp className="startknapp" onClick={startVeiviser}>
+                <Hovedknapp className="startknapp" onClick={startVeiviser}>
                   Start veiviseren
-                </Knapp>
+                </Hovedknapp>
               </div>
             ) : null}
             <Spørsmål // eslint-disable-line
