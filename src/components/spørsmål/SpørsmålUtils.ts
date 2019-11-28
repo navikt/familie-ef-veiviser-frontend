@@ -1,4 +1,4 @@
-import {ISpørsmål, ISvar} from "../../models/Spørsmål";
+import {ISpørsmål, ISvar, ISvarstiTilInformasjonsboksMapping} from "../../models/Spørsmål";
 import { RefObject } from 'react';
 
 const scrollTilRef = (ref: RefObject<HTMLDivElement>) => {
@@ -49,12 +49,12 @@ export const besvarteSvar = (spørsmålSti: ISpørsmål[]) => {
     return svarListe.map((svar: ISvar | undefined) => svar && svar._id);
 };
 
-export const finnInformasjonsboksMedFlestMatchendeSvar = (svarstiTilInformasjonsboksMapping: any, besvarteSvarIDer: (string | undefined)[]) => {
+export const finnInformasjonsboksMedFlestMatchendeSvar = (svarstiTilInformasjonsboksMappingListe: ISvarstiTilInformasjonsboksMapping[], besvarteSvarIDer: (string | undefined)[]) => {
     let lengsteMatchId = -1;
     let lengsteMatchLengde = 0;
 
-    for (let i = 0; i < svarstiTilInformasjonsboksMapping.length; i++) {
-        const mapping = svarstiTilInformasjonsboksMapping[i];
+    for (let i = 0; i < svarstiTilInformasjonsboksMappingListe.length; i++) {
+        const mapping = svarstiTilInformasjonsboksMappingListe[i];
 
         if (!mapping.svarsti || !mapping.svarsti.length) continue;
 

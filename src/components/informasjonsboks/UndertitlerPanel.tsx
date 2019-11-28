@@ -61,6 +61,7 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
                       className={
                         i === undertittel.brodtekster.length - 1 ? 'siste' : ''
                       }
+                      key={i}
                     >
                       <MarkdownViewer key={i} markdown={brodtekst.body} />
                     </div>
