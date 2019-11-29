@@ -1,4 +1,4 @@
-import React, { useState, SyntheticEvent } from 'react';
+import React, { useState, SyntheticEvent, RefObject } from 'react';
 import {
   ISvarstiTilInformasjonsboksMapping,
   ISpørsmål,
@@ -19,7 +19,7 @@ interface ISpørsmålProps {
   spørsmålListe: ISpørsmål[];
   svarstiTilInformasjonsboksMapping: ISvarstiTilInformasjonsboksMapping[];
   startet: boolean;
-  nesteSpørsmål: any;
+  nesteSpørsmål: RefObject<HTMLDivElement>;
   disclaimer?: string;
 }
 
