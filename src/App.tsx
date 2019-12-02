@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Spørsmål from './components/spørsmål/Spørsmål';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
-import Header from './components/header/Header';
+import { Systemtittel } from 'nav-frontend-typografi';
+import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
 import { Panel } from 'nav-frontend-paneler';
 import {
   client,
@@ -88,9 +89,24 @@ const App = () => {
   if (!feil && spørsmålListe && spørsmålListe.length) {
     return (
       <div className="app">
+        <div className="side-header">
+          <Systemtittel>Hva kan du få?</Systemtittel>
+        </div>
+        <div className="brødsmuler">
+          <span className="brødsmule-element">
+            <a href="https://nav.no">Forside</a>
+          </span>{' '}
+          /{' '}
+          <span className="brødsmule-element">
+            <a href="https://www.nav.no/no/Person/Familie/Enslig+mor+eller+far/alene-med-barn-hva-n%C3%A5/alene-med-barn">
+              Alene med barn
+            </a>
+          </span>{' '}
+          / <span className="brødsmule-element">Hva kan du få?</span>
+        </div>
         <Panel className="innholdspanel">
           <div className="innholdscontainer">
-            <Header />
+            <VeiviserHeader />
             {!startet ? (
               <div className="knappwrapper">
                 <Hovedknapp className="startknapp" onClick={startVeiviser}>
