@@ -93,7 +93,8 @@ const App = () => {
         <div className="side-header">
           <Systemtittel>Hva kan du få?</Systemtittel>
         </div>
-        <Brødsmuler />
+        <Brødsmuler // eslint-disable-line
+        />
         <Panel className="innholdspanel">
           <div className="innholdscontainer">
             <VeiviserHeader />
