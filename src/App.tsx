@@ -4,6 +4,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
 import { Systemtittel } from 'nav-frontend-typografi';
 import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
+import Brødsmuler from './components/brødsmuler/Brødsmuler';
 import { Panel } from 'nav-frontend-paneler';
 import {
   client,
@@ -92,18 +93,7 @@ const App = () => {
         <div className="side-header">
           <Systemtittel>Hva kan du få?</Systemtittel>
         </div>
-        <div className="brødsmuler">
-          <span className="brødsmule-element">
-            <a href="https://nav.no">Forside</a>
-          </span>{' '}
-          /{' '}
-          <span className="brødsmule-element">
-            <a href="https://www.nav.no/no/Person/Familie/Enslig+mor+eller+far/alene-med-barn-hva-n%C3%A5/alene-med-barn">
-              Alene med barn
-            </a>
-          </span>{' '}
-          / <span className="brødsmule-element">Hva kan du få?</span>
-        </div>
+        <Brødsmuler />
         <Panel className="innholdspanel">
           <div className="innholdscontainer">
             <VeiviserHeader />
