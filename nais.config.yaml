@@ -14,10 +14,10 @@ spec:
     - {{ingress1}}
     - {{ingress2}}
   liveness:
-    path: {{baseurl}}/internal/isAlive
+    path: {{baseurl}}/
     initialDelay: 10
   readiness:
-    path: {{baseurl}}/internal/isReady
+    path: {{baseurl}}/
     initialDelay: 10
   replicas:
     min: 2

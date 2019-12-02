@@ -1,4 +1,5 @@
-export interface ISporsmal {
+export interface ISpørsmål {
+  startet: boolean;
   _id: string;
   sporsmal_id: number;
   sporsmal_tekst: string;
@@ -14,4 +15,9 @@ export interface ISvar {
   done?: boolean;
   done_complete?: boolean;
   checked?: boolean;
+}
+
+export interface ISvarstiTilInformasjonsboksMapping {
+  information_id: number;
+  svarsti?: ISvar[];
 }

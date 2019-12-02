@@ -1,5 +1,5 @@
 .tekst-wrapper {
-  width: 600px;
+  width: 588px;
 }
 
 .informasjonsboks {
@@ -7,13 +7,13 @@
   -webkit-border-radius: 8px;
 
   background-color: @navLysGra;
-  width: 596px;
+  width: @panel-innhold-bredde;
   min-height: 5rem;
   margin: 0 auto;
   margin-top: 4rem;
 
   @media @tablet {
-    max-width: 596px;
+    max-width: @panel-innhold-bredde;
     width: 100%;
   }
 
@@ -24,15 +24,11 @@
 
   ul {
     padding: 0;
-    list-style: none;
-
-    li {
-      margin-top: 1rem;
-    }
   }
 
   hr {
     margin-top: 4rem;
+    width: 70%;
     border: solid 0.5px #151515;
   }
 
@@ -45,14 +41,29 @@
     }
   }
 
+  .rett-til-liste {
+    ul {
+      @media @mobile {
+        margin-top: 1rem;
+      }
+
+      @media @tablet {
+        margin-top: 1rem;
+      }
+
+      list-style: none;
+    }
+  }
+
   .liste-element {
     display: inline;
     margin-left: 1rem;
-    margin-right: 1rem;
+    margin-right: 2rem;
   }
 
   .undertittel-flere,
-  .undertittel-singel {
+  .undertittel-singel,
+  .andre-stonader {
     margin-top: 4rem;
 
     padding-left: 6rem;
@@ -62,14 +73,38 @@
       padding-left: 2rem;
       padding-right: 2rem;
     }
+
+    ul {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
   }
 
   .undertittel-singel {
     padding-bottom: 6rem;
   }
 
-  .undertittel-flere:last-of-type {
-    padding-bottom: 6rem;
+  .bare-brodtekst {
+    margin-top: 4rem;
+
+    padding-left: 6rem;
+    padding-right: 6rem;
+
+    @media @mobile {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    &-0 {
+      padding-left: 6rem;
+      padding-right: 6rem;
+
+      @media @mobile {
+        padding-top: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
   }
 
   .informasjonsboks-header {
@@ -85,7 +120,7 @@
 
     .ball-ikon {
       position: absolute;
-      top: 109px;
+      top: 116px;
       left: 18%;
 
       @media @mobile {
@@ -95,50 +130,58 @@
 
     .bamse-ikon {
       position: absolute;
-      top: 100px;
+      top: 106px;
       left: 13%;
     }
 
     .bord-ikon {
       position: absolute;
-      top: 120px;
+      top: 126px;
       left: 55%;
+
+      @media @mobile {
+        left: 35%;
+      }
+    }
+
+    .barn-ikon {
+      position: absolute;
+      top: 56px;
+      left: 70%;
+
+      @media @mobile {
+        left: 70%;
+      }
+    }
+
+    .barn2-ikon {
+      position: absolute;
+      top: 76px;
+      left: 60%;
 
       @media @mobile {
         left: 50%;
       }
     }
 
-    .barn-ikon {
-      position: absolute;
-      top: 50px;
-      left: 70%;
-
-      @media @mobile {
-        left: 75%;
-      }
-    }
-
-    .barn2-ikon {
-      position: absolute;
-      top: 70px;
-      left: 60%;
-    }
-
     .brodskive-ikon {
       position: absolute;
-      top: 105px;
+      top: 111px;
       left: 72%;
 
       @media @mobile {
-        left: 78%;
+        left: 73%;
       }
     }
 
     .taateflaske-ikon {
       position: absolute;
-      top: 91px;
+      top: 97px;
       left: 59%;
+
+      @media @mobile {
+        left: 49%;
+      }
     }
   }
 
@@ -148,11 +191,34 @@
       margin-block-end: 0;
     }
 
+    .disclaimer {
+      padding: 2rem 6rem 4rem 6rem;
+
+      @media @mobile {
+        padding-right: 2rem;
+        padding-left: 2rem;
+      }
+    }
+
     .rett-til-liste {
+      ul {
+        li {
+          padding-bottom: 0;
+          padding-right: 2rem;
+        }
+      }
+
+      ul {
+        li:not(:last-child) {
+          padding-bottom: 0.5rem;
+        }
+      }
+
       padding-left: 6rem;
 
       @media @mobile {
         padding-left: 2rem;
+        padding-right: 2rem;
       }
     }
 

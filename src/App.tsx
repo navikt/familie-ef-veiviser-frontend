@@ -1,92 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import Sporsmal from './components/sporsmal/Sporsmal';
+import React, { useState, useEffect, useRef } from 'react';
+import Spørsmål from './components/spørsmål/Spørsmål';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
-import Header from './components/header/Header';
+import { Systemtittel } from 'nav-frontend-typografi';
+import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
+import Brødsmuler from './components/brødsmuler/Brødsmuler';
 import { Panel } from 'nav-frontend-paneler';
-import { client } from './utils/sanity';
-import header from './assets/header.png';
-import footer from './assets/footer.png';
+import {
+  client,
+  hentSpørsmålQuery,
+  svarstiTilInformasjonsboksQuery,
+} from './utils/sanity';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import {
+  ISvarstiTilInformasjonsboksMapping,
+  ISpørsmål,
+} from './models/Spørsmål';
+import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils';
 
 const App = () => {
-  const [sporsmalListe, setSporsmalListe] = useState<any>([]);
-  const [ferdig, setFerdig] = useState<boolean>(false);
-  const [steg, setSteg] = useState<number>(1);
-  const [fetching, setFetching] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
-  const [infoMapping, setInfoMapping] = useState<any>();
-
-  const sporsmalQuery =
-    '*[_type == $type]{sporsmal_id, sporsmal_tekst, hjelpetekst_overskrift, hjelpetekst, svarliste[]->, _createdAt, _id, _rev, _type, _updatedAt}';
-
-  const infoMappingQuery =
-    '*[_type == $type]{information_id, svarsti[]->{_id, tekst}}';
+  const [spørsmålListe, settSpørsmålListe] = useState<ISpørsmål[]>([]);
+  const [ferdig, settFerdig] = useState<boolean>(false);
+  const [disclaimer, settDisclaimer] = useState<string>('');
+  const [steg, settSteg] = useState<number>(1);
+  const [henter, settHenter] = useState<boolean>(true);
+  const [feil, settFeil] = useState<boolean>(false);
+  const [
+    svarstiTilInformasjonsboksMapping,
+    settSvarstiTilInformasjonsboksMapping,
+  ] = useState<ISvarstiTilInformasjonsboksMapping[]>([]);
+  const [startet, settStartet] = useState<boolean>(false);
+  const nesteSpørsmål = useRef(null);
 
   useEffect(() => {
-    const fetchInfoMapping = () => {
+    const fetchSvarstiTilInformasjonsboksMapping = () => {
       client
-        .fetch(infoMappingQuery, {
+        .fetch(svarstiTilInformasjonsboksQuery, {
           type: 'informasjonsboks',
         })
-        .then((res: any) => {
-          setInfoMapping(res);
+        .then((res: ISvarstiTilInformasjonsboksMapping[]) => {
+          settSvarstiTilInformasjonsboksMapping(res);
         })
-        .catch((err: any) => {
-          console.error('Oh no, error occured: ', err);
+        .catch((err: Error) => {
+          console.log('err', err);
+          console.error('Oh no, feil occured: ', err);
         });
     };
 
-    const fetchSporsmal = () => {
+    const fetchSpørsmål = () => {
       client
-        .fetch(sporsmalQuery, { type: 'sporsmal' })
-        .then((res: any) => {
-          setSporsmalListe(res);
+        .fetch(hentSpørsmålQuery, { type: 'sporsmal' })
+        .then((res: ISpørsmål[]) => {
+          settSpørsmålListe(res);
         })
-        .catch((err: any) => {
-          console.error('Oh no, error occured: ', err);
-          setError(true);
+        .catch((err: Error) => {
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
         });
 
-      setFetching(false);
+      settHenter(false);
     };
 
-    fetchSporsmal();
-    fetchInfoMapping();
+    const fetchDisclaimer = () => {
+      client
+        .fetch('*[_type == $type][0]', { type: 'disclaimer' })
+        .then((res: any) => {
+          settDisclaimer(res.disclaimer);
+        })
+        .catch((err: Error) => {
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
+        });
+    };
+
+    fetchSpørsmål();
+    fetchSvarstiTilInformasjonsboksMapping();
+    fetchDisclaimer();
   }, []);
 
-  if (fetching) {
+  const startVeiviser = () => {
+    settStartet(true);
+    scrollTilNesteSpørsmal(nesteSpørsmål);
+  };
+
+  if (henter) {
     return <NavFrontendSpinner className="spinner" />;
   }
 
-  if (!error && sporsmalListe && sporsmalListe.length) {
+  if (!feil && spørsmålListe && spørsmålListe.length) {
     return (
       <div className="app">
-        <div style={{ width: '100%', margin: '0 auto', overflow: 'hidden' }}>
-          <div style={{ position: 'relative', float: 'right', right: '50%' }}>
-            <img src={header} style={{ position: 'relative', right: '-50%' }} />
-          </div>
+        <div className="side-header">
+          <Systemtittel>Hva kan du få?</Systemtittel>
         </div>
+        <Brødsmuler // eslint-disable-line
+        />
         <Panel className="innholdspanel">
           <div className="innholdscontainer">
-            <Header />
-            <Sporsmal
-              sporsmalListe={sporsmalListe}
-              setSteg={setSteg}
-              setFerdig={setFerdig}
+            <VeiviserHeader />
+            {!startet ? (
+              <div className="knappwrapper">
+                <Hovedknapp className="startknapp" onClick={startVeiviser}>
+                  Start veiviseren
+                </Hovedknapp>
+              </div>
+            ) : null}
+            <Spørsmål // eslint-disable-line
+              nesteSpørsmål={nesteSpørsmål}
+              startet={startet}
+              spørsmålListe={spørsmålListe}
+              settSteg={settSteg}
+              settFerdig={settFerdig}
               ferdig={ferdig}
               steg={steg}
-              infoMapping={infoMapping}
+              svarstiTilInformasjonsboksMapping={
+                svarstiTilInformasjonsboksMapping
+              }
+              disclaimer={disclaimer}
             />
           </div>
         </Panel>
-        <div style={{ width: '100%', margin: '0 auto', overflow: 'hidden' }}>
-          <div style={{ position: 'relative', float: 'right', right: '50%' }}>
-            <img src={footer} style={{ position: 'relative', right: '-50%' }} />
-          </div>
-        </div>
       </div>
     );
-  } else if (error) {
+  } else if (feil) {
     return <Feilside />;
   }
 

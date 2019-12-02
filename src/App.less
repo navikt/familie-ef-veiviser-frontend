@@ -25,15 +25,23 @@ body {
 }
 
 .innholdspanel {
-  margin-top: 6rem;
+  margin-top: 5rem;
   margin-bottom: 8rem;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
 
+.knappwrapper {
+  text-align: center;
+}
+
+.startknapp {
+  margin-top: 2rem;
+}
+
 .panel {
-  width: 800px;
+  width: @panel-bredde;
 
   @media @tablet {
     width: 100%;
@@ -72,5 +80,18 @@ body {
     -webkit-filter: blur(0);
     filter: blur(0);
     opacity: 1;
+  }
+}
+
+.side-header {
+  background-color: #c1b6d1;
+  text-align: center;
+  height: 80px;
+  width: 100%;
+  font-weight: bold;
+
+  h2 {
+    font-size: 40px;
+    line-height: 80px;
   }
 }
