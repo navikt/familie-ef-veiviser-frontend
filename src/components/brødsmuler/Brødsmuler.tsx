@@ -4,12 +4,12 @@ const Brødsmuler = () => {
     return (
         <div className="brødsmuler">
           <span className="brødsmule-element">
-            <a href="https://nav.no" target="_blank" rel="noopener noreferrer">Forside</a>
+            <a href="https://nav.no">Forside</a>
           </span>{' '}
             /{' '}
             <span className="brødsmule-element">
-            <a href="https://www.nav.no/no/Person/Familie/Enslig+mor+eller+far/alene-med-barn-hva-n%C3%A5/alene-med-barn" rel="noopener noreferrer">
-              Alene med barn
+            <a href="https://www.nav.no/no/person/familie/enslig-mor-eller-far">
+              Enslig mor eller far
             </a>
           </span>{' '}
             / <span className="brødsmule-element">Hva kan du få?</span>
