@@ -80,7 +80,6 @@ jobs:
       - run:
           name: Create github deployment for stable test
           command: |
-            echo $VERSION
             source $BASH_ENV
             /app/deploy \
             --apikey="$NAIS_DEPLOY_APIKEY" \
@@ -89,6 +88,7 @@ jobs:
             --repository=$CIRCLE_PROJECT_REPONAME \
             --var=version="${VERSION}" \
             --resource=./gcp-nais-dev.yaml
+
   deploy_prod:
     docker:
       - image: navikt/deployment:v1
@@ -102,6 +102,7 @@ jobs:
       - run:
           name: Create github deployment for stable test
           command: |
+            source $BASH_ENV
             /app/deploy \
             --apikey="$NAIS_DEPLOY_APIKEY" \
             --cluster=prod-gcp \
