@@ -85,7 +85,7 @@ jobs:
             --cluster=dev-gcp \
             --owner=$CIRCLE_PROJECT_USERNAME \
             --repository=$CIRCLE_PROJECT_REPONAME \
-            --var=version=${VERSION} \
+            --var=version="$VERSION" \
             --resource=./gcp-nais-dev.yaml
   deploy_prod:
     docker:
@@ -105,7 +105,7 @@ jobs:
             --cluster=prod-gcp \
             --owner=$CIRCLE_PROJECT_USERNAME \
             --repository=$CIRCLE_PROJECT_REPONAME \
-            --var=version=${VERSION} \
+            --var=version="$VERSION" \
             --resource=./gcp-nais-prod.yaml
 workflows:
   version: 2
