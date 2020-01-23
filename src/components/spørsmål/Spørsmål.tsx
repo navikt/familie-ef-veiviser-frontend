@@ -49,6 +49,8 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     spørsmål: ISpørsmål,
     svar: ISvar
   ): void => {
+    svar.checked = true;
+
     if (svar.done) {
       settFerdig(true);
     } else {
