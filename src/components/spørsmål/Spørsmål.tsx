@@ -60,9 +60,10 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     hoppTilSpørsmål(spørsmål, spørsmålSti);
 
     setSpørsmålSti(finnSpørsmålStiMedBesvarteSvar(spørsmålSti, spørsmål, svar));
-    const besvarteSvarIDer = besvarteSvar(spørsmålSti);
-    let lengsteMatchId = finnInformasjonsboksMedFlestMatchendeSvar(svarstiTilInformasjonsboksMapping, besvarteSvarIDer);
 
+    const besvarteSvarMedSpørsmålId = besvarteSvar(spørsmålSti);
+
+    let lengsteMatchId = finnInformasjonsboksMedFlestMatchendeSvar(svarstiTilInformasjonsboksMapping, besvarteSvarMedSpørsmålId);
 
     if (svar.done_complete) {
       settSteg(lengsteMatchId);
@@ -93,6 +94,10 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
               </Lesmerpanel>
             ) : null}
             {spørsmål.svarliste.map((svar: ISvar) => {
+              let c = svar.checked ? svar.checked : false;
+
+              if (index === spørsmålSti.length - 1 && !ferdig) c = false;
+
               return (
                 <div key={svar._id} className="radioknapp-wrapper">
                   <RadioPanel
@@ -100,7 +105,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
                     value={svar.tekst}
                     label={svar.tekst}
                     name={spørsmål._id}
-                    checked={svar.checked ? svar.checked : false}
+                    checked={c}
                     onChange={(e) => KlikkPåSvar(e, spørsmål, svar)}
                   />
                 </div>
