@@ -59,11 +59,13 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
 
     hoppTilSpørsmål(spørsmål, spørsmålSti);
 
-    setSpørsmålSti(finnSpørsmålStiMedBesvarteSvar(spørsmålSti, spørsmål, svar));
+    let tempSpørsmålSti = finnSpørsmålStiMedBesvarteSvar(spørsmålSti, spørsmål, svar);
 
-    const besvarteSvarMedSpørsmålId = besvarteSvar(spørsmålSti);
+    const besvarteSvarMedSpørsmålId = besvarteSvar(tempSpørsmålSti);
 
     let lengsteMatchId = finnInformasjonsboksMedFlestMatchendeSvar(svarstiTilInformasjonsboksMapping, besvarteSvarMedSpørsmålId);
+
+    setSpørsmålSti(tempSpørsmålSti);
 
     if (svar.done_complete) {
       settSteg(lengsteMatchId);
