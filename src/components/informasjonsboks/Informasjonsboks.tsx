@@ -12,17 +12,20 @@ import Barn2Ikon from '../../assets/icons/Barn2Ikon';
 import BrodskiveIkon from '../../assets/icons/BrodskiveIkon';
 import TaateflaskeIkon from '../../assets/icons/TaateflaskeIkon';
 import Feilside from '../feilside/Feilside';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import MarkdownViewer from '../utils/MarkdownViewer';
 import { hentInformasjonsboksQuery } from '../../utils/sanity';
 
 interface IInformasjonstekstProps {
   steg: number;
   disclaimer?: string;
+  alert?: string;
 }
 
 const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   steg,
   disclaimer,
+  alert,
 }) => {
   const [henter, settHenter] = useState<boolean>(true);
   const [info, settInfo] = useState<any>([]);
@@ -101,44 +104,51 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   );
 
   return (
-    <div className="informasjonsboks blur-in" id={`informasjonsboks-${steg}`}>
-      <div className="informasjonsboks-header">
-        <BallIkon className="ball-ikon" />
-        <BamseIkon className="bamse-ikon" />
-        <BarnIkon className="barn-ikon" />
-        <Barn2Ikon className="barn2-ikon" />
-        <BordIkon className="bord-ikon" />
-        <BrodskiveIkon className="brodskive-ikon" />
-        <TaateflaskeIkon className="taateflaske-ikon" />
-      </div>
-      <div className="informasjonsboks-innhold">
-        {rett_til_liste.length ? (
-          <RettTilListe
-            tekster_i_liste={rett_til_liste}
-            ikke_rett_til={false}
+    <>
+      {alert ? (
+        <AlertStripeAdvarsel className="veiviser-alert">
+          {alert}
+        </AlertStripeAdvarsel>
+      ) : null}
+      <div className="informasjonsboks blur-in" id={`informasjonsboks-${steg}`}>
+        <div className="informasjonsboks-header">
+          <BallIkon className="ball-ikon" />
+          <BamseIkon className="bamse-ikon" />
+          <BarnIkon className="barn-ikon" />
+          <Barn2Ikon className="barn2-ikon" />
+          <BordIkon className="bord-ikon" />
+          <BrodskiveIkon className="brodskive-ikon" />
+          <TaateflaskeIkon className="taateflaske-ikon" />
+        </div>
+        <div className="informasjonsboks-innhold">
+          {rett_til_liste.length ? (
+            <RettTilListe
+              tekster_i_liste={rett_til_liste}
+              ikke_rett_til={false}
+            />
+          ) : null}
+          <UndertitlerPanel
+            undertitler={rett_til_undertitler}
+            antall_undertitler_totalt={info.undertitler.length}
           />
-        ) : null}
-        <UndertitlerPanel
-          undertitler={rett_til_undertitler}
-          antall_undertitler_totalt={info.undertitler.length}
-        />
-        {ikke_rett_til_liste.length ? (
-          <RettTilListe
-            tekster_i_liste={ikke_rett_til_liste}
-            ikke_rett_til={true}
+          {ikke_rett_til_liste.length ? (
+            <RettTilListe
+              tekster_i_liste={ikke_rett_til_liste}
+              ikke_rett_til={true}
+            />
+          ) : null}
+          <UndertitlerPanel
+            undertitler={ikke_rett_til_undertitler}
+            antall_undertitler_totalt={info.undertitler.length}
           />
-        ) : null}
-        <UndertitlerPanel
-          undertitler={ikke_rett_til_undertitler}
-          antall_undertitler_totalt={info.undertitler.length}
-        />
-        {disclaimer ? (
-          <div className="disclaimer">
-            <MarkdownViewer markdown={disclaimer} />
-          </div>
-        ) : null}
+          {disclaimer ? (
+            <div className="disclaimer">
+              <MarkdownViewer markdown={disclaimer} />
+            </div>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

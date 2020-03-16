@@ -21,6 +21,7 @@ interface ISpørsmålProps {
   startet: boolean;
   nesteSpørsmål: RefObject<HTMLDivElement>;
   disclaimer?: string;
+  alert?: string;
 }
 
 const Spørsmål: React.FC<ISpørsmålProps> = ({
@@ -33,6 +34,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
   svarstiTilInformasjonsboksMapping,
   startet,
   disclaimer,
+  alert
 }) => {
   const [spørsmålSti, setSpørsmålSti] = useState<any>([]);
 
@@ -119,7 +121,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
       {ferdig ? (
         <>
           <div ref={nesteSpørsmål} />
-          <Informasjonsboks steg={steg} disclaimer={disclaimer} />
+          <Informasjonsboks steg={steg} disclaimer={disclaimer} alert={alert} />
         </>
       ) : null}
     </div>

@@ -22,6 +22,7 @@ const App = () => {
   const [spørsmålListe, settSpørsmålListe] = useState<ISpørsmål[]>([]);
   const [ferdig, settFerdig] = useState<boolean>(false);
   const [disclaimer, settDisclaimer] = useState<string>('');
+  const [alert, settAlert] = useState<string>('');
   const [steg, settSteg] = useState<number>(1);
   const [henter, settHenter] = useState<boolean>(true);
   const [feil, settFeil] = useState<boolean>(false);
@@ -73,9 +74,25 @@ const App = () => {
         });
     };
 
+    const fetchAlert = () => {
+      client
+        .fetch('*[_type == $type][0]', { type: 'alert' })
+        .then((res: any) => {
+          console.log(res);
+          if (res && res.alert) {
+            settAlert(res.alert);
+          }
+        })
+        .catch((err: Error) => {
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
+        });
+    };
+
     fetchSpørsmål();
     fetchSvarstiTilInformasjonsboksMapping();
     fetchDisclaimer();
+    fetchAlert();
   }, []);
 
   const startVeiviser = () => {
@@ -117,6 +134,7 @@ const App = () => {
                 svarstiTilInformasjonsboksMapping
               }
               disclaimer={disclaimer}
+              alert={alert}
             />
           </div>
         </Panel>
