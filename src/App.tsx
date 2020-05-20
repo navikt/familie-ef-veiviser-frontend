@@ -78,7 +78,6 @@ const App = () => {
       client
         .fetch('*[_type == $type][0]', { type: 'alert' })
         .then((res: any) => {
-          console.log(res);
           if (res && res.alert) {
             settAlert(res.alert);
           }
