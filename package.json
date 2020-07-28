@@ -21,7 +21,7 @@
     "craco-less": "^1.16.0",
     "gh-pages": "^2.1.1",
     "lodash.throttle": "^4.1.1",
-    "marked": "^0.7.0",
+    "marked": "^1.1.1",
     "nav-frontend-alertstriper": "^3.0.16",
     "nav-frontend-alertstriper-style": "^2.0.14",
     "nav-frontend-chevron": "^1.0.10",
