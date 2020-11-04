@@ -107,7 +107,7 @@ const App = () => {
     return (
       <div className="app">
         <div className="side-header">
-          <Systemtittel>Hva kan du få?</Systemtittel>
+          <Systemtittel>Hva kan du få??</Systemtittel>
         </div>
         <Brødsmuler // eslint-disable-line
         />
