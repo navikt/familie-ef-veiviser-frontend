@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamfamilie
 spec:
-  image: navikt/familie-ef-veiviser:{{version}}
+  image: {{ image }}
   team: teamfamilie
   port: 8080
   ingresses:
