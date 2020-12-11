@@ -49,9 +49,10 @@
     "react-app-polyfill": "^1.0.6",
     "react-collapse": "^5.1.0",
     "react-dom": "^16.14.0",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^4.0.0",
     "smoothscroll-polyfill": "^0.4.4",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "snyk": "^1.436.0"
   },
   "scripts": {
     "start": "craco start",
@@ -59,7 +60,9 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "predeploy": "craco build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -86,5 +89,6 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  }
+  },
+  "snyk": true
 }
