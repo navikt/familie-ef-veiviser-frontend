@@ -8,3 +8,33 @@ patch:
         patched: '2020-12-11T16:03:01.679Z'
     - react-scripts > eslint-plugin-testing-library > @typescript-eslint/experimental-utils > @typescript-eslint/typescript-estree > lodash:
         patched: '2020-12-11T16:03:01.679Z'
+    - snyk > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-cpp-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-docker-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-gradle-plugin > @snyk/java-call-graph-builder > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-go-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-docker-plugin > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-mvn-plugin > @snyk/java-call-graph-builder > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-python-plugin > snyk-poetry-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-gradle-plugin > @snyk/cli-interface > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
+    - snyk > snyk-mvn-plugin > @snyk/cli-interface > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-12-11T16:07:34.952Z'
