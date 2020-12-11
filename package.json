@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.9.0",
-    "@sanity/client": "^0.144.0",
+    "@sanity/client": "^0.147.3",
     "@types/classnames": "^2.2.11",
     "@types/jest": "^24.0.17",
     "@types/node": "^12.19.8",
