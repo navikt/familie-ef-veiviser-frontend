@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Spørsmål from './components/spørsmål/Spørsmål';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
 import Brødsmuler from './components/brødsmuler/Brødsmuler';
 import { Panel } from 'nav-frontend-paneler';
@@ -107,7 +107,7 @@ const App = () => {
     return (
       <div className="app">
         <div className="side-header">
-          <Systemtittel tag="h1">Hva kan du få?</Systemtittel>
+          <Innholdstittel>Hva kan du få?</Innholdstittel>
         </div>
         <Brødsmuler // eslint-disable-line
         />
