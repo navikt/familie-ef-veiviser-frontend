@@ -8,6 +8,7 @@ const BallIkon: React.FC<IBallIkonProps> = ({ className }) => {
   return (
     <div className={className}>
       <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
+        <title>Ball</title>
         <g
           id="Page-1"
           stroke="none"
