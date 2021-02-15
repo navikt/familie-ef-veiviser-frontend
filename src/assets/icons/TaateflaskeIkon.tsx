@@ -8,6 +8,7 @@ const TaateflaskeIkon: React.FC<ITaateFlaskeIkonProps> = ({ className }) => {
   return (
     <div className={className}>
       <svg width="14px" height="30px" viewBox="0 0 14 30">
+        <title>Flaske</title>
         <g
           id="Page-1"
           stroke="none"

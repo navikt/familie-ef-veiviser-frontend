@@ -8,6 +8,7 @@ const BordIkon: React.FC<IBordIkonProps> = ({ className }) => {
   return (
     <div className={className}>
       <svg width="182px" height="22px" viewBox="0 0 182 22">
+        <title>Bord</title>
         <g
           id="Page-1"
           stroke="none"

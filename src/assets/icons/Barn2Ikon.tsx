@@ -8,6 +8,7 @@ const Barn2Ikon: React.FC<IBarn2IkonProps> = ({ className }) => {
   return (
     <div className={className}>
       <svg width="57px" height="76px" viewBox="0 0 57 76">
+        <title>Barn</title>
         <defs>
           <path
             d="M26,7.69762363 L26,18 L0,18 L0,7.69762363 C0,4.75030457 4.24721934,1.38558744 7.09090909,0 C7.09090909,0 18.9090909,0 18.9090909,0 C21.7786191,1.40992181 26,4.78427783 26,7.69762363 Z"
