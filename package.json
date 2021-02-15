@@ -13,7 +13,7 @@
     "@types/react-dom": "^16.9.10",
     "@types/react-redux": "^7.1.12",
     "@types/react-transition-group": "^4.4.0",
-    "@types/redux": "^3.6.0",
+    "@types/redux": "^3.6.31",
     "@types/smoothscroll-polyfill": "^0.3.1",
     "babel-polyfill": "^6.26.0",
     "be-pretty": "^0.9.5",
