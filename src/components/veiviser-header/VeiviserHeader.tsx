@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { client, hentHeaderQuery } from '../../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from '../feilside/Feilside';
-import MarkdownViewer from '../utils/MarkdownViewer';
-import Veiviserikon from '../../assets/icons/VeiviserIkon';
 import { IHeader } from '../../models/Header';
+import {
+  VeiviserHeader,
+  StyledVeiviserIkon,
+  Overskrift,
+  Ingress,
+} from './VeiviserHeaderElementer';
 
 const Header = () => {
   const [henter, settHenter] = useState<boolean>(true);
@@ -35,12 +39,12 @@ const Header = () => {
 
   if (!feil && info && info.ingress && info.overskrift) {
     return (
-      <div className="veiviser-header">
-        <Veiviserikon className="veiviser-ikon" />
-        <h2>{info.overskrift}</h2>
+      <VeiviserHeader>
+        <StyledVeiviserIkon />
+        <Overskrift>{info.overskrift}</Overskrift>
         <hr />
-        <MarkdownViewer markdown={info.ingress} />
-      </div>
+        <Ingress markdown={info.ingress} />
+      </VeiviserHeader>
     );
   } else if (feil) {
     return <Feilside />;
