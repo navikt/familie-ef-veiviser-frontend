@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import RettTilListe from './RettTilListe';
+import RettTilListe from './RettTilListe/RettTilListe';
 import { IInformasjonsboks, IUndertittel } from '../../models/Informasjonsboks';
 import UndertitlerPanel from './UndertitlerPanel';
 import BallIkon from '../../assets/icons/BallIkon';
@@ -12,9 +12,12 @@ import Barn2Ikon from '../../assets/icons/Barn2Ikon';
 import BrodskiveIkon from '../../assets/icons/BrodskiveIkon';
 import TaateflaskeIkon from '../../assets/icons/TaateflaskeIkon';
 import Feilside from '../feilside/Feilside';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import MarkdownViewer from '../utils/MarkdownViewer';
 import { hentInformasjonsboksQuery } from '../../utils/sanity';
+import {
+  StyledAlertstripeAdvarsel,
+  InformasjonsboksInnhold,
+} from './InformasjonsboksElementer';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -106,9 +109,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   return (
     <>
       {alert ? (
-        <AlertStripeAdvarsel className="veiviser-alert">
-          {alert}
-        </AlertStripeAdvarsel>
+        <StyledAlertstripeAdvarsel>{alert}</StyledAlertstripeAdvarsel>
       ) : null}
       <div className="informasjonsboks blur-in" id={`informasjonsboks-${steg}`}>
         <div className="informasjonsboks-header">
@@ -120,7 +121,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
           <BrodskiveIkon className="brodskive-ikon" />
           <TaateflaskeIkon className="taateflaske-ikon" />
         </div>
-        <div className="informasjonsboks-innhold">
+        <InformasjonsboksInnhold>
           {rett_til_liste.length ? (
             <RettTilListe
               tekster_i_liste={rett_til_liste}
@@ -146,7 +147,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
               <MarkdownViewer markdown={disclaimer} />
             </div>
           ) : null}
-        </div>
+        </InformasjonsboksInnhold>
       </div>
     </>
   );

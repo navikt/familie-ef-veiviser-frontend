@@ -1,6 +1,10 @@
 import React from 'react';
 import Ikon from 'nav-frontend-ikoner-assets';
-import { Normaltekst } from 'nav-frontend-typografi';
+import {
+  StyledRettTilListe,
+  ListeMedIkon,
+  ListeElement,
+} from './RettTilListeElementer';
 
 interface IRettTilListeProps {
   tekster_i_liste: string[];
@@ -21,19 +25,19 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
   );
 
   return (
-    <div className="rett-til-liste">
+    <StyledRettTilListe>
       <h2>{overskrift}</h2>
       <ul>
         {tekster_i_liste.map((tekst: string) => (
           <li key={tekst}>
-            <span className="liste-med-ikon">
+            <ListeMedIkon>
               {ikon}
-              <Normaltekst className="liste-element">{tekst}</Normaltekst>
-            </span>
+              <ListeElement>{tekst}</ListeElement>
+            </ListeMedIkon>
           </li>
         ))}
       </ul>
-    </div>
+    </StyledRettTilListe>
   );
 };
 
