@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 const marked = require('marked');
 const renderer = new marked.Renderer();
 
@@ -20,4 +21,15 @@ const MarkdownViewer: React.FC<IMarkdownViewerProps> = ({ markdown }) => {
   return <div className="markdown" dangerouslySetInnerHTML={{ __html: md }} />;
 };
 
-export default MarkdownViewer;
+const StyledMarkdownViewer = styled(MarkdownViewer)`
+  p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    a {
+      margin-bottom: 200px;
+    }
+  }
+`;
+
+export default StyledMarkdownViewer;

@@ -17,6 +17,17 @@ import {
   ISpørsmål,
 } from './models/Spørsmål';
 import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils';
+import styled from 'styled-components';
+import { device } from './utils/styles';
+
+const InnholdsWrapper = styled.div`
+  scroll-behavior: smooth;
+  padding: 2rem;
+
+  @media ${device.mobile} {
+    padding: 0;
+  }
+`;
 
 const App = () => {
   const [spørsmålListe, settSpørsmålListe] = useState<ISpørsmål[]>([]);
@@ -112,7 +123,7 @@ const App = () => {
         <Brødsmuler // eslint-disable-line
         />
         <Panel className="innholdspanel">
-          <div className="innholdscontainer">
+          <InnholdsWrapper>
             <VeiviserHeader />
             {!startet ? (
               <div className="knappwrapper">
@@ -135,7 +146,7 @@ const App = () => {
               disclaimer={disclaimer}
               alert={alert}
             />
-          </div>
+          </InnholdsWrapper>
         </Panel>
       </div>
     );

@@ -6,10 +6,20 @@ import {
 } from '../../models/Spørsmål';
 import { RadioPanel } from 'nav-frontend-skjema';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
-import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { scrollTilNesteSpørsmal } from './SpørsmålUtils';
 import MarkdownViewer from '../utils/MarkdownViewer';
-import { hoppTilSpørsmål, finnSpørsmålStiMedBesvarteSvar, besvarteSvar, finnInformasjonsboksMedFlestMatchendeSvar } from './SpørsmålUtils';
+import {
+  hoppTilSpørsmål,
+  finnSpørsmålStiMedBesvarteSvar,
+  besvarteSvar,
+  finnInformasjonsboksMedFlestMatchendeSvar,
+} from './SpørsmålUtils';
+import {
+  SpørsmålElement,
+  Spørsmålstekst,
+  Hjelpetekst,
+  RadioknappWrapper,
+} from './SpørsmålElementer';
 
 interface ISpørsmålProps {
   steg: number;
@@ -34,7 +44,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
   svarstiTilInformasjonsboksMapping,
   startet,
   disclaimer,
-  alert
+  alert,
 }) => {
   const [spørsmålSti, setSpørsmålSti] = useState<any>([]);
 
@@ -61,11 +71,18 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
 
     hoppTilSpørsmål(spørsmål, spørsmålSti);
 
-    let tempSpørsmålSti = finnSpørsmålStiMedBesvarteSvar(spørsmålSti, spørsmål, svar);
+    let tempSpørsmålSti = finnSpørsmålStiMedBesvarteSvar(
+      spørsmålSti,
+      spørsmål,
+      svar
+    );
 
     const besvarteSvarMedSpørsmålId = besvarteSvar(tempSpørsmålSti);
 
-    let lengsteMatchId = finnInformasjonsboksMedFlestMatchendeSvar(svarstiTilInformasjonsboksMapping, besvarteSvarMedSpørsmålId);
+    let lengsteMatchId = finnInformasjonsboksMedFlestMatchendeSvar(
+      svarstiTilInformasjonsboksMapping,
+      besvarteSvarMedSpørsmålId
+    );
 
     setSpørsmålSti(tempSpørsmålSti);
 
@@ -82,20 +99,17 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     <div>
       {spørsmålSti.map((spørsmål: ISpørsmål, index: number) => {
         return (
-          <div key={spørsmål._id} className="spørsmål-element">
+          <SpørsmålElement key={spørsmål._id}>
             {index === spørsmålSti.length - 1 && !ferdig ? (
               <div ref={nesteSpørsmål} />
             ) : null}
-            <span className="spørsmål-tekst">{spørsmål.sporsmal_tekst}</span>
+            <Spørsmålstekst>{spørsmål.sporsmal_tekst}</Spørsmålstekst>
             {spørsmål &&
             spørsmål.hjelpetekst_overskrift &&
             spørsmål.hjelpetekst ? (
-              <Lesmerpanel
-                className="hjelpetekst"
-                apneTekst={spørsmål.hjelpetekst_overskrift}
-              >
+              <Hjelpetekst apneTekst={spørsmål.hjelpetekst_overskrift}>
                 <MarkdownViewer markdown={spørsmål.hjelpetekst} />
-              </Lesmerpanel>
+              </Hjelpetekst>
             ) : null}
             {spørsmål.svarliste.map((svar: ISvar) => {
               let c = svar.checked ? svar.checked : false;
@@ -103,7 +117,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
               if (index === spørsmålSti.length - 1 && !ferdig) c = false;
 
               return (
-                <div key={svar._id} className="radioknapp-wrapper">
+                <RadioknappWrapper key={svar._id}>
                   <RadioPanel
                     id={spørsmål.sporsmal_tekst + ' ' + svar.tekst}
                     value={svar.tekst}
@@ -112,10 +126,10 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
                     checked={c}
                     onChange={(e) => KlikkPåSvar(e, spørsmål, svar)}
                   />
-                </div>
+                </RadioknappWrapper>
               );
             })}
-          </div>
+          </SpørsmålElement>
         );
       })}
       {ferdig ? (
