@@ -2,7 +2,7 @@ import React from 'react';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import styled from 'styled-components';
 
-const StyledFeilside = styled.div`
+const FeilsideWrapper = styled.div`
   padding: 1;
   width: 400px;
   margin: auto;
@@ -10,9 +10,9 @@ const StyledFeilside = styled.div`
 
 const Feilside = () => {
   return (
-    <StyledFeilside>
+    <FeilsideWrapper>
       <AlertStripeFeil>Noe galt skjedde</AlertStripeFeil>
-    </StyledFeilside>
+    </FeilsideWrapper>
   );
 };
 

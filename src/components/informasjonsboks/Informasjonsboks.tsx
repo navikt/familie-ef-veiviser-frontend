@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import RettTilListe from './RettTilListe/RettTilListe';
+import RettTilListe from './rett-til-liste/RettTilListe';
 import { IInformasjonsboks, IUndertittel } from '../../models/Informasjonsboks';
 import UndertitlerPanel from './UndertitlerPanel';
 import BallIkon from '../../assets/icons/BallIkon';

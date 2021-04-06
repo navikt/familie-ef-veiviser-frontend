@@ -1,15 +1,52 @@
 import React from 'react';
 import Ikon from 'nav-frontend-ikoner-assets';
-import {
-  StyledRettTilListe,
-  ListeMedIkon,
-  ListeElement,
-} from './RettTilListeElementer';
+import styled from 'styled-components';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { device } from '../../../utils/styles';
 
 interface IRettTilListeProps {
   tekster_i_liste: string[];
   ikke_rett_til: boolean;
 }
+
+export const RettTilListeWrapper = styled.div`
+  ul {
+    list-style-type: none;
+
+    li {
+      padding-bottom: 0;
+      padding-right: 2rem;
+    }
+  }
+
+  ul {
+    li:not(:last-child) {
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  padding-left: 6rem;
+
+  @media ${device.mobile} {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+`;
+
+export const ListeMedIkon = styled.span`
+  display: inline;
+
+  p {
+    position: absolute;
+    margin-top: 0.1rem;
+  }
+`;
+
+export const ListeElement = styled(Normaltekst)`
+  display: inline;
+  margin-left: 1rem;
+  margin-right: 2rem;
+`;
 
 const RettTilListe: React.FC<IRettTilListeProps> = ({
   tekster_i_liste,
@@ -25,7 +62,7 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
   );
 
   return (
-    <StyledRettTilListe>
+    <RettTilListeWrapper>
       <h2>{overskrift}</h2>
       <ul>
         {tekster_i_liste.map((tekst: string) => (
@@ -37,7 +74,7 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
           </li>
         ))}
       </ul>
-    </StyledRettTilListe>
+    </RettTilListeWrapper>
   );
 };
 
