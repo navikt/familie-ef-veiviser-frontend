@@ -9,7 +9,11 @@ interface IRettTilListeProps {
   ikke_rett_til: boolean;
 }
 
-export const RettTilListeWrapper = styled.div`
+const StyledIkon = styled(Ikon)`
+  margin-right: 1rem;
+`;
+
+const RettTilListeWrapper = styled.div`
   ul {
     list-style-type: none;
 
@@ -33,7 +37,7 @@ export const RettTilListeWrapper = styled.div`
   }
 `;
 
-export const ListeMedIkon = styled.span`
+const ListeMedIkon = styled.span`
   display: inline;
 
   p {
@@ -42,10 +46,8 @@ export const ListeMedIkon = styled.span`
   }
 `;
 
-export const ListeElement = styled(Normaltekst)`
+const ListeElement = styled(Normaltekst)`
   display: inline;
-  margin-left: 1rem;
-  margin-right: 2rem;
 `;
 
 const RettTilListe: React.FC<IRettTilListeProps> = ({
@@ -56,9 +58,9 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
     ? 'Det ser ikke ut til at du har rett til'
     : 'Du kan ha rett til';
   const ikon = ikke_rett_til ? (
-    <Ikon kind="feil-sirkel-fyll" size="1.5em" />
+    <StyledIkon kind="feil-sirkel-fyll" size="1.5em" />
   ) : (
-    <Ikon kind="ok-sirkel-fyll" size="1.5em" />
+    <StyledIkon kind="ok-sirkel-fyll" size="1.5em" />
   );
 
   return (

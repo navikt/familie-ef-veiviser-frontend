@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { device } from '../../utils/styles';
 
-export const BrødsmulerWrapper = styled.div`
+const BrødsmulerWrapper = styled.div`
   font-size: 16px;
   width: 100%;
   margin-top: 1rem;
@@ -17,7 +17,7 @@ export const BrødsmulerWrapper = styled.div`
   }
 `;
 
-export const Brødsmule = styled.span`
+const Brødsmule = styled.span`
   margin-left: 5px;
   margin-right: 5px;
 
