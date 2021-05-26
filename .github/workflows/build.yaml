@@ -1,0 +1,14 @@
+name: Build app
+
+on: [pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    name: Bygg app og Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Bygg app med npm
+        run: |
+          npm install
+          npm run build
