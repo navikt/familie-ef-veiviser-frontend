@@ -1,8 +1,14 @@
 const sanityClient = require('@sanity/client');
 
+const sanityDataset =
+  process.env.NODE_ENV === 'development' ||
+  window.location.href.indexOf('www-q0') > -1
+    ? 'test'
+    : 'questions';
+
 export const client = sanityClient({
   projectId: '8wpntadz',
-  dataset: 'test',
+  dataset: sanityDataset,
   useCdn: true,
 });
 
