@@ -6,12 +6,6 @@ const sanityDataset =
     ? 'test'
     : 'questions';
 
-console.log('DATASET', sanityDataset);
-
-console.log('HREF', window.location.href);
-
-console.log('ENV', process.env);
-
 export const client = sanityClient({
   projectId: '8wpntadz',
   dataset: sanityDataset,
