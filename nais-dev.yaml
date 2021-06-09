@@ -12,9 +12,15 @@ spec:
   ingresses:
     - https://www-q0.nav.no/familie/alene-med-barn/veiviser
   liveness:
-    path: /familie/alene-med-barn/veiviser/
+    path: /status
+    initialDelay: 5
+    periodSeconds: 5
+    failureThreshold: 30
   readiness:
-    path: /familie/alene-med-barn/veiviser/
+    path: /status
+    initialDelay: 5
+    periodSeconds: 5
+    failureThreshold: 30
   prometheus:
     enabled: false
   replicas:
