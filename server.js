@@ -42,6 +42,9 @@ app.get('/status', (req, res) => {
   res.status(200).end();
 });
 
+router.get('/health/isAlive', (req, res) => res.sendStatus(200));
+router.get('/health/isReady', (req, res) => res.sendStatus(200));
+
 app.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) =>
   getDecorator()
     .then((fragments) => {
