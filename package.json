@@ -50,6 +50,7 @@
     "react-collapse": "^5.1.0",
     "react-dom": "^16.14.0",
     "react-scripts": "^4.0.3",
+    "requests": "^0.3.0",
     "smoothscroll-polyfill": "^0.4.4",
     "snyk": "^1.436.0",
     "styled-components": "^5.2.1",
