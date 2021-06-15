@@ -7,12 +7,6 @@ Veiviser-applikasjon for enslig forsørger.
 1. `npm install`
 2. `npm start`
 
-# Deploy
-
-`npm run deploy` deployer til test (https://navikt.github.io/familie-ef-veiviser/). Homepage-variablen i `package.json` må være satt til denne URLen før deploy: ´"homepage": "https://navikt.github.io/familie-ef-veiviser/"`.
-
-Prod bygges fra master. homepage-variabelen må være satt til `"/familie/alene-med-barn/veiviser"` før push til master.
-
 
 ## Sett opp Prettier lokalt on save (IntelliJ)
 
