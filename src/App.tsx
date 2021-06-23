@@ -4,7 +4,6 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
-import Brødsmuler from './components/brødsmuler/Brødsmuler';
 import { Panel } from 'nav-frontend-paneler';
 import {
   client,
@@ -120,8 +119,6 @@ const App = () => {
         <div className="side-header">
           <Innholdstittel>Hva kan du få?</Innholdstittel>
         </div>
-        <Brødsmuler // eslint-disable-line
-        />
         <Panel className="innholdspanel">
           <InnholdsWrapper>
             <VeiviserHeader />
