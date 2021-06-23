@@ -3,11 +3,13 @@ import { client, hentHeaderQuery } from '../../utils/sanity';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from '../feilside/Feilside';
 import { IHeader } from '../../models/Header';
+import MicroCard from '../../navikt-components/card/MicroCard';
 import {
   VeiviserHeader,
   StyledVeiviserIkon,
   Overskrift,
   Ingress,
+  MicroCardWrapper,
 } from './VeiviserHeaderElementer';
 
 const Header = () => {
@@ -44,6 +46,12 @@ const Header = () => {
         <Overskrift>{info.overskrift}</Overskrift>
         <hr />
         <Ingress markdown={info.ingress} />
+        <MicroCardWrapper>
+          <h3>Mer om hva du kan ha rett til når du</h3>
+          <MicroCard href="https://www.nav.no/alene-med-barn">
+            Er helt eller delvis alene med barn
+          </MicroCard>
+        </MicroCardWrapper>
       </VeiviserHeader>
     );
   } else if (feil) {
