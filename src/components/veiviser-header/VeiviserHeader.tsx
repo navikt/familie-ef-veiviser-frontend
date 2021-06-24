@@ -47,7 +47,7 @@ const Header = () => {
         <hr />
         <Ingress markdown={info.ingress} />
         <MicroCardWrapper>
-          <h3>Mer om hva du kan ha rett til når du</h3>
+          <h2>Mer om hva du kan ha rett til når du</h2>
           <MicroCard href="https://www.nav.no/alene-med-barn">
             Er helt eller delvis alene med barn
           </MicroCard>
