@@ -18,12 +18,27 @@ import {
   StyledAlertstripeAdvarsel,
   InformasjonsboksInnhold,
 } from './InformasjonsboksElementer';
+import MicroCard from '../../navikt-components/card/MicroCard';
+import styled from 'styled-components';
+import { device, farge, størrelse } from '../../utils/styles';
 
 interface IInformasjonstekstProps {
   steg: number;
   disclaimer?: string;
   alert?: string;
 }
+
+export const MicroCardWrapper = styled.div`
+  padding-left: 6rem;
+  padding-right: 6rem;
+
+  padding-bottom: 3rem;
+
+  @media @mobile {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+`;
 
 const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   steg,
@@ -147,6 +162,13 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
               <MarkdownViewer markdown={disclaimer} />
             </div>
           ) : null}
+
+          <MicroCardWrapper>
+            <h3>Mer om hva du kan ha rett til når du</h3>
+            <MicroCard href="https://www.nav.no/alene-med-barn">
+              Er helt eller delvis alene med barn
+            </MicroCard>
+          </MicroCardWrapper>
         </InformasjonsboksInnhold>
       </div>
     </>

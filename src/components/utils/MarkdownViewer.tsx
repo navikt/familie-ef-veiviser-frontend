@@ -24,7 +24,6 @@ const MarkdownViewer: React.FC<IMarkdownViewerProps> = ({ markdown }) => {
 const StyledMarkdownViewer = styled(MarkdownViewer)`
   p {
     margin-top: 1rem;
-    margin-bottom: 1rem;
 
     a {
       margin-bottom: 200px;

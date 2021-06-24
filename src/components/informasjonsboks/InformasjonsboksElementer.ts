@@ -34,7 +34,7 @@ export const InformasjonsboksInnhold = styled.div`
   }
 
   .disclaimer {
-    padding: 2rem 6rem 4rem 6rem;
+    padding: 2rem 6rem 1rem 6rem;
 
     @media ${device.mobile} {
       padding-right: 2rem;
