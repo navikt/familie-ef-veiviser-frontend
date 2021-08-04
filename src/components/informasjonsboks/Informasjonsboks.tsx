@@ -20,7 +20,6 @@ import {
 } from './InformasjonsboksElementer';
 import MicroCard from '../../navikt-components/card/MicroCard';
 import styled from 'styled-components';
-import { device, farge, størrelse } from '../../utils/styles';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -34,7 +33,7 @@ export const MicroCardWrapper = styled.div`
 
   padding-bottom: 3rem;
 
-  @media @mobile {
+  @media all and (max-width: 420px) {
     padding-left: 2rem;
     padding-right: 2rem;
   }
