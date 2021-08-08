@@ -46,7 +46,7 @@
     "nav-frontend-typografi-style": "^1.0.35",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
-    "react-app-polyfill": "^1.0.6",
+    "react-app-polyfill": "^2.0.0",
     "react-collapse": "^5.1.0",
     "react-dom": "^16.14.0",
     "react-scripts": "^4.0.3",
