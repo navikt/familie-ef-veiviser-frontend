@@ -10,7 +10,7 @@ spec:
   team: teamfamilie
   port: 8080
   ingresses:
-    - https://dev.nav.no/familie/alene-med-barn/veiviser
+    - https://familie.dev.nav.no/familie/alene-med-barn/veiviser
   liveness:
     path: /status
     initialDelay: 5
