@@ -5,6 +5,8 @@ metadata:
   namespace: teamfamilie
   labels:
     team: teamfamilie
+  annotations:
+    snorlax.nais.io/enabled: "true"
 spec:
   image: {{ image }}
   team: teamfamilie
