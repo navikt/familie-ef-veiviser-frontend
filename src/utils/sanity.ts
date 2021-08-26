@@ -2,7 +2,7 @@ const sanityClient = require('@sanity/client');
 
 const sanityDataset =
   process.env.NODE_ENV === 'development' ||
-  window.location.href.indexOf('www-q0') > -1
+  window.location.href.indexOf('.dev.') > -1
     ? 'test'
     : 'questions';
 
