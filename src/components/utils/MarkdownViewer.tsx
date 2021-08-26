@@ -8,11 +8,8 @@ marked.setOptions({
 });
 
 renderer.link = function(href: string, title: string, text: string) {
-  if (!title) {
-    return `<a target="_blank" rel="noopener noreferrer" href="${href}">${text}</a>`;
-  } else {
-    return `<a target="_blank" rel="noopener noreferrer" href="${href}" title="${title}">${text}</a>`;
-  }
+  return `<a target="_blank" rel="noopener noreferrer" href="${href}" title="${title ||
+    text}">${text}</a>`;
 };
 
 interface IMarkdownViewerProps {
