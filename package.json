@@ -52,7 +52,7 @@
     "react-scripts": "^4.0.3",
     "requests": "^0.3.0",
     "smoothscroll-polyfill": "^0.4.4",
-    "snyk": "^1.436.0",
+    "snyk": "^1.720.0",
     "styled-components": "^5.2.1",
     "typescript": "^3.9.9"
   },
