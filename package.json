@@ -8,7 +8,7 @@
     "@sanity/client": "^2.19.0",
     "@types/classnames": "^2.3.1",
     "@types/jest": "^27.0.2",
-    "@types/node": "^16.11.6",
+    "@types/node": "^16.11.7",
     "@types/react": "^16.14.5",
     "@types/react-dom": "^17.0.9",
     "@types/react-redux": "^7.1.20",
@@ -52,7 +52,7 @@
     "react-scripts": "^4.0.3",
     "requests": "^0.3.0",
     "smoothscroll-polyfill": "^0.4.4",
-    "snyk": "^1.720.0",
+    "snyk": "^1.760.0",
     "styled-components": "^5.3.3",
     "typescript": "^3.9.9"
   },
