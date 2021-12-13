@@ -43,7 +43,7 @@
     "nav-frontend-spinner-style": "^0.2.10",
     "nav-frontend-tekstomrade": "^2.0.76",
     "nav-frontend-typografi": "^2.0.39",
-    "nav-frontend-typografi-style": "^1.0.35",
+    "nav-frontend-typografi-style": "^2.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-app-polyfill": "^2.0.0",
