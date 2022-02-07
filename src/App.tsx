@@ -4,7 +4,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Feilside from './components/feilside/Feilside';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
-import { Panel } from 'nav-frontend-paneler';
+import { Panel } from '@navikt/ds-react';
 import {
   client,
   hentSpørsmålQuery,
