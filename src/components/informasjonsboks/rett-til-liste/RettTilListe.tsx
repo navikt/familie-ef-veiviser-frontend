@@ -1,7 +1,7 @@
 import React from 'react';
 import Ikon from 'nav-frontend-ikoner-assets';
 import styled from 'styled-components';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import { device } from '../../../utils/styles';
 
 interface IRettTilListeProps {
@@ -46,7 +46,7 @@ const ListeMedIkon = styled.span`
   }
 `;
 
-const ListeElement = styled(Normaltekst)`
+const ListeElement = styled(BodyShort)`
   display: inline;
 `;
 

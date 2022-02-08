@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import { Alert } from '@navikt/ds-react';
 import { device, størrelse } from '../../utils/styles';
 
-export const StyledAlertstripeAdvarsel = styled(AlertStripeAdvarsel)`
+export const StyledAlertstripeAdvarsel = styled(Alert)`
   max-width: 556px;
   margin: 0 auto;
   margin-top: 3.5rem;
