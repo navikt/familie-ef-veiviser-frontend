@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { client, hentHeaderQuery } from '../../utils/sanity';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import { Loader } from '@navikt/ds-react';
 import Feilside from '../feilside/Feilside';
 import { IHeader } from '../../models/Header';
 import MicroCard from '../../navikt-components/card/MicroCard';
@@ -36,7 +36,7 @@ const Header = () => {
   }, []);
 
   if (henter) {
-    return <NavFrontendSpinner className="spinner" />;
+    return <Loader className="spinner" />;
   }
 
   if (!feil && info && info.ingress && info.overskrift) {

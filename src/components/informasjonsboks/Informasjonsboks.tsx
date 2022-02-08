@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import { Loader } from '@navikt/ds-react';
 import RettTilListe from './rett-til-liste/RettTilListe';
 import { IInformasjonsboks, IUndertittel } from '../../models/Informasjonsboks';
 import UndertitlerPanel from './UndertitlerPanel';
@@ -71,7 +71,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   }, [steg]);
 
   if (henter || !(info && info.undertitler)) {
-    return <NavFrontendSpinner className="spinner" />;
+    return <Loader className="spinner" />;
   }
 
   if (feil) {
@@ -123,7 +123,9 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   return (
     <>
       {alert ? (
-        <StyledAlertstripeAdvarsel>{alert}</StyledAlertstripeAdvarsel>
+        <StyledAlertstripeAdvarsel variant="warning">
+          {alert}
+        </StyledAlertstripeAdvarsel>
       ) : null}
       <div className="informasjonsboks blur-in" id={`informasjonsboks-${steg}`}>
         <div className="informasjonsboks-header">
