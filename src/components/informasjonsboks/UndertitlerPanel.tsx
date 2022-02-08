@@ -1,7 +1,7 @@
 import React from 'react';
 import { IUndertittel, IBrodtekst } from '../../models/Informasjonsboks';
 import MarkdownViewer from '../utils/MarkdownViewer';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 
 interface IUndertitlerPanelProps {
   undertitler: IUndertittel[];
@@ -52,7 +52,7 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
             key={i}
           >
             {undertittel.tekst_i_panel ? (
-              <Undertittel>{undertittel.tekst_i_panel}</Undertittel>
+              <Heading size="small">{undertittel.tekst_i_panel}</Heading>
             ) : null}
             {undertittel.brodtekster &&
               undertittel.brodtekster.map(

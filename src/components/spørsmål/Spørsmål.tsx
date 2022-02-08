@@ -4,7 +4,7 @@ import {
   ISpørsmål,
   ISvar,
 } from '../../models/Spørsmål';
-import { RadioPanel } from 'nav-frontend-skjema';
+import { Radio, RadioGroup } from '@navikt/ds-react';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
 import { scrollTilNesteSpørsmal } from './SpørsmålUtils';
 import MarkdownViewer from '../utils/MarkdownViewer';
@@ -111,24 +111,27 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
                 <MarkdownViewer markdown={spørsmål.hjelpetekst} />
               </Hjelpetekst>
             ) : null}
-            {spørsmål.svarliste.map((svar: ISvar) => {
-              let c = svar.checked ? svar.checked : false;
+            <RadioGroup legend="">
+              {spørsmål.svarliste.map((svar: ISvar) => {
+                let c = svar.checked ? svar.checked : false;
 
-              if (index === spørsmålSti.length - 1 && !ferdig) c = false;
+                if (index === spørsmålSti.length - 1 && !ferdig) c = false;
 
-              return (
-                <RadioknappWrapper key={svar._id}>
-                  <RadioPanel
-                    id={spørsmål.sporsmal_tekst + ' ' + svar.tekst}
-                    value={svar.tekst}
-                    label={svar.tekst}
-                    name={spørsmål._id}
-                    checked={c}
-                    onChange={(e) => KlikkPåSvar(e, spørsmål, svar)}
-                  />
-                </RadioknappWrapper>
-              );
-            })}
+                return (
+                  <RadioknappWrapper key={svar._id}>
+                    <Radio
+                      id={spørsmål.sporsmal_tekst + ' ' + svar.tekst}
+                      value={svar.tekst}
+                      name={spørsmål._id}
+                      checked={c}
+                      onChange={(e) => KlikkPåSvar(e, spørsmål, svar)}
+                    >
+                      {svar.tekst}
+                    </Radio>
+                  </RadioknappWrapper>
+                );
+              })}
+            </RadioGroup>
           </SpørsmålElement>
         );
       })}

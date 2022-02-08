@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { device, størrelse } from '../../utils/styles';
-import Lesmerpanel from 'nav-frontend-lesmerpanel';
+import { Panel } from '@navikt/ds-react';
 
 export const Spørsmålstekst = styled.span`
   display: inline-block;
@@ -19,7 +19,7 @@ export const Spørsmålstekst = styled.span`
   }
 `;
 
-export const Hjelpetekst = styled(Lesmerpanel)`
+export const Hjelpetekst = styled(Panel)`
   .lesMerPanel {
     &__toggle {
       justify-content: flex-start;
@@ -66,6 +66,8 @@ export const SpørsmålElement = styled.div`
 export const RadioknappWrapper = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
+
+  padding-left: ${størrelse.spørsmålTekstPadding};
 
   .inputPanel {
     margin: 0 auto;

@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Spørsmål from './components/spørsmål/Spørsmål';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import { Loader, Heading, Button } from '@navikt/ds-react';
 import Feilside from './components/feilside/Feilside';
-import { Innholdstittel } from 'nav-frontend-typografi';
 import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
-import { Panel } from 'nav-frontend-paneler';
+import { Panel } from '@navikt/ds-react';
 import {
   client,
   hentSpørsmålQuery,
   svarstiTilInformasjonsboksQuery,
 } from './utils/sanity';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import {
   ISvarstiTilInformasjonsboksMapping,
   ISpørsmål,
@@ -110,23 +108,27 @@ const App = () => {
   };
 
   if (henter) {
-    return <NavFrontendSpinner className="spinner" />;
+    return <Loader className="spinner" />;
   }
 
   if (!feil && spørsmålListe && spørsmålListe.length) {
     return (
       <div className="app">
         <div className="side-header">
-          <Innholdstittel>Hva kan du få?</Innholdstittel>
+          <Heading size="xlarge">Hva kan du få?</Heading>
         </div>
         <Panel className="innholdspanel">
           <InnholdsWrapper>
             <VeiviserHeader />
             {!startet ? (
               <div className="knappwrapper">
-                <Hovedknapp className="startknapp" onClick={startVeiviser}>
+                <Button
+                  variant="primary"
+                  className="startknapp"
+                  onClick={startVeiviser}
+                >
                   Start veiviseren
-                </Hovedknapp>
+                </Button>
               </div>
             ) : null}
             <Spørsmål // eslint-disable-line

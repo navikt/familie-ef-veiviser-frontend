@@ -6,6 +6,7 @@ import './index.less';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import smoothscroll from 'smoothscroll-polyfill';
+import '@navikt/ds-css';
 
 smoothscroll.polyfill();
 

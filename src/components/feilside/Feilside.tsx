@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
+import { Alert } from '@navikt/ds-react';
 import styled from 'styled-components';
 
 const FeilsideWrapper = styled.div`
@@ -11,7 +11,7 @@ const FeilsideWrapper = styled.div`
 const Feilside = () => {
   return (
     <FeilsideWrapper>
-      <AlertStripeFeil>Noe galt skjedde</AlertStripeFeil>
+      <Alert variant="error">Noe galt skjedde</Alert>
     </FeilsideWrapper>
   );
 };
