@@ -9,7 +9,7 @@
     "@navikt/ds-react": "^0.16.16",
     "@sanity/client": "^3.0.6",
     "@types/classnames": "^2.3.1",
-    "@types/jest": "^27.4.0",
+    "@types/jest": "^27.4.1",
     "@types/node": "^17.0.18",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
