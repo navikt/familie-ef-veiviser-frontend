@@ -6,7 +6,7 @@
   "dependencies": {
     "@craco/craco": "^5.9.0",
     "@navikt/ds-css": "^0.15.10",
-    "@navikt/ds-react": "^0.16.16",
+    "@navikt/ds-react": "^0.17.0",
     "@sanity/client": "^3.0.6",
     "@types/classnames": "^2.3.1",
     "@types/jest": "^27.4.1",
