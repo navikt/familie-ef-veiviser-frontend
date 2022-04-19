@@ -18,8 +18,8 @@ import {
   StyledAlertstripeAdvarsel,
   InformasjonsboksInnhold,
 } from './InformasjonsboksElementer';
-import MicroCard from '../../navikt-components/card/MicroCard';
 import styled from 'styled-components';
+import MikroKort from '../mikrokort/MikroKort';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -27,7 +27,7 @@ interface IInformasjonstekstProps {
   alert?: string;
 }
 
-export const MicroCardWrapper = styled.div`
+export const MikroKortWrapper = styled.div`
   padding-left: 6rem;
   padding-right: 6rem;
 
@@ -164,12 +164,12 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
             </div>
           ) : null}
 
-          <MicroCardWrapper>
+          <MikroKortWrapper>
             <h3>Mer om hva du kan ha rett til når du</h3>
-            <MicroCard href="https://www.nav.no/alene-med-barn">
+            <MikroKort href="https://www.nav.no/alene-med-barn">
               Er helt eller delvis alene med barn
-            </MicroCard>
-          </MicroCardWrapper>
+            </MikroKort>
+          </MikroKortWrapper>
         </InformasjonsboksInnhold>
       </div>
     </>
