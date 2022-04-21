@@ -3,7 +3,7 @@ import MarkdownViewer from '../utils/MarkdownViewer';
 import VeiviserIkon from '../../assets/icons/VeiviserIkon';
 import { device, farge, størrelse } from '../../utils/styles';
 
-export const MicroCardWrapper = styled.div`
+export const MikroKortWrapper = styled.div`
   padding-left: 3rem;
 
   @media ${device.mobile} {
