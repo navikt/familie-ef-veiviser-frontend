@@ -30,7 +30,7 @@
     "react-app-polyfill": "^3.0.0",
     "react-collapse": "^5.1.1",
     "react-dom": "^16.14.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.0",
     "requests": "^0.3.0",
     "smoothscroll-polyfill": "^0.4.4",
     "snyk": "^1.922.0",
