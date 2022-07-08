@@ -14,7 +14,7 @@ function logEvent(eventName: string, eventProperties: any) {
   amplitudeInstance.logEvent(eventName, eventProperties);
 }
 
-export const logEventVeiviser = (eventName: string, eventProperties?: any) => {
+const logEventVeiviser = (eventName: string, eventProperties?: any) => {
   logEvent(eventName, {
     team_id: 'familie',
     applikasjon: 'ef-veiviser',

@@ -20,7 +20,7 @@ import {
   Hjelpetekst,
   RadioknappWrapper,
 } from './SpørsmålElementer';
-import { logEventVeiviser, logSpørsmålBesvart } from '../../utils/amplitude';
+import { logSpørsmålBesvart } from '../../utils/amplitude';
 
 interface ISpørsmålProps {
   steg: number;
