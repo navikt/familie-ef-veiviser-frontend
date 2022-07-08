@@ -20,6 +20,7 @@ import {
 } from './InformasjonsboksElementer';
 import styled from 'styled-components';
 import MikroKort from '../mikrokort/MikroKort';
+import { logEventVeiviser, logVeiviserFullført } from '../../utils/amplitude';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -120,6 +121,8 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
       )
   );
 
+  logVeiviserFullført(rett_til_liste, ikke_rett_til_liste);
+
   return (
     <>
       {alert ? (
@@ -166,7 +169,17 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
 
           <MikroKortWrapper>
             <h3>Mer om hva du kan ha rett til når du</h3>
-            <MikroKort href="https://www.nav.no/alene-med-barn">
+            <MikroKort
+              href="https://www.nav.no/alene-med-barn"
+              onClick={() => {
+                logEventVeiviser('navigasjon', {
+                  destinasjon: 'https://www.nav.no/alene-med-barn',
+                  lenketekst:
+                    'Mer om hva du kan ha rett til når du er helt eller delvis alene med barn',
+                  kilde: 'informasjonsboks',
+                });
+              }}
+            >
               Er helt eller delvis alene med barn
             </MikroKort>
           </MikroKortWrapper>
