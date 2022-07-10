@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.4",
-    "@navikt/ds-css": "^0.18.24",
+    "@navikt/ds-css": "^0.18.27",
     "@navikt/ds-react": "^0.19.18",
     "@sanity/client": "^3.3.2",
     "@types/classnames": "^2.3.1",
