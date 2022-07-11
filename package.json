@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.4.4",
+    "@craco/craco": "^6.4.5",
     "@navikt/ds-css": "^0.18.27",
     "@navikt/ds-react": "^0.19.22",
     "@sanity/client": "^3.3.2",
