@@ -16,6 +16,7 @@ import {
 import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils';
 import styled from 'styled-components';
 import { device } from './utils/styles';
+import { logStartVeiviser } from './utils/amplitude';
 
 const InnholdsWrapper = styled.div`
   scroll-behavior: smooth;
@@ -104,6 +105,9 @@ const App = () => {
 
   const startVeiviser = () => {
     settStartet(true);
+
+    logStartVeiviser();
+
     scrollTilNesteSpørsmal(nesteSpørsmål);
   };
 

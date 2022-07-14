@@ -20,6 +20,7 @@ import {
   Hjelpetekst,
   RadioknappWrapper,
 } from './SpørsmålElementer';
+import { logSpørsmålBesvart } from '../../utils/amplitude';
 
 interface ISpørsmålProps {
   steg: number;
@@ -62,6 +63,8 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     svar: ISvar
   ): void => {
     svar.checked = true;
+
+    logSpørsmålBesvart(spørsmål.sporsmal_tekst, svar.tekst);
 
     if (svar.done) {
       settFerdig(true);
