@@ -11,7 +11,7 @@ import {
   MikroKortWrapper,
 } from './VeiviserHeaderElementer';
 import MikroKort from '../mikrokort/MikroKort';
-import { logNavigasjon } from '../../utils/amplitude';
+import { logNavigering } from '../../utils/amplitude';
 
 const Header = () => {
   const [henter, settHenter] = useState<boolean>(true);
@@ -52,7 +52,7 @@ const Header = () => {
           <MikroKort
             href="https://www.nav.no/alene-med-barn"
             onClick={() => {
-              logNavigasjon(
+              logNavigering(
                 'https://www.nav.no/alene-med-barn',
                 'Mer om hva du kan ha rett til når du er helt eller delvis alene med barn',
                 'header'
