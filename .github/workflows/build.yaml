@@ -19,4 +19,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Npm build
-        run: npm build
+        run: npm run build
