@@ -75,5 +75,5 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "snyk": true
+  "snyk": false
 }
