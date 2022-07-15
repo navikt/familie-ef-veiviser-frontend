@@ -39,11 +39,12 @@ const StyledMikroKort = styled.a`
 interface MikroKortProps {
   href: string;
   children: string;
+  onClick?: () => void;
 }
 
-const MikroKort = ({ href, children, ...rest }: MikroKortProps) => {
+const MikroKort = ({ href, children, onClick, ...rest }: MikroKortProps) => {
   return (
-    <StyledMikroKort href={href} {...rest}>
+    <StyledMikroKort href={href} onClick={onClick} {...rest}>
       {children}
     </StyledMikroKort>
   );

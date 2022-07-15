@@ -11,6 +11,7 @@ import {
   MikroKortWrapper,
 } from './VeiviserHeaderElementer';
 import MikroKort from '../mikrokort/MikroKort';
+import { logNavigasjon } from '../../utils/amplitude';
 
 const Header = () => {
   const [henter, settHenter] = useState<boolean>(true);
@@ -48,7 +49,16 @@ const Header = () => {
         <Ingress markdown={info.ingress} />
         <MikroKortWrapper>
           <h3>Mer om hva du kan ha rett til når du</h3>
-          <MikroKort href="https://www.nav.no/alene-med-barn">
+          <MikroKort
+            href="https://www.nav.no/alene-med-barn"
+            onClick={() => {
+              logNavigasjon(
+                'https://www.nav.no/alene-med-barn',
+                'Mer om hva du kan ha rett til når du er helt eller delvis alene med barn',
+                'header'
+              );
+            }}
+          >
             Er helt eller delvis alene med barn
           </MikroKort>
         </MikroKortWrapper>
