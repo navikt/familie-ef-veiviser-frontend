@@ -8,7 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Bygg app med npm
-        run: |
-          npm install
-          npm run build
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: npm
+          registry-url: "https://npm.pkg.github.com"
+        if: github.actor != 'dependabot[bot]'
+      - name: Npm install
+        run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Npm build
+        run: npm run build
