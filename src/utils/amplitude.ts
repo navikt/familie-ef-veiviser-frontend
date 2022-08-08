@@ -26,12 +26,12 @@ export const logStartVeiviser = () => {
   logEventVeiviser('skjema startet');
 };
 
-export const logNavigasjon = (
+export const logNavigering = (
   destinasjon: string,
   lenketekst: string,
   kilde?: string
 ) => {
-  logEventVeiviser('navigasjon', {
+  logEventVeiviser('navigere', {
     destinasjon: destinasjon,
     lenketekst: lenketekst,
     kilde: kilde,
