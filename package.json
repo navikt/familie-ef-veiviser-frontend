@@ -7,7 +7,7 @@
     "@craco/craco": "^6.4.5",
     "@navikt/ds-css": "^0.18.27",
     "@navikt/ds-react": "^0.19.23",
-    "@sanity/client": "^3.3.2",
+    "@sanity/client": "^3.3.3",
     "@types/amplitude-js": "^8.16.1",
     "@types/classnames": "^2.3.1",
     "@types/jest": "^28.1.4",
