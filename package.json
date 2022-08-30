@@ -10,7 +10,7 @@
     "@sanity/client": "^3.3.2",
     "@types/amplitude-js": "^8.16.1",
     "@types/classnames": "^2.3.1",
-    "@types/jest": "^28.1.4",
+    "@types/jest": "^29.0.0",
     "@types/node": "^18.0.3",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
