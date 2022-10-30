@@ -18,7 +18,7 @@
     "@types/react-transition-group": "^4.4.5",
     "@types/redux": "^3.6.31",
     "@types/smoothscroll-polyfill": "^0.3.1",
-    "amplitude-js": "^8.19.0",
+    "amplitude-js": "^8.21.2",
     "babel-polyfill": "^6.26.0",
     "be-pretty": "^1.1.1",
     "classnames": "^2.3.1",
