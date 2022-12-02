@@ -54,7 +54,8 @@ const App = () => {
         .catch((err: Error) => {
           console.log('err', err);
           console.error('Oh no, feil occured: ', err);
-        });
+        })
+        .finally(() => settHenter(false));
     };
 
     const fetchSpørsmål = () => {
@@ -67,8 +68,6 @@ const App = () => {
           console.error('Oh no, feil occured: ', err);
           settFeil(true);
         });
-
-      settHenter(false);
     };
 
     const fetchDisclaimer = () => {
@@ -111,53 +110,53 @@ const App = () => {
     scrollTilNesteSpørsmal(nesteSpørsmål);
   };
 
+  const skalViseApp = !feil && spørsmålListe && spørsmålListe.length > 0;
+
   if (henter) {
     return <Loader className="spinner" />;
   }
 
-  if (!feil && spørsmålListe && spørsmålListe.length) {
-    return (
-      <div className="app">
-        <div className="side-header">
-          <Heading size="xlarge">Hva kan du få?</Heading>
-        </div>
-        <Panel className="innholdspanel">
-          <InnholdsWrapper>
-            <VeiviserHeader />
-            {!startet ? (
-              <div className="knappwrapper">
-                <Button
-                  variant="primary"
-                  className="startknapp"
-                  onClick={startVeiviser}
-                >
-                  Start veiviseren
-                </Button>
-              </div>
-            ) : null}
-            <Spørsmål // eslint-disable-line
-              nesteSpørsmål={nesteSpørsmål}
-              startet={startet}
-              spørsmålListe={spørsmålListe}
-              settSteg={settSteg}
-              settFerdig={settFerdig}
-              ferdig={ferdig}
-              steg={steg}
-              svarstiTilInformasjonsboksMapping={
-                svarstiTilInformasjonsboksMapping
-              }
-              disclaimer={disclaimer}
-              alert={alert}
-            />
-          </InnholdsWrapper>
-        </Panel>
-      </div>
-    );
-  } else if (feil) {
+  if (!skalViseApp) {
     return <Feilside />;
   }
 
-  return null;
+  return (
+    <div className="app">
+      <div className="side-header">
+        <Heading size="xlarge">Hva kan du få?</Heading>
+      </div>
+      <Panel className="innholdspanel">
+        <InnholdsWrapper>
+          <VeiviserHeader />
+          {!startet ? (
+            <div className="knappwrapper">
+              <Button
+                variant="primary"
+                className="startknapp"
+                onClick={startVeiviser}
+              >
+                Start veiviseren
+              </Button>
+            </div>
+          ) : null}
+          <Spørsmål // eslint-disable-line
+            nesteSpørsmål={nesteSpørsmål}
+            startet={startet}
+            spørsmålListe={spørsmålListe}
+            settSteg={settSteg}
+            settFerdig={settFerdig}
+            ferdig={ferdig}
+            steg={steg}
+            svarstiTilInformasjonsboksMapping={
+              svarstiTilInformasjonsboksMapping
+            }
+            disclaimer={disclaimer}
+            alert={alert}
+          />
+        </InnholdsWrapper>
+      </Panel>
+    </div>
+  );
 };
 
 export default App;
