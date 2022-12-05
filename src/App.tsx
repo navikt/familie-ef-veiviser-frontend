@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Spørsmål from './components/spørsmål/Spørsmål';
-import { Loader, Heading, Button } from '@navikt/ds-react';
+import { Button, Loader, Heading, Panel } from '@navikt/ds-react';
 import Feilside from './components/feilside/Feilside';
-import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
-import { Panel } from '@navikt/ds-react';
+import Header from './components/veiviser-header/Header';
 import {
   client,
+  hentHeaderQuery,
   hentSpørsmålQuery,
   svarstiTilInformasjonsboksQuery,
 } from './utils/sanity';
@@ -17,6 +17,7 @@ import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils
 import styled from 'styled-components';
 import { device } from './utils/styles';
 import { logStartVeiviser } from './utils/amplitude';
+import { IHeader, tomHeaderTekst } from './models/Header';
 
 const InnholdsWrapper = styled.div`
   scroll-behavior: smooth;
@@ -41,23 +42,9 @@ const App = () => {
   ] = useState<ISvarstiTilInformasjonsboksMapping[]>([]);
   const [startet, settStartet] = useState<boolean>(false);
   const nesteSpørsmål = useRef(null);
+  const [headerTekst, settHeaderTekst] = useState<IHeader>(tomHeaderTekst);
 
   useEffect(() => {
-    const fetchSvarstiTilInformasjonsboksMapping = () => {
-      client
-        .fetch(svarstiTilInformasjonsboksQuery, {
-          type: 'informasjonsboks',
-        })
-        .then((res: ISvarstiTilInformasjonsboksMapping[]) => {
-          settSvarstiTilInformasjonsboksMapping(res);
-        })
-        .catch((err: Error) => {
-          console.log('err', err);
-          console.error('Oh no, feil occured: ', err);
-        })
-        .finally(() => settHenter(false));
-    };
-
     const fetchSpørsmål = () => {
       client
         .fetch(hentSpørsmålQuery, { type: 'sporsmal' })
@@ -67,6 +54,32 @@ const App = () => {
         .catch((err: Error) => {
           console.error('Oh no, feil occured: ', err);
           settFeil(true);
+        });
+    };
+
+    const fetchHeaderInfo = () => {
+      client
+        .fetch(hentHeaderQuery, { type: 'header' })
+        .then((res: IHeader) => {
+          settHeaderTekst(res);
+        })
+        .catch((err: Error) => {
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
+        })
+        .finally(() => settHenter(false));
+    };
+
+    const fetchSvarstiTilInformasjonsboksMapping = () => {
+      client
+        .fetch(svarstiTilInformasjonsboksQuery, {
+          type: 'informasjonsboks',
+        })
+        .then((res: ISvarstiTilInformasjonsboksMapping[]) => {
+          settSvarstiTilInformasjonsboksMapping(res);
+        })
+        .catch((err: Error) => {
+          console.error('Oh no, feil occured: ', err);
         });
     };
 
@@ -93,10 +106,12 @@ const App = () => {
         .catch((err: Error) => {
           console.error('Oh no, feil occured: ', err);
           settFeil(true);
-        });
+        })
+        .finally(() => settHenter(false));
     };
 
     fetchSpørsmål();
+    fetchHeaderInfo();
     fetchSvarstiTilInformasjonsboksMapping();
     fetchDisclaimer();
     fetchAlert();
@@ -127,7 +142,7 @@ const App = () => {
       </div>
       <Panel className="innholdspanel">
         <InnholdsWrapper>
-          <VeiviserHeader />
+          <Header tekst={headerTekst} />
           {!startet ? (
             <div className="knappwrapper">
               <Button
