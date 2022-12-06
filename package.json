@@ -27,7 +27,6 @@
     "gh-pages": "^4.0.0",
     "marked": "^4.0.17",
     "mustache-express": "^1.3.2",
-    "nav-frontend-ikoner-assets": "^3.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
