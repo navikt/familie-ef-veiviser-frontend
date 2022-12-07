@@ -154,7 +154,7 @@ const App = () => {
               </Button>
             </div>
           ) : null}
-          <Spørsmål // eslint-disable-line
+          <Spørsmål
             nesteSpørsmål={nesteSpørsmål}
             startet={startet}
             spørsmålListe={spørsmålListe}

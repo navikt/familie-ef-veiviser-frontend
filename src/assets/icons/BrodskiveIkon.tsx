@@ -7,7 +7,13 @@ interface IBrodskiveIkonProps {
 const BrodskiveIkon: React.FC<IBrodskiveIkonProps> = ({ className }) => {
   return (
     <div className={className}>
-      <svg width="31px" height="16px" viewBox="0 0 31 16">
+      <svg
+        width="31px"
+        height="16px"
+        viewBox="0 0 31 16"
+        role="img"
+        aria-hidden="true"
+      >
         <title>Brødskive</title>
         <g
           id="Page-1"

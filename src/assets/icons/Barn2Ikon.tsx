@@ -7,7 +7,13 @@ interface IBarn2IkonProps {
 const Barn2Ikon: React.FC<IBarn2IkonProps> = ({ className }) => {
   return (
     <div className={className}>
-      <svg width="57px" height="76px" viewBox="0 0 57 76">
+      <svg
+        width="57px"
+        height="76px"
+        viewBox="0 0 57 76"
+        role="img"
+        aria-hidden="true"
+      >
         <title>Barn</title>
         <defs>
           <path

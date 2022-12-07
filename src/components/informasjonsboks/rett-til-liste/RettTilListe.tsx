@@ -48,15 +48,26 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
     ? 'Det ser ikke ut til at du har rett til'
     : 'Du kan ha rett til';
   const ikon = ikke_rett_til ? (
-    <ErrorColored fontSize={'1.75rem'} />
+    <ErrorColored
+      aria-hidden={true}
+      title={'det ser ikke ut til at du har rett til'}
+      fontSize={'1.75rem'}
+    />
   ) : (
-    <SuccessColored fontSize={'1.75rem'} />
+    <SuccessColored
+      aria-hidden={true}
+      title={'du kan ha rett til'}
+      fontSize={'1.75rem'}
+    />
   );
+  const listeLabel = ikke_rett_til
+    ? 'Det ser ikke ut til at du har rett til'
+    : 'Du kan ha rett til';
 
   return (
     <RettTilListeWrapper>
       <h2>{overskrift}</h2>
-      <ul>
+      <ul aria-label={listeLabel}>
         {tekster_i_liste.map((tekst: string) => (
           <li key={tekst}>
             <FlexBox>

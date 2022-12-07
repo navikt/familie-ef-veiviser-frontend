@@ -3,7 +3,7 @@ import { Alert } from '@navikt/ds-react';
 import styled from 'styled-components';
 
 const FeilsideWrapper = styled.div`
-  padding: 1;
+  padding: 1rem;
   width: 400px;
   margin: auto;
 `;

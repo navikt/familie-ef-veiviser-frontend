@@ -106,7 +106,9 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
             {index === spørsmålSti.length - 1 && !ferdig ? (
               <div ref={nesteSpørsmål} />
             ) : null}
-            <Spørsmålstekst>{spørsmål.sporsmal_tekst}</Spørsmålstekst>
+            <Spørsmålstekst id={spørsmål.sporsmal_tekst}>
+              {spørsmål.sporsmal_tekst}
+            </Spørsmålstekst>
             {spørsmål &&
             spørsmål.hjelpetekst_overskrift &&
             spørsmål.hjelpetekst ? (
@@ -114,7 +116,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
                 <MarkdownViewer markdown={spørsmål.hjelpetekst} />
               </Hjelpetekst>
             ) : null}
-            <RadioGroup legend="">
+            <RadioGroup legend={spørsmål.sporsmal_tekst} hideLegend={true}>
               {spørsmål.svarliste.map((svar: ISvar) => {
                 let c = svar.checked ? svar.checked : false;
 
@@ -123,9 +125,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
                 return (
                   <RadioknappWrapper key={svar._id}>
                     <Radio
-                      id={spørsmål.sporsmal_tekst + ' ' + svar.tekst}
                       value={svar.tekst}
-                      name={spørsmål._id}
                       checked={c}
                       onChange={(e) => KlikkPåSvar(e, spørsmål, svar)}
                     >
