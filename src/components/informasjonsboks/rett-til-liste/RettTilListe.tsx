@@ -30,10 +30,11 @@ const RettTilListeWrapper = styled.div`
   }
 `;
 
-const FlexBox = styled.span`
-  display: flex;
-  gap: 1rem;
+const Grid = styled.span`
+  display: inline-grid;
+  grid-template-columns: 1.75rem auto;
   align-items: center;
+  column-gap: 1rem;
 `;
 
 const ListeElement = styled(BodyShort)`
@@ -51,13 +52,15 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
     <ErrorColored
       aria-hidden={true}
       title={'det ser ikke ut til at du har rett til'}
-      fontSize={'1.75rem'}
+      width={'1.75rem'}
+      height={'1.75rem'}
     />
   ) : (
     <SuccessColored
       aria-hidden={true}
       title={'du kan ha rett til'}
-      fontSize={'1.75rem'}
+      width={'1.75rem'}
+      height={'1.75rem'}
     />
   );
   const listeLabel = ikke_rett_til
@@ -70,10 +73,10 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
       <ul aria-label={listeLabel}>
         {tekster_i_liste.map((tekst: string) => (
           <li key={tekst}>
-            <FlexBox>
+            <Grid>
               {ikon}
               <ListeElement>{tekst}</ListeElement>
-            </FlexBox>
+            </Grid>
           </li>
         ))}
       </ul>
