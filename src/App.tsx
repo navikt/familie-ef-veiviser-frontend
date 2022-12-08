@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Spørsmål from './components/spørsmål/Spørsmål';
-import { Loader, Heading, Button } from '@navikt/ds-react';
+import { Button, Loader, Heading, Panel } from '@navikt/ds-react';
 import Feilside from './components/feilside/Feilside';
-import VeiviserHeader from './components/veiviser-header/VeiviserHeader';
-import { Panel } from '@navikt/ds-react';
+import Header from './components/veiviser-header/Header';
 import {
   client,
+  hentHeaderQuery,
   hentSpørsmålQuery,
   svarstiTilInformasjonsboksQuery,
 } from './utils/sanity';
@@ -17,6 +17,7 @@ import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils
 import styled from 'styled-components';
 import { device } from './utils/styles';
 import { logStartVeiviser } from './utils/amplitude';
+import { IHeader, tomHeaderTekst } from './models/Header';
 
 const InnholdsWrapper = styled.div`
   scroll-behavior: smooth;
@@ -41,22 +42,9 @@ const App = () => {
   ] = useState<ISvarstiTilInformasjonsboksMapping[]>([]);
   const [startet, settStartet] = useState<boolean>(false);
   const nesteSpørsmål = useRef(null);
+  const [headerTekst, settHeaderTekst] = useState<IHeader>(tomHeaderTekst);
 
   useEffect(() => {
-    const fetchSvarstiTilInformasjonsboksMapping = () => {
-      client
-        .fetch(svarstiTilInformasjonsboksQuery, {
-          type: 'informasjonsboks',
-        })
-        .then((res: ISvarstiTilInformasjonsboksMapping[]) => {
-          settSvarstiTilInformasjonsboksMapping(res);
-        })
-        .catch((err: Error) => {
-          console.log('err', err);
-          console.error('Oh no, feil occured: ', err);
-        });
-    };
-
     const fetchSpørsmål = () => {
       client
         .fetch(hentSpørsmålQuery, { type: 'sporsmal' })
@@ -67,8 +55,32 @@ const App = () => {
           console.error('Oh no, feil occured: ', err);
           settFeil(true);
         });
+    };
 
-      settHenter(false);
+    const fetchHeaderInfo = () => {
+      client
+        .fetch(hentHeaderQuery, { type: 'header' })
+        .then((res: IHeader) => {
+          settHeaderTekst(res);
+        })
+        .catch((err: Error) => {
+          console.error('Oh no, feil occured: ', err);
+          settFeil(true);
+        })
+        .finally(() => settHenter(false));
+    };
+
+    const fetchSvarstiTilInformasjonsboksMapping = () => {
+      client
+        .fetch(svarstiTilInformasjonsboksQuery, {
+          type: 'informasjonsboks',
+        })
+        .then((res: ISvarstiTilInformasjonsboksMapping[]) => {
+          settSvarstiTilInformasjonsboksMapping(res);
+        })
+        .catch((err: Error) => {
+          console.error('Oh no, feil occured: ', err);
+        });
     };
 
     const fetchDisclaimer = () => {
@@ -94,10 +106,12 @@ const App = () => {
         .catch((err: Error) => {
           console.error('Oh no, feil occured: ', err);
           settFeil(true);
-        });
+        })
+        .finally(() => settHenter(false));
     };
 
     fetchSpørsmål();
+    fetchHeaderInfo();
     fetchSvarstiTilInformasjonsboksMapping();
     fetchDisclaimer();
     fetchAlert();
@@ -111,53 +125,53 @@ const App = () => {
     scrollTilNesteSpørsmal(nesteSpørsmål);
   };
 
+  const skalViseApp = !feil && spørsmålListe && spørsmålListe.length > 0;
+
   if (henter) {
     return <Loader className="spinner" />;
   }
 
-  if (!feil && spørsmålListe && spørsmålListe.length) {
-    return (
-      <div className="app">
-        <div className="side-header">
-          <Heading size="xlarge">Hva kan du få?</Heading>
-        </div>
-        <Panel className="innholdspanel">
-          <InnholdsWrapper>
-            <VeiviserHeader />
-            {!startet ? (
-              <div className="knappwrapper">
-                <Button
-                  variant="primary"
-                  className="startknapp"
-                  onClick={startVeiviser}
-                >
-                  Start veiviseren
-                </Button>
-              </div>
-            ) : null}
-            <Spørsmål // eslint-disable-line
-              nesteSpørsmål={nesteSpørsmål}
-              startet={startet}
-              spørsmålListe={spørsmålListe}
-              settSteg={settSteg}
-              settFerdig={settFerdig}
-              ferdig={ferdig}
-              steg={steg}
-              svarstiTilInformasjonsboksMapping={
-                svarstiTilInformasjonsboksMapping
-              }
-              disclaimer={disclaimer}
-              alert={alert}
-            />
-          </InnholdsWrapper>
-        </Panel>
-      </div>
-    );
-  } else if (feil) {
+  if (!skalViseApp) {
     return <Feilside />;
   }
 
-  return null;
+  return (
+    <div className="app">
+      <div className="side-header">
+        <Heading size="xlarge">Hva kan du få?</Heading>
+      </div>
+      <Panel className="innholdspanel">
+        <InnholdsWrapper>
+          <Header tekst={headerTekst} />
+          {!startet ? (
+            <div className="knappwrapper">
+              <Button
+                variant="primary"
+                className="startknapp"
+                onClick={startVeiviser}
+              >
+                Start veiviseren
+              </Button>
+            </div>
+          ) : null}
+          <Spørsmål // eslint-disable-line
+            nesteSpørsmål={nesteSpørsmål}
+            startet={startet}
+            spørsmålListe={spørsmålListe}
+            settSteg={settSteg}
+            settFerdig={settFerdig}
+            ferdig={ferdig}
+            steg={steg}
+            svarstiTilInformasjonsboksMapping={
+              svarstiTilInformasjonsboksMapping
+            }
+            disclaimer={disclaimer}
+            alert={alert}
+          />
+        </InnholdsWrapper>
+      </Panel>
+    </div>
+  );
 };
 
 export default App;

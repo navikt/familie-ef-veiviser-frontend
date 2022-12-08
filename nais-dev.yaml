@@ -1,5 +1,5 @@
-apiVersion: nais.io/v1alpha1
-kind: Application
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
 metadata:
   name: familie-ef-veiviser
   namespace: teamfamilie
@@ -10,25 +10,27 @@ metadata:
 spec:
   image: {{ image }}
   team: teamfamilie
-  port: 8080
-  ingresses:
-    - https://familie.dev.nav.no/familie/alene-med-barn/veiviser
-  liveness:
-    path: /status
-    initialDelay: 5
-    periodSeconds: 5
-    failureThreshold: 30
-  readiness:
-    path: /status
-    initialDelay: 5
-    periodSeconds: 5
-    failureThreshold: 30
-  prometheus:
-    enabled: false
   replicas:
-    min: 1
+    min: 2
     max: 2
     cpuThresholdPercentage: 50
+  port: 8080
+  liveness:
+    path: /isAlive
+    initialDelay: 5
+  readiness:
+    path: /isReady
+    initialDelay: 5
+  prometheus:
+    enabled: false
+  ingresses:
+    - https://familie.dev.nav.no/familie/alene-med-barn/veiviser
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 512Mi
+    requests:
+      memory: 256Mi
   accessPolicy:
     outbound:
       external:
@@ -36,9 +38,3 @@ spec:
   env:
     - name: APP_VERSION
       value: '{{version}}'
-  resources:
-    limits:
-      cpu: 1000m
-      memory: 512Mi
-    requests:
-      memory: 256Mi

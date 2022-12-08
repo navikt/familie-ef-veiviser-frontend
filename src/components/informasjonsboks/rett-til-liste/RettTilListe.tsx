@@ -1,17 +1,13 @@
 import React from 'react';
-import Ikon from 'nav-frontend-ikoner-assets';
 import styled from 'styled-components';
 import { BodyShort } from '@navikt/ds-react';
 import { device } from '../../../utils/styles';
+import { ErrorColored, SuccessColored } from '@navikt/ds-icons';
 
 interface IRettTilListeProps {
   tekster_i_liste: string[];
   ikke_rett_til: boolean;
 }
-
-const StyledIkon = styled(Ikon)`
-  margin-right: 1rem;
-`;
 
 const RettTilListeWrapper = styled.div`
   ul {
@@ -19,13 +15,10 @@ const RettTilListeWrapper = styled.div`
 
     li {
       padding-bottom: 0;
-      padding-right: 2rem;
     }
-  }
 
-  ul {
     li:not(:last-child) {
-      padding-bottom: 0.5rem;
+      padding-bottom: 1rem;
     }
   }
 
@@ -37,13 +30,10 @@ const RettTilListeWrapper = styled.div`
   }
 `;
 
-const ListeMedIkon = styled.span`
-  display: inline;
-
-  p {
-    position: absolute;
-    margin-top: 0.1rem;
-  }
+const FlexBox = styled.span`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 `;
 
 const ListeElement = styled(BodyShort)`
@@ -58,9 +48,9 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
     ? 'Det ser ikke ut til at du har rett til'
     : 'Du kan ha rett til';
   const ikon = ikke_rett_til ? (
-    <StyledIkon kind="feil-sirkel-fyll" size="1.5em" />
+    <ErrorColored fontSize={'1.75rem'} />
   ) : (
-    <StyledIkon kind="ok-sirkel-fyll" size="1.5em" />
+    <SuccessColored fontSize={'1.75rem'} />
   );
 
   return (
@@ -69,10 +59,10 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
       <ul>
         {tekster_i_liste.map((tekst: string) => (
           <li key={tekst}>
-            <ListeMedIkon>
+            <FlexBox>
               {ikon}
               <ListeElement>{tekst}</ListeElement>
-            </ListeMedIkon>
+            </FlexBox>
           </li>
         ))}
       </ul>
