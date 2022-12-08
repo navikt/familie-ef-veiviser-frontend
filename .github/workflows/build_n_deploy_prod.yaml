@@ -19,18 +19,18 @@ jobs:
           node-version: '16'
           cache: npm
           registry-url: "https://npm.pkg.github.com"
-      - name: Npm install and build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Npm install dev and build
         run: |
           npm ci
           npm run build
+        env:
+          NPM_TOKEN: ${{ secrets.READER_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.READER_TOKEN }}
         run: |
-          docker build . -t ${IMAGE} --build-arg NPM_TOKEN=${NPM_TOKEN}
+          docker build . -t ${IMAGE}
           echo ${GITHUB_TOKEN} | docker login ghcr.io --username ${GITHUB_REPOSITORY} --password-stdin
           docker push ${IMAGE}
   deploy:
@@ -38,14 +38,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Deploy til dev-sbs
+      - uses: actions/checkout@v3
+      - name: Deploy til dev-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: nais-dev.yaml
-      - name: Deploy til prod-sbs
+      - name: Deploy til prod-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
