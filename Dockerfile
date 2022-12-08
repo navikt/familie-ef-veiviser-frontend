@@ -4,4 +4,4 @@ ADD ./ /var/server/
 
 EXPOSE 8080
 
-CMD ["npm", "run", "serve", "--loglevel=verbose"]
+CMD ["NODE_ENV=production", "node", "server.js"]
