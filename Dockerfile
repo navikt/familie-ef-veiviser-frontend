@@ -1,5 +1,7 @@
 FROM navikt/node-express:16
 
+RUN apk add --update npm
+
 ADD ./ /var/server/
 USER root
 ARG NPM_TOKEN
