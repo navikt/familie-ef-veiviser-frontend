@@ -1,8 +1,7 @@
-FROM navikt/node-express:12.2.0-alpine
+FROM navikt/node-express:16
 
 ADD ./ /var/server/
-USER root
-ARG NPM_TOKEN
-RUN npm ci
 
 EXPOSE 8080
+
+CMD ["node", "server.js"]
