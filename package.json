@@ -21,7 +21,7 @@
     "amplitude-js": "^8.19.0",
     "babel-polyfill": "^6.26.0",
     "be-pretty": "^1.1.1",
-    "classnames": "^2.3.1",
+    "classnames": "^2.3.2",
     "craco-less": "^1.20.0",
     "express": "^4.18.2",
     "gh-pages": "^4.0.0",
