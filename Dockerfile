@@ -1,6 +1,7 @@
-FROM navikt/node-express:12.2.0-alpine
-RUN apk --no-cache add curl
+FROM navikt/node-express:16
+
 ADD ./ /var/server/
-RUN npm ci
+
 EXPOSE 8080
-CMD ["npm", "run", "serve"]
+
+CMD ["node", "server.js"]
