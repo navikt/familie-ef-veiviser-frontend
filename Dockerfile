@@ -3,7 +3,7 @@ FROM navikt/node-express:16
 
 ADD ./ /var/server/
 USER root
-RUN mkdir .npm && chmod a+rwx .npm
+RUN mkdir .npm && chmod -R a+rwx .npm
 
 ADD ./ /var/server/
 USER root
