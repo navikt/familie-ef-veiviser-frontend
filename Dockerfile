@@ -1,5 +1,8 @@
 FROM navikt/node-express:16
 
+
+ADD ./ /var/server/
+USER root
 RUN apk add --update npm
 
 ADD ./ /var/server/
