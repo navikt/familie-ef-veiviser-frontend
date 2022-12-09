@@ -7,7 +7,14 @@ interface IBamseIkonProps {
 const BamseIkon: React.FC<IBamseIkonProps> = ({ className }) => {
   return (
     <div className={className}>
-      <svg width="28px" height="42px" viewBox="0 0 28 42" version="1.1">
+      <svg
+        width="28px"
+        height="42px"
+        viewBox="0 0 28 42"
+        version="1.1"
+        role="img"
+        aria-hidden="true"
+      >
         <title>Bamse</title>
         <g
           id="Page-1"

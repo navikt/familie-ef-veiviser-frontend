@@ -168,7 +168,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
           ) : null}
 
           <MikroKortWrapper>
-            <h3>Mer om hva du kan ha rett til når du</h3>
+            <h3>Les mer om hva du kan ha rett til når du</h3>
             <MikroKort
               href="https://www.nav.no/alene-med-barn"
               onClick={() => {

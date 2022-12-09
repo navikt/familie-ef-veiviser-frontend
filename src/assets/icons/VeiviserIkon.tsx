@@ -7,8 +7,14 @@ interface IVeiviserIkonProps {
 const VeiviserIkon: React.FC<IVeiviserIkonProps> = ({ className }) => {
   return (
     <div className={className}>
-      <svg width="100px" height="100px" viewBox="0 -7 48 58">
-        <title>Veiviser</title>
+      <svg
+        width="100px"
+        height="100px"
+        viewBox="0 -7 48 58"
+        role="img"
+        aria-hidden="true"
+      >
+        <title>Veiviserskilt</title>
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <rect fill="#B2AAA0" x="23" y="-2" width="3" height="53"></rect>
           <g transform="translate(8.000000, 3.000000)">

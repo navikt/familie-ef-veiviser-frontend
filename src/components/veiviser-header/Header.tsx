@@ -27,7 +27,7 @@ const Header: React.FC<IProps> = ({ tekst }) => {
       <hr />
       <Ingress markdown={tekst.ingress} />
       <MikroKortWrapper>
-        <h3>Mer om hva du kan ha rett til når du</h3>
+        <h3 id={'mikrokort_tittel'}>Mer om hva du kan ha rett til når du</h3>
         <MikroKort
           href="https://www.nav.no/alene-med-barn"
           onClick={() => {
