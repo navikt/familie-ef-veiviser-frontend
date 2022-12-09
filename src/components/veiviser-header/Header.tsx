@@ -24,7 +24,7 @@ const Header: React.FC<IProps> = ({ tekst }) => {
     <VeiviserHeader>
       <StyledVeiviserIkon />
       <Overskrift>{tekst.overskrift}</Overskrift>
-      <hr />
+      <hr aria-hidden={true} />
       <Ingress markdown={tekst.ingress} />
       <MikroKortWrapper>
         <h3 id={'mikrokort_tittel'}>Mer om hva du kan ha rett til når du</h3>
