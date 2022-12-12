@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import MarkdownViewer from '../utils/MarkdownViewer';
 import VeiviserIkon from '../../assets/icons/VeiviserIkon';
-import { device, farge, størrelse } from '../../utils/styles';
+import { device, størrelse } from '../../utils/styles';
+import { AGray900, APurple200 } from '@navikt/ds-tokens/dist/tokens';
 
 export const MikroKortWrapper = styled.div`
   padding-left: 3rem;
@@ -47,8 +48,8 @@ export const VeiviserHeader = styled.div`
     border: none;
     height: 3px;
     width: 63px;
-    color: #151515;
-    background-color: #000;
+    color: ${AGray900};
+    background-color: ${AGray900};
   }
 
   ul {
@@ -72,7 +73,7 @@ export const VeiviserHeader = styled.div`
 
 export const StyledVeiviserIkon = styled(VeiviserIkon)`
   margin: 0 auto;
-  background-color: ${farge.familieBakgrunn};
+  background-color: ${APurple200};
   border-radius: 50%;
   width: 100px;
   height: 100px;
