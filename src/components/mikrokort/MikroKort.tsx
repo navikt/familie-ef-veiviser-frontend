@@ -1,38 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
+import {
+  ABorderAction,
+  ABorderFocus,
+  AOrange200,
+  ATextAction,
+  ATextDefault,
+  ASurfaceAction,
+  AWhite,
+} from '@navikt/ds-tokens/dist/tokens';
 
 const StyledMikroKort = styled.a`
   border-radius: 1rem;
-  color: #262626;
+  color: ${ATextDefault};
   display: inline-flex;
   padding: 0.25rem 0.5rem;
   text-decoration: none;
-  background-color: #ffd699;
+  background-color: ${AOrange200};
   border: 1px solid transparent;
-
   font-weight: bold;
   font-size: 14px;
 
   &:hover {
-    background-color: #fff;
-    border-color: #01459c;
-    color: #0166c5;
+    background-color: ${AWhite};
+    border-color: ${ABorderAction};
+    color: ${ATextAction};
     transition: 0.3s;
-
     cursor: pointer;
   }
 
-  &:focus {
-    background-color: #fff;
-    color: #0166c5;
-    outline: none;
-    box-shadow: var(--navds-shadow-focus);
-    transition: 0.1s;
+  &:focus-visible {
+    background-color: ${AOrange200};
+    color: ${ATextDefault};
+    outline: 3px solid ${ABorderFocus};
   }
 
   &:active {
-    background-color: #0166c5;
-    color: #fff;
+    background-color: ${ASurfaceAction};
+    color: ${AWhite};
   }
 `;
 

@@ -1,19 +1,18 @@
+@import 'node_modules/@navikt/ds-tokens/dist/tokens';
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: @navLysGra;
+  background-color: @a-gray-100;
   margin: 0;
 
-  a {
-    color: @navBla;
-  }
 
   a:focus {
-    color: @navMorkGra;
+    color: @a-gray-700;
     text-decoration: none;
-    background-color: @orangeFocus;
+    background-color: @a-orange-500;
   }
 }
 
@@ -84,7 +83,7 @@ body {
 }
 
 .side-header {
-  background-color: #c1b6d1;
+  background-color: @a-purple-200;
   text-align: center;
   height: 80px;
   width: 100%;

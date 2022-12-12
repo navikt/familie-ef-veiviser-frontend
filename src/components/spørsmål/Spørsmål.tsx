@@ -1,24 +1,24 @@
-import React, { useState, SyntheticEvent, RefObject } from 'react';
+import React, { RefObject, useState } from 'react';
 import {
-  ISvarstiTilInformasjonsboksMapping,
   ISpørsmål,
   ISvar,
+  ISvarstiTilInformasjonsboksMapping,
 } from '../../models/Spørsmål';
 import { Radio, RadioGroup } from '@navikt/ds-react';
 import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
-import { scrollTilNesteSpørsmal } from './SpørsmålUtils';
-import MarkdownViewer from '../utils/MarkdownViewer';
 import {
-  hoppTilSpørsmål,
-  finnSpørsmålStiMedBesvarteSvar,
   besvarteSvar,
   finnInformasjonsboksMedFlestMatchendeSvar,
+  finnSpørsmålStiMedBesvarteSvar,
+  hoppTilSpørsmål,
+  scrollTilNesteSpørsmal,
 } from './SpørsmålUtils';
+import MarkdownViewer from '../utils/MarkdownViewer';
 import {
-  SpørsmålElement,
-  Spørsmålstekst,
   Hjelpetekst,
   RadioknappWrapper,
+  SpørsmålElement,
+  Spørsmålstekst,
 } from './SpørsmålElementer';
 import { logSpørsmålBesvart } from '../../utils/amplitude';
 
@@ -57,10 +57,10 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     spørsmålSti.push(detteSpørsmålet);
   }
 
-  const KlikkPåSvar = (
-    e: SyntheticEvent<EventTarget>,
+  const klikkPåSvar = (
     spørsmål: ISpørsmål,
-    svar: ISvar
+    svar: ISvar,
+    scroll: boolean
   ): void => {
     svar.checked = true;
 
@@ -95,8 +95,14 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
       settSteg(svar.goto);
     }
 
-    scrollTilNesteSpørsmal(nesteSpørsmål);
+    scroll && scrollTilNesteSpørsmal(nesteSpørsmål);
   };
+
+  const museklikk = (xKoordinat: number, yKoordinat: number) =>
+    xKoordinat !== 0 && yKoordinat !== 0;
+
+  const valgtVedTastetrykk = (knapp: string) =>
+    knapp === 'Space' || knapp === 'Enter';
 
   return (
     <div>
@@ -118,16 +124,17 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
             ) : null}
             <RadioGroup legend={spørsmål.sporsmal_tekst} hideLegend={true}>
               {spørsmål.svarliste.map((svar: ISvar) => {
-                let c = svar.checked ? svar.checked : false;
-
-                if (index === spørsmålSti.length - 1 && !ferdig) c = false;
-
                 return (
                   <RadioknappWrapper key={svar._id}>
                     <Radio
                       value={svar.tekst}
-                      checked={c}
-                      onChange={(e) => KlikkPåSvar(e, spørsmål, svar)}
+                      onKeyDown={(e) =>
+                        klikkPåSvar(spørsmål, svar, valgtVedTastetrykk(e.code))
+                      }
+                      onClick={(e) =>
+                        museklikk(e.clientX, e.clientY) &&
+                        klikkPåSvar(spørsmål, svar, true)
+                      }
                     >
                       {svar.tekst}
                     </Radio>
