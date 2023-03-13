@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-const marked = require('marked');
+import  { marked }  from 'marked';
+
 const renderer = new marked.Renderer();
 
 marked.setOptions({
