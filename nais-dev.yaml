@@ -24,7 +24,7 @@ spec:
   prometheus:
     enabled: false
   ingresses:
-    - https://familie.dev.nav.no/familie/alene-med-barn/veiviser
+    - https://familie.ekstern.dev.nav.no/familie/alene-med-barn/veiviser
   resources:
     limits:
       cpu: 1000m
