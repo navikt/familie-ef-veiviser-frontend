@@ -1,4 +1,4 @@
-const sanityClient = require('@sanity/client');
+import sanityClient from '@sanity/client';
 
 const sanityDataset =
   process.env.NODE_ENV === 'development' ||

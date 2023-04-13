@@ -21,6 +21,12 @@ import {
 import styled from 'styled-components';
 import MikroKort from '../mikrokort/MikroKort';
 import { logNavigering, logVeiviserFullført } from '../../utils/amplitude';
+import { device, størrelse } from '../../utils/styles';
+import {
+  AGray100,
+  APurple200,
+  APurple400,
+} from '@navikt/ds-tokens/dist/tokens';
 
 interface IInformasjonstekstProps {
   steg: number;
@@ -37,6 +43,187 @@ export const MikroKortWrapper = styled.div`
   @media all and (max-width: 420px) {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+`;
+
+const InfoBoksContainer = styled.div`
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+
+  background-color: ${AGray100};
+  width: ${størrelse.panelInnholdBredde};
+  min-height: 5rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+
+  @media ${device.tablet} {
+    max-width: ${størrelse.panelInnholdBredde};
+    width: 100%;
+  }
+
+  @media ${device.mobile} {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  hr {
+    margin-top: 4rem;
+    width: 70%;
+    border: solid 0.5px #151515;
+  }
+
+  .liste-element {
+    display: inline;
+    margin-left: 1rem;
+    margin-right: 2rem;
+  }
+
+  .undertittel-flere,
+  .undertittel-singel,
+  .andre-stonader {
+    margin-top: 4rem;
+
+    padding-left: 6rem;
+    padding-right: 6rem;
+
+    @media ${device.mobile} {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    ul {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .undertittel-singel {
+    padding-bottom: 6rem;
+  }
+
+  .bare-brodtekst {
+    margin-top: 0;
+
+    padding-left: 6rem;
+    padding-right: 6rem;
+
+    @media ${device.mobile} {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    &-0 {
+      padding-left: 6rem;
+      padding-right: 6rem;
+
+      @media ${device.mobile} {
+        padding-top: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+  }
+
+  .informasjonsboks-header {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    border-bottom: 0.4rem ${APurple400} solid;
+    background-color: ${APurple200};
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+
+    .ball-ikon {
+      position: absolute;
+      top: 108px;
+      left: 18%;
+
+      @media ${device.mobile} {
+        left: 22%;
+      }
+    }
+
+    .bamse-ikon {
+      position: absolute;
+      top: 98px;
+      left: 13%;
+    }
+
+    .bord-ikon {
+      position: absolute;
+      top: 118px;
+      left: 55%;
+
+      @media ${device.mobile} {
+        left: 35%;
+      }
+    }
+
+    .barn-ikon {
+      position: absolute;
+      top: 54px;
+      left: 70%;
+
+      @media ${device.mobile} {
+        left: 70%;
+      }
+    }
+
+    .barn2-ikon {
+      position: absolute;
+      top: 64px;
+      left: 60%;
+
+      @media ${device.mobile} {
+        left: 50%;
+      }
+    }
+
+    .brodskive-ikon {
+      position: absolute;
+      top: 109px;
+      left: 72%;
+
+      @media ${device.mobile} {
+        left: 73%;
+      }
+    }
+
+    .taateflaske-ikon {
+      position: absolute;
+      top: 95px;
+      left: 59%;
+
+      @media ${device.mobile} {
+        left: 49%;
+      }
+    }
+  }
+
+  .informasjonsboks-innhold {
+    h2 {
+      margin-block-start: 4rem;
+      margin-block-end: 0;
+    }
+
+    .disclaimer {
+      padding: 2rem 6rem 4rem 6rem;
+
+      @media ${device.mobile} {
+        padding-right: 2rem;
+        padding-left: 2rem;
+      }
+    }
+
+    @media ${device.mobile} {
+      padding: 0;
+    }
   }
 `;
 
@@ -130,7 +317,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
           {alert}
         </StyledAlertstripeAdvarsel>
       ) : null}
-      <div className="informasjonsboks blur-in" id={`informasjonsboks-${steg}`}>
+      <InfoBoksContainer className="blur-in" id={`informasjonsboks-${steg}`}>
         <div className="informasjonsboks-header">
           <BallIkon className="ball-ikon" />
           <BamseIkon className="bamse-ikon" />
@@ -183,7 +370,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
             </MikroKort>
           </MikroKortWrapper>
         </InformasjonsboksInnhold>
-      </div>
+      </InfoBoksContainer>
     </>
   );
 };
