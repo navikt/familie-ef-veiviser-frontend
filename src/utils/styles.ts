@@ -5,6 +5,7 @@ export const device = {
 };
 
 export const størrelse = {
-  spørsmålTekstPadding: '3.3rem',
+  panelBredde: '792px',
   panelInnholdBredde: '588px',
+  spørsmålTekstPadding: '3.3rem',
 };

@@ -1,6 +1,5 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-import './index.less';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import smoothscroll from 'smoothscroll-polyfill';
