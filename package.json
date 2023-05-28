@@ -24,7 +24,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
     "smoothscroll-polyfill": "^0.4.4",
-    "styled-components": "^5.3.9",
+    "styled-components": "^5.3.11",
     "typescript": "^5.0.4"
   },
   "overrides": {
