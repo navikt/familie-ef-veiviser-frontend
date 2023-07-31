@@ -23,6 +23,9 @@ spec:
     cpuThresholdPercentage: 50
   accessPolicy:
     outbound:
+      rules:
+        - application: nav-dekoratoren
+          namespace: personbruker
       external:
         - host: nav.no
   env:
