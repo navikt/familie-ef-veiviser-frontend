@@ -13,7 +13,6 @@ spec:
   replicas:
     min: 2
     max: 2
-    cpuThresholdPercentage: 50
   port: 8080
   liveness:
     path: /isAlive
@@ -27,7 +26,6 @@ spec:
     - https://familie.ekstern.dev.nav.no/familie/alene-med-barn/veiviser
   resources:
     limits:
-      cpu: 1000m
       memory: 512Mi
     requests:
       memory: 256Mi
