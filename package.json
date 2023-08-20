@@ -9,7 +9,7 @@
     "@navikt/ds-react": "^4.7.2",
     "@navikt/ds-tokens": "^4.7.2",
     "@navikt/nav-dekoratoren-moduler": "^2.1.1",
-    "@sanity/client": "^6.2.0",
+    "@sanity/client": "^6.4.9",
     "@types/amplitude-js": "^8.16.2",
     "@types/marked": "^5.0.1",
     "@types/react": "^18.2.17",
