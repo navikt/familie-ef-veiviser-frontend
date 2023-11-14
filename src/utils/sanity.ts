@@ -4,7 +4,7 @@ const sanityDataset =
   process.env.NODE_ENV === 'development' ||
   window.location.href.indexOf('.dev.') > -1
     ? 'test'
-    : 'questions';
+    : 'prod-v2023';
 
 export const client = sanityClient({
   projectId: '8wpntadz',
