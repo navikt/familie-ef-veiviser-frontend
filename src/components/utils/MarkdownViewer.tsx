@@ -18,7 +18,9 @@ interface IMarkdownViewerProps {
 }
 
 const MarkdownViewer: React.FC<IMarkdownViewerProps> = ({ markdown }) => {
-  const md = marked.parse(markdown, { renderer: renderer });
+  // Sender vi ikke sender inn async: true i options, så kan ikke returverdien være et Promise.
+  // Caster derfor retur-verdien til string.
+  const md = marked.parse(markdown, { renderer: renderer }) as string;
 
   return <div className="markdown" dangerouslySetInnerHTML={{ __html: md }} />;
 };
