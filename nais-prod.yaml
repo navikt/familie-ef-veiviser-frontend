@@ -6,8 +6,7 @@ metadata:
   labels:
     team: teamfamilie
 spec:
-  image: {{ image }}
-  team: teamfamilie
+  image: "{{ image }}"
   port: 8080
   ingresses:
     - https://www.nav.no/familie/alene-med-barn/veiviser
