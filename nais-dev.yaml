@@ -8,8 +8,7 @@ metadata:
   annotations:
     snorlax.nais.io/enabled: "true"
 spec:
-  image: {{ image }}
-  team: teamfamilie
+  image: "{{ image }}"
   replicas:
     min: 2
     max: 2
