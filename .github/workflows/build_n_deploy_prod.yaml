@@ -8,12 +8,15 @@ on:
 env:
   IMAGE: ghcr.io/navikt/familie-ef-veiviser:${{ github.sha }}
 
+permissions:
+  packages: write
+  id-token: write
+  contents: read
+
 jobs:
   build:
     name: Build and push Docker container
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -44,12 +47,10 @@ jobs:
       - name: Deploy til dev-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: nais-dev.yaml
       - name: Deploy til prod-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
           RESOURCE: nais-prod.yaml
