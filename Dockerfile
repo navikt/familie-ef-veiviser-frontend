@@ -1,4 +1,5 @@
 FROM gcr.io/distroless/nodejs:18
+ENV TZ="Europe/Oslo"
 WORKDIR /app
 COPY src/assets /app/src/assets
 COPY src/backend /app/src/backend
