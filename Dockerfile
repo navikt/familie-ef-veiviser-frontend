@@ -1,7 +1,8 @@
-FROM navikt/node-express:18
-
-ADD ./ /var/server/
-
+FROM gcr.io/distroless/nodejs:18
+WORKDIR /app
+COPY src/assets /app/src/assets
+COPY src/backend /app/src/backend
+COPY node_modules /app/node_modules
+COPY package.json /app/
 EXPOSE 8080
-
-CMD ["node", "src/backend/server.js"]
+CMD ["node", "/app/src/backend/server.js"]
