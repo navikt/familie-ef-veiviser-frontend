@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { BodyShort } from '@navikt/ds-react';
 import { device } from '../../../utils/styles';
-import { ErrorColored, SuccessColored } from '@navikt/ds-icons';
+import ErrorIkon from "../../../assets/icons/ErrorIkon";
+import SuccessIkon from "../../../assets/icons/SuccessIkon";
 
 interface IRettTilListeProps {
   tekster_i_liste: string[];
@@ -49,19 +50,9 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
     ? 'Det ser ikke ut til at du har rett til'
     : 'Du kan ha rett til';
   const ikon = ikke_rett_til ? (
-    <ErrorColored
-      aria-hidden={true}
-      title={'det ser ikke ut til at du har rett til'}
-      width={'1.75rem'}
-      height={'1.75rem'}
-    />
+    <ErrorIkon title={'det ser ikke ut til at du har rett til'} />
   ) : (
-    <SuccessColored
-      aria-hidden={true}
-      title={'du kan ha rett til'}
-      width={'1.75rem'}
-      height={'1.75rem'}
-    />
+    <SuccessIkon title={'du kan ha rett til'} />
   );
   const listeLabel = ikke_rett_til
     ? 'Det ser ikke ut til at du har rett til'
