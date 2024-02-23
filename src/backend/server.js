@@ -7,7 +7,7 @@ const router = express.Router();
 
 app.set('views', path.join(process.cwd(), 'build'));
 
-router.use(express.static(path.join(process.cwd(), 'build'), { index: false }));
+router.use(express.static(path.join(process.cwd(), 'dist'), { index: false }));
 
 router.get('/status', (req, res) => {
   res.status(200).end();

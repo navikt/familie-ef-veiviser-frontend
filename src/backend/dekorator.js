@@ -1,7 +1,7 @@
 const dekorator = require('@navikt/nav-dekoratoren-moduler/ssr');
 const path = require('path');
 
-const env = process.env.NODE_ENV === 'development' ? 'dev' : 'prod';
+const env = import.meta.env.VITE_ENV === 'development' ? 'dev' : 'prod';
 
 const indexHandler = (_, res) => {
   dekorator

@@ -1,7 +1,7 @@
 import sanityClient from '@sanity/client';
 
 const sanityDataset =
-  process.env.NODE_ENV === 'development' ||
+    import.meta.env.VITE_ENV === 'development' ||
   window.location.href.indexOf('.dev.') > -1
     ? 'test'
     : 'prod-v2023';
