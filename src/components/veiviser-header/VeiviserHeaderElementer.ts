@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import MarkdownViewer from '../utils/MarkdownViewer';
-import VeiviserIkon from '../../assets/icons/VeiviserIkon';
+import VeiviserIkon from '../../icons/VeiviserIkon';
 import { device, størrelse } from '../../utils/styles';
 import { AGray900, APurple200 } from '@navikt/ds-tokens/dist/tokens';
 
