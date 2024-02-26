@@ -2,6 +2,7 @@
   "homepage": "/familie/alene-med-barn/veiviser/",
   "name": "veiviser",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@navikt/ds-css": "^6.1.0",

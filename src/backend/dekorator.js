@@ -1,12 +1,13 @@
-const dekorator = require('@navikt/nav-dekoratoren-moduler/ssr');
-const path = require('path');
-const {appEnv} = require("../utils/env");
+import * as dekorator from '@navikt/nav-dekoratoren-moduler/ssr/index.js';
+import path from 'path';
+
+const env = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 
 const indexHandler = (_, res) => {
   dekorator
     .injectDecoratorServerSide({
-      env: appEnv.env,
-      filePath: `${path.join(process.cwd(), 'build')}/index.html`,
+      env: env,
+      filePath: `${path.join(process.cwd(), 'dist')}/index.html`,
     })
     .then((html) => {
       res.send(html);
@@ -17,4 +18,4 @@ const indexHandler = (_, res) => {
       res.status(500).send(error);
     });
 };
-module.exports = indexHandler;
+export default indexHandler;

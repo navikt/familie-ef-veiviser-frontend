@@ -1,5 +1,5 @@
 import sanityClient from '@sanity/client';
-import { appEnv } from './env';
+import appEnv from './env';
 
 export const client = sanityClient({
   projectId: appEnv.sanityConfig.projectId,

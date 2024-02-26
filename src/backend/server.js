@@ -1,24 +1,18 @@
-var path = require('path');
-const express = require('express');
-const indexHandler = require('./dekorator');
+import path from 'path';
+import express from 'express';
+import indexHandler from './dekorator.js';
+
 const app = express();
 const port = 8080;
-const router = express.Router();
 
-app.set('views', path.join(process.cwd(), 'build'));
+app.set('views', path.join(process.cwd(), 'dist'));
 
-router.use(express.static(path.join(process.cwd(), 'dist'), { index: false }));
+app.use(express.static(path.join(process.cwd(), 'dist'), { index: false }));
 
-router.get('/status', (req, res) => {
-  res.status(200).end();
-});
-
-app.get('/status', (req, res) => {
+app.get('/status', (_req, res) => {
   res.status(200).end();
 });
 
 app.use(/^(?!.*\/(internal|static)\/).*$/, indexHandler);
-
-app.use('/familie/alene-med-barn/veiviser', router);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
