@@ -9,5 +9,5 @@ export default defineConfig({
     port: 3000,
     open: true,
   },
-  base: 'familie/alene-med-barn/veiviser',
+  base: '/familie/alene-med-barn/veiviser',
 });
