@@ -20,4 +20,4 @@ const getAppEnvironment = () => {
 };
 
 const appEnv = getAppEnvironment();
-export default { appEnv };
+export default appEnv;
