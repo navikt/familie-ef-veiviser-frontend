@@ -1,6 +1,9 @@
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = window.location.href.includes('www.nav.no');
 
-const getAppEnvironment = () => {
+type SanityConfig = { dataset: string; projectId: string };
+type Environment = { env: string; sanityConfig: SanityConfig };
+
+const getEnvironment = (): Environment => {
   if (isProduction) {
     return {
       env: 'prod',
@@ -19,5 +22,5 @@ const getAppEnvironment = () => {
   };
 };
 
-const appEnv = getAppEnvironment();
+const appEnv = getEnvironment();
 export default appEnv;

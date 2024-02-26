@@ -38,3 +38,5 @@ spec:
   env:
     - name: APP_VERSION
       value: '{{version}}'
+    - name: ENV
+      value: development
