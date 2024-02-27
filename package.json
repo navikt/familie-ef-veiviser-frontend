@@ -2,6 +2,7 @@
   "homepage": "/familie/alene-med-barn/veiviser/",
   "name": "veiviser",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@navikt/ds-css": "^6.1.0",
@@ -21,7 +22,6 @@
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
     "smoothscroll-polyfill": "^0.4.4",
     "styled-components": "^6.1.8",
     "typescript": "^5.3.3"
@@ -30,14 +30,9 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "react-scripts build",
-    "snyk-protect": "snyk protect",
-    "serve": "NODE_ENV=production node src/backend/server.js",
-    "serve:dev": "NODE_ENV=local node src/backend/server.js"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": {
     "production": [
@@ -55,9 +50,12 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/styled-components": "^5.1.34",
+    "@vitejs/plugin-react": "^4.2.1",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
-    "pretty-quick": "^4.0.0"
+    "pretty-quick": "^4.0.0",
+    "vite": "^5.1.4",
+    "vite-tsconfig-paths": "^4.3.1"
   },
   "husky": {
     "hooks": {

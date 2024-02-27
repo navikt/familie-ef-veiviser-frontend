@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { BodyShort } from '@navikt/ds-react';
 import { device } from '../../../utils/styles';
-import ErrorIkon from "../../../assets/icons/ErrorIkon";
-import SuccessIkon from "../../../assets/icons/SuccessIkon";
+import ErrorIkon from "../../../icons/ErrorIkon";
+import SuccessIkon from "../../../icons/SuccessIkon";
 
 interface IRettTilListeProps {
   tekster_i_liste: string[];
