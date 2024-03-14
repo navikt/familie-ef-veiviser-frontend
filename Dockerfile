@@ -15,7 +15,7 @@ ADD src/utils ./src/utils
 
 ADD node_modules ./node_modules
 ADD package.json ./
-ADD public ./build
+ADD build ./build
 
 ENV NODE_ENV production
 
