@@ -1,14 +1,9 @@
 import sanityClient from '@sanity/client';
-
-const sanityDataset =
-  process.env.NODE_ENV === 'development' ||
-  window.location.href.indexOf('.dev.') > -1
-    ? 'test'
-    : 'prod-v2023';
+import appEnv from './environment';
 
 export const client = sanityClient({
-  projectId: '8wpntadz',
-  dataset: sanityDataset,
+  projectId: appEnv.sanityConfig.projectId,
+  dataset: appEnv.sanityConfig.dataset,
   useCdn: true,
 });
 
