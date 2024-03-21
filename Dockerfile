@@ -4,7 +4,7 @@ USER root
 user apprunner
 ENV TZ="Europe/Oslo"
 
-WORKDIR /app
+WORKDIR /
 
 ADD src/backend ./src/backend
 ADD src/components ./src/components
@@ -18,4 +18,4 @@ ADD build ./build
 ENV NODE_ENV production
 
 EXPOSE 8080
-CMD ["--es-module-specifier-resolution=node", "/app/src/backend/server.js"]
+CMD ["--es-module-specifier-resolution=node", "/src/backend/server.js"]
