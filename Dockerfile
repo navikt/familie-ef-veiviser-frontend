@@ -1,13 +1,16 @@
-FROM navikt/node-express:18
+FROM gcr.io/distroless/nodejs:18
 
+USER root
+user apprunner
+ENV TZ="Europe/Oslo"
 WORKDIR /var/server
 
 COPY dist ./dist
 COPY index.html ./index.html
 COPY ./src/backend/server.js ./server.js
-
-ADD ./ /var/server/
+COPY node_modules ./node_modules
+COPY package.json .
 
 EXPOSE 8080
 
-CMD ["node", "server.js"]
+CMD ["--es-module-specifier-resolution=node", "server.js"]
