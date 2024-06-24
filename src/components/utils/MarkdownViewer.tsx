@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import  { marked }  from 'marked';
+import { marked } from 'marked';
 
 const renderer = new marked.Renderer();
 
@@ -8,9 +8,10 @@ marked.setOptions({
   breaks: true,
 });
 
-renderer.link = function(href: string, title: string, text: string) {
-  return `<a target="_blank" rel="noopener noreferrer" href="${href}" title="${title ||
-    text}">${text}</a>`;
+renderer.link = function ({ href, title, text }) {
+  return `<a target="_blank" rel="noopener noreferrer" href="${href}" title="${
+    title || text
+  }">${text}</a>`;
 };
 
 interface IMarkdownViewerProps {
