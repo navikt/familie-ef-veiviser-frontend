@@ -1,10 +1,11 @@
-import sanityClient from '@sanity/client';
+import { createClient } from '@sanity/client';
 import appEnv from './environment';
 
-export const client = sanityClient({
+export const client = createClient({
   projectId: appEnv.sanityConfig.projectId,
   dataset: appEnv.sanityConfig.dataset,
   useCdn: true,
+  apiVersion: '2024-09-23',
 });
 
 export const hentHeaderQuery = '*[_type == $type][0]{ingress, overskrift}';
