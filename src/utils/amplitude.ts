@@ -1,17 +1,31 @@
-import amplitude from 'amplitude-js';
+import * as amplitude from '@amplitude/analytics-browser';
+import { userAgentEnrichmentPlugin } from '@amplitude/plugin-user-agent-enrichment-browser';
 
-const amplitudeInstance = amplitude.getInstance();
-
-amplitudeInstance.init('default', '', {
-  apiEndpoint: 'amplitude.nav.no/collect-auto',
-  saveEvents: false,
-  includeUtm: true,
-  includeReferrer: true,
-  platform: window.location.toString(),
+const uaPlugin = userAgentEnrichmentPlugin({
+  osName: true,
+  osVersion: true,
+  deviceManufacturer: false,
+  deviceModel: false,
 });
 
-function logEvent(eventName: string, eventProperties: any) {
-  amplitudeInstance.logEvent(eventName, eventProperties);
+amplitude.add(uaPlugin);
+
+amplitude.init('default', undefined, {
+  autocapture: {
+    attribution: true,
+    pageViews: true,
+    sessions: false,
+    elementInteractions: false,
+  },
+  defaultTracking: {
+    pageViews: {
+      trackOn: 'attribution',
+    },
+  },
+});
+
+function logEvent(eventType: string, eventProperties: any) {
+  amplitude.track(eventType, eventProperties);
 }
 
 const logEventVeiviser = (eventName: string, eventProperties?: any) => {
