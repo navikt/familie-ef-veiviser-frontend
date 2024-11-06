@@ -11,6 +11,7 @@ const uaPlugin = userAgentEnrichmentPlugin({
 amplitude.add(uaPlugin);
 
 amplitude.init('default', undefined, {
+  serverUrl: 'https://amplitude.nav.no/collect-auto',
   autocapture: {
     attribution: true,
     pageViews: true,
