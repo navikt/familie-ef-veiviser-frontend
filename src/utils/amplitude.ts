@@ -37,6 +37,13 @@ const logEventVeiviser = (eventName: string, eventProperties?: any) => {
   });
 };
 
+export const logSideBesøk = () => {
+  amplitude.track('EF sidevisning veiviser', {
+    sidetittel: document.title || 'Enslig mor eller far - www.nav.no',
+    platform: window.location.toString(),
+  });
+};
+
 export const logStartVeiviser = () => {
   logEventVeiviser('skjema startet');
 };
