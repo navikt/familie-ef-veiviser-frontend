@@ -1,28 +1,8 @@
 import * as amplitude from '@amplitude/analytics-browser';
-import { userAgentEnrichmentPlugin } from '@amplitude/plugin-user-agent-enrichment-browser';
-
-const uaPlugin = userAgentEnrichmentPlugin({
-  osName: true,
-  osVersion: true,
-  deviceManufacturer: false,
-  deviceModel: false,
-});
-
-amplitude.add(uaPlugin);
 
 amplitude.init('default', undefined, {
   serverUrl: 'https://amplitude.nav.no/collect-auto',
-  autocapture: {
-    attribution: true,
-    pageViews: true,
-    sessions: false,
-    elementInteractions: false,
-  },
-  defaultTracking: {
-    pageViews: {
-      trackOn: 'attribution',
-    },
-  },
+  autocapture: true,
 });
 
 function logEvent(eventType: string, eventProperties: any) {
@@ -38,8 +18,8 @@ const logEventVeiviser = (eventName: string, eventProperties?: any) => {
 };
 
 export const logSideBesøk = () => {
-  amplitude.track('EF sidevisning veiviser', {
-    sidetittel: document.title || 'Enslig mor eller far - www.nav.no',
+  amplitude.track('EF Veiviser - sidevisning', {
+    sidetittel: document.title,
     platform: window.location.toString(),
   });
 };
@@ -71,7 +51,7 @@ export const logVeiviserFullført = (
   rett_til?: string[],
   ikke_rett_til?: string[]
 ) => {
-  logEventVeiviser('skjema fullført', {
+  amplitude.track('EF Veiviser - skjema fullført', {
     rett_til,
     ikke_rett_til,
   });

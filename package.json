@@ -6,7 +6,6 @@
   "private": true,
   "dependencies": {
     "@amplitude/analytics-browser": "^2.11.8",
-    "@amplitude/plugin-user-agent-enrichment-browser": "^1.0.1",
     "@navikt/ds-css": "^7.4.2",
     "@navikt/ds-react": "^7.4.2",
     "@navikt/ds-tokens": "^7.1.0",
