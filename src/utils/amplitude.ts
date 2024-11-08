@@ -1,17 +1,12 @@
-import amplitude from 'amplitude-js';
+import * as amplitude from '@amplitude/analytics-browser';
 
-const amplitudeInstance = amplitude.getInstance();
-
-amplitudeInstance.init('default', '', {
-  apiEndpoint: 'amplitude.nav.no/collect-auto',
-  saveEvents: false,
-  includeUtm: true,
-  includeReferrer: true,
-  platform: window.location.toString(),
+amplitude.init('default', undefined, {
+  serverUrl: 'https://amplitude.nav.no/collect-auto',
+  autocapture: true,
 });
 
-function logEvent(eventName: string, eventProperties: any) {
-  amplitudeInstance.logEvent(eventName, eventProperties);
+function logEvent(eventType: string, eventProperties: any) {
+  amplitude.track(eventType, eventProperties);
 }
 
 const logEventVeiviser = (eventName: string, eventProperties?: any) => {
@@ -19,6 +14,13 @@ const logEventVeiviser = (eventName: string, eventProperties?: any) => {
     team_id: 'familie',
     applikasjon: 'ef-veiviser',
     ...eventProperties,
+  });
+};
+
+export const logSideBesøk = () => {
+  amplitude.track('EF Veiviser - sidevisning', {
+    sidetittel: document.title,
+    platform: window.location.toString(),
   });
 };
 
@@ -49,7 +51,7 @@ export const logVeiviserFullført = (
   rett_til?: string[],
   ikke_rett_til?: string[]
 ) => {
-  logEventVeiviser('skjema fullført', {
+  amplitude.track('EF Veiviser - skjema fullført', {
     rett_til,
     ikke_rett_til,
   });

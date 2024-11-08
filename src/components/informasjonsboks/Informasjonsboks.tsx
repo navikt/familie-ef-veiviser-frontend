@@ -20,7 +20,7 @@ import {
 } from './InformasjonsboksElementer';
 import styled from 'styled-components';
 import MikroKort from '../mikrokort/MikroKort';
-import { logNavigering, logVeiviserFullført } from '../../utils/amplitude';
+import { logNavigering } from '../../utils/amplitude';
 import { device, størrelse } from '../../utils/styles';
 import {
   AGray100,
@@ -307,8 +307,6 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
         'Andre stønader og ordninger som kan være aktuelle for deg som er alene med barn'
       )
   );
-
-  logVeiviserFullført(rett_til_liste, ikke_rett_til_liste);
 
   return (
     <>

@@ -16,7 +16,7 @@ import {
 import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils';
 import styled, { createGlobalStyle } from 'styled-components';
 import { device, størrelse } from './utils/styles';
-import { logStartVeiviser } from './utils/amplitude';
+import { logSideBesøk, logStartVeiviser } from './utils/amplitude';
 import { IHeader, tomHeaderTekst } from './models/Header';
 import {
   AGray100,
@@ -217,7 +217,6 @@ const App = () => {
     fetchDisclaimer();
     fetchAlert();
   }, []);
-
   const startVeiviser = () => {
     settStartet(true);
 
@@ -225,6 +224,10 @@ const App = () => {
 
     scrollTilNesteSpørsmal(nesteSpørsmål);
   };
+
+  useEffect(() => {
+    logSideBesøk();
+  }, []);
 
   const skalViseApp = !feil && spørsmålListe && spørsmålListe.length > 0;
 
