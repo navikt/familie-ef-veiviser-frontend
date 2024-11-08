@@ -24,10 +24,11 @@ jobs:
           node-version: '18'
           cache: npm
           registry-url: "https://npm.pkg.github.com"
-      - name: Npm install dev and build
+      - name: Npm install and build and install only runtime dependencies
         run: |
           npm ci
           npm run build
+          npm ci --omit=dev
         env:
           NPM_TOKEN: ${{ secrets.READER_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
