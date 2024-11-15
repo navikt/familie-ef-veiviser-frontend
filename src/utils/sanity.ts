@@ -1,9 +1,8 @@
 import { createClient } from '@sanity/client';
-import appEnv from './environment';
 
 export const client = createClient({
-  projectId: appEnv.sanityConfig.projectId,
-  dataset: appEnv.sanityConfig.dataset,
+  dataset: 'prod-v2023',
+  projectId: '8wpntadz',
   useCdn: true,
   apiVersion: '2024-09-23',
 });
