@@ -1,6 +1,15 @@
 import * as amplitude from '@amplitude/analytics-browser';
 
-amplitude.init('default', undefined, {
+const AMPLITUDE_API_KEY_PROD = '10798841ebeba333b8ece6c046322d76';
+
+const getApiKey = () => {
+  if (!window.location.href.includes('.dev.nav.no')) {
+    return AMPLITUDE_API_KEY_PROD;
+  }
+  return 'default';
+};
+
+amplitude.init(getApiKey(), undefined, {
   serverUrl: 'https://amplitude.nav.no/collect-auto',
   autocapture: true,
 });
@@ -14,13 +23,6 @@ const logEventVeiviser = (eventName: string, eventProperties?: any) => {
     team_id: 'familie',
     applikasjon: 'ef-veiviser',
     ...eventProperties,
-  });
-};
-
-export const logSideBesøk = () => {
-  amplitude.track('EF Veiviser - sidevisning', {
-    sidetittel: document.title,
-    platform: window.location.toString(),
   });
 };
 

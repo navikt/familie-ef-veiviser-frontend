@@ -16,7 +16,7 @@ import {
 import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils';
 import styled, { createGlobalStyle } from 'styled-components';
 import { device, størrelse } from './utils/styles';
-import { logSideBesøk, logStartVeiviser } from './utils/amplitude';
+import { logStartVeiviser } from './utils/amplitude';
 import { IHeader, tomHeaderTekst } from './models/Header';
 import {
   AGray100,
@@ -224,10 +224,6 @@ const App = () => {
 
     scrollTilNesteSpørsmal(nesteSpørsmål);
   };
-
-  useEffect(() => {
-    logSideBesøk();
-  }, []);
 
   const skalViseApp = !feil && spørsmålListe && spørsmålListe.length > 0;
 
