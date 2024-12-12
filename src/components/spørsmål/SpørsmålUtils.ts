@@ -1,13 +1,13 @@
 import {ISpørsmål, ISvar, ISvarstiTilInformasjonsboksMapping} from "../../models/Spørsmål";
 import { RefObject } from 'react';
 
-const scrollTilRef = (ref: RefObject<HTMLDivElement>) => {
+const scrollTilRef = (ref: RefObject<HTMLDivElement | null>) => {
     if (!ref || !ref.current) return;
     window.scrollTo({ top: ref.current!.offsetTop, left: 0, behavior: 'smooth' });
 };
 
 export const scrollTilNesteSpørsmal = (
-    nesteSpørsmål: RefObject<HTMLDivElement>
+    nesteSpørsmål: RefObject<HTMLDivElement | null>
 ) => {
     setTimeout(() => scrollTilRef(nesteSpørsmål), 120);
 };
