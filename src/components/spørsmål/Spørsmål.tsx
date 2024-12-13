@@ -30,7 +30,7 @@ interface ISpørsmålProps {
   spørsmålListe: ISpørsmål[];
   svarstiTilInformasjonsboksMapping: ISvarstiTilInformasjonsboksMapping[];
   startet: boolean;
-  nesteSpørsmål: RefObject<HTMLDivElement>;
+  nesteSpørsmål: RefObject<HTMLDivElement | null>;
   disclaimer?: string;
   alert?: string;
 }
