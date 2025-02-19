@@ -1,22 +1,10 @@
-import * as amplitude from '@amplitude/analytics-browser';
+import { getAmplitudeInstance } from '@navikt/nav-dekoratoren-moduler';
 
-const AMPLITUDE_API_KEY_PROD = '10798841ebeba333b8ece6c046322d76';
+const logger = getAmplitudeInstance('dekoratoren');
 
-const getApiKey = () => {
-  if (!window.location.href.includes('.dev.nav.no')) {
-    return AMPLITUDE_API_KEY_PROD;
-  }
-  return 'default';
+const logEvent = (eventName: string, eventProperties: any) => {
+  logger(eventName, eventProperties);
 };
-
-amplitude.init(getApiKey(), undefined, {
-  serverUrl: 'https://amplitude.nav.no/collect-auto',
-  autocapture: true,
-});
-
-function logEvent(eventType: string, eventProperties: any) {
-  amplitude.track(eventType, eventProperties);
-}
 
 const logEventVeiviser = (eventName: string, eventProperties?: any) => {
   logEvent(eventName, {
@@ -53,7 +41,7 @@ export const logVeiviserFullført = (
   rett_til?: string[],
   ikke_rett_til?: string[]
 ) => {
-  amplitude.track('EF Veiviser - skjema fullført', {
+  logEventVeiviser('EF Veiviser - skjema fullført', {
     rett_til,
     ikke_rett_til,
   });
