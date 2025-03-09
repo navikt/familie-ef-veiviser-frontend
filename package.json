@@ -5,8 +5,8 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "@navikt/ds-css": "^7.14.1",
-    "@navikt/ds-react": "^7.14.1",
+    "@navikt/ds-css": "^7.17.1",
+    "@navikt/ds-react": "^7.17.1",
     "@navikt/ds-tokens": "^7.1.0",
     "@navikt/nav-dekoratoren-moduler": "^3.2.0",
     "@sanity/client": "^6.28.0",
@@ -45,7 +45,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "husky": "^9.1.4",
     "prettier": "^3.5.1",
-    "pretty-quick": "^4.0.0",
+    "pretty-quick": "^4.1.1",
     "vite": "^6.2.0",
     "vite-tsconfig-paths": "^5.1.3"
   },
