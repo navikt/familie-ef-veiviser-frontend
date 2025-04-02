@@ -13,4 +13,4 @@ COPY package.json .
 
 EXPOSE 8080
 
-CMD ["node", "dist-server/server.js"]
+CMD ["--es-module-specifier-resolution=node", "dist-server/server.js"]
