@@ -7,10 +7,12 @@ WORKDIR /var/server
 
 COPY dist ./dist
 COPY index.html ./index.html
-COPY ./src/backend/server.js ./server.js
+COPY ./src/backend/server.ts ./server.ts
 COPY node_modules ./node_modules
 COPY package.json .
 
+RUN npm install -g ts-node
+
 EXPOSE 8080
 
-CMD ["--es-module-specifier-resolution=node", "server.js"]
+CMD ["ts-node", "--esm", "server.ts"]
