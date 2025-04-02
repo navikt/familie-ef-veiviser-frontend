@@ -1,4 +1,4 @@
-import dekorator from '@navikt/nav-dekoratoren-moduler/ssr/index';
+import dekorator from '@navikt/nav-dekoratoren-moduler/ssr/index.js';
 import express, { Request, Response } from 'express';
 import path from 'path';
 
