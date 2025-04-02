@@ -6,10 +6,10 @@ ENV TZ="Europe/Oslo"
 WORKDIR /var/server
 
 COPY dist ./dist
+COPY dist-server ./dist-server
 COPY index.html ./index.html
 COPY node_modules ./node_modules
 COPY package.json .
-
 
 EXPOSE 8080
 
