@@ -1,5 +1,5 @@
 import dekorator from '@navikt/nav-dekoratoren-moduler/ssr/index.js';
-import express, { Request, Response, NextFunction, Express } from 'express';
+import express, { Request, Response, Express } from 'express';
 import path from 'path';
 
 const app = express();
