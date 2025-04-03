@@ -8,15 +8,15 @@ const port = 8080;
 const BASE_PATH = '/familie/alene-med-barn/veiviser';
 const byggmappeFrontend = path.join(process.cwd(), 'dist');
 
-app.get('/isAlive', (_req: Request, res: Response) => {
+app.get(['/isAlive', 'isReady'], (_req: Request, res: Response) => {
   res.status(200).send('Alive');
 });
 
-app.get('/isReady', (_req: Request, res: Response) => {
-  res.status(200).send('Ready');
-});
+const indexHandler = (req: Request, res: Response): void => {
+  if (Object.keys(req.query).length > 0) {
+    res.status(403).send('Forbidden Access.');
+  }
 
-const indexHandler = (_: Request, res: Response): void => {
   dekorator
     .injectDecoratorServerSide({
       env: process.env.ENV === 'production' ? 'prod' : 'dev',
@@ -32,15 +32,6 @@ const indexHandler = (_: Request, res: Response): void => {
     });
 };
 
-const forbiddenHandler = (_: Request, res: Response) => {
-  res.status(403).send('Forbidden Access.');
-};
-
-const forbiddenFallback = (express: Express) => {
-  express.use(`${BASE_PATH}*splat`, forbiddenHandler);
-  return app;
-};
-
 const indexFallback = (express: Express) => {
   express.get(`${BASE_PATH}`, indexHandler);
   return app;
@@ -48,16 +39,11 @@ const indexFallback = (express: Express) => {
 
 app.set('views', byggmappeFrontend);
 
-app.get(`${BASE_PATH}/status`, (_req: Request, res: Response) => {
-  res.status(200).end();
-});
-
 app.use(
   `${BASE_PATH}`,
   express.static(path.join(process.cwd(), 'dist'), { index: false })
 );
 
 indexFallback(app);
-forbiddenFallback(app);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
