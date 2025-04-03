@@ -8,6 +8,14 @@ const port = 8080;
 const BASE_PATH = '/familie/alene-med-barn/veiviser';
 const byggmappeFrontend = path.join(process.cwd(), 'dist');
 
+app.get('/isAlive', (_req: Request, res: Response) => {
+  res.status(200).send('Alive');
+});
+
+app.get('/isReady', (_req: Request, res: Response) => {
+  res.status(200).send('Ready');
+});
+
 const indexHandler = (_: Request, res: Response): void => {
   dekorator
     .injectDecoratorServerSide({
