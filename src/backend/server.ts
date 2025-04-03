@@ -1,5 +1,5 @@
 import dekorator from '@navikt/nav-dekoratoren-moduler/ssr/index.js';
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction, Express } from 'express';
 import path from 'path';
 
 const app = express();
@@ -24,6 +24,20 @@ const indexHandler = (_: Request, res: Response): void => {
     });
 };
 
+const forbiddenHandler = (_: Request, res: Response) => {
+  res.status(403).send('Forbidden Access.');
+};
+
+const forbiddenFallback = (express: Express) => {
+  express.use(`${BASE_PATH}*splat`, forbiddenHandler);
+  return app;
+};
+
+const indexFallback = (express: Express) => {
+  express.get(`${BASE_PATH}`, indexHandler);
+  return app;
+};
+
 app.set('views', byggmappeFrontend);
 
 app.get(`${BASE_PATH}/status`, (_req: Request, res: Response) => {
@@ -35,6 +49,7 @@ app.use(
   express.static(path.join(process.cwd(), 'dist'), { index: false })
 );
 
-app.get(/^(?!.*\/(internal|static)\/).*$/, indexHandler);
+indexFallback(app);
+forbiddenFallback(app);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
