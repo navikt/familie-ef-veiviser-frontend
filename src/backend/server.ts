@@ -8,7 +8,7 @@ const port = 8080;
 const BASE_PATH = '/familie/alene-med-barn/veiviser';
 const byggmappeFrontend = path.join(process.cwd(), 'dist');
 
-app.get(['/isAlive', 'isReady'], (_req: Request, res: Response) => {
+app.get(['/isAlive', '/isReady'], (_req: Request, res: Response) => {
   res.status(200).send('Alive');
 });
 
