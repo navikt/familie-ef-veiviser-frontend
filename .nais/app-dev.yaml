@@ -40,3 +40,11 @@ spec:
       value: '{{version}}'
     - name: ENV
       value: development
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
+    logging:
+      destinations:
+        - id: loki
+        - id: elastic
