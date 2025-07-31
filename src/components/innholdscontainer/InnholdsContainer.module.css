@@ -1,0 +1,8 @@
+.innholdscontainer {
+  background-color: var(--a-white);
+  padding: 3rem;
+
+  @media all and (max-width: 420px) {
+    padding: 1rem;
+  }
+}
