@@ -7,8 +7,6 @@ body {
   margin: 0;
 
   a:focus {
-    color: var(--a-gray-700);
     text-decoration: none;
-    background-color: var(--a-orange-500);
   }
 }

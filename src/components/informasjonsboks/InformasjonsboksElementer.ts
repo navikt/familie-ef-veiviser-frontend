@@ -26,23 +26,3 @@ export const StyledAlertstripeAdvarsel = styled(Alert)`
     }
   }
 `;
-
-export const InformasjonsboksInnhold = styled.div`
-  h2 {
-    margin-block-start: 4rem;
-    margin-block-end: 0;
-  }
-
-  .disclaimer {
-    padding: 2rem 6rem 1rem 6rem;
-
-    @media ${device.mobile} {
-      padding-right: 2rem;
-      padding-left: 2rem;
-    }
-  }
-
-  @media ${device.mobile} {
-    padding: 0;
-  }
-`;

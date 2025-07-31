@@ -7,5 +7,4 @@ export const device = {
 export const størrelse = {
   panelBredde: '792px',
   panelInnholdBredde: '588px',
-  spørsmålTekstPadding: '3.3rem',
 };

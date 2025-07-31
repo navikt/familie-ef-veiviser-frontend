@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
-import { Loader } from '@navikt/ds-react';
+import { Loader, VStack } from '@navikt/ds-react';
 import RettTilListe from './rett-til-liste/RettTilListe';
 import { IInformasjonsboks, IUndertittel } from '../../models/Informasjonsboks';
 import UndertitlerPanel from './UndertitlerPanel';
@@ -12,234 +12,17 @@ import Barn2Ikon from '../../icons/Barn2Ikon';
 import BrodskiveIkon from '../../icons/BrodskiveIkon';
 import TaateflaskeIkon from '../../icons/TaateflaskeIkon';
 import Feilside from '../feilside/Feilside';
-import MarkdownViewer from '../utils/MarkdownViewer';
 import { hentInformasjonsboksQuery } from '../../utils/sanity';
-import {
-  StyledAlertstripeAdvarsel,
-  InformasjonsboksInnhold,
-} from './InformasjonsboksElementer';
-import styled from 'styled-components';
-import MikroKort from '../mikrokort/MikroKort';
+import { StyledAlertstripeAdvarsel } from './InformasjonsboksElementer';
+import { MikroKort } from '../mikrokort/MikroKort';
 import { logNavigering } from '../../utils/amplitude';
-import { device, størrelse } from '../../utils/styles';
-import {
-  AGray100,
-  APurple200,
-  APurple400,
-} from '@navikt/ds-tokens/dist/tokens';
-
+import { Disclaimer } from './Disclaimer';
+import styles from './Informasjonsboks.module.css';
 interface IInformasjonstekstProps {
   steg: number;
   disclaimer?: string;
   alert?: string;
 }
-
-export const MikroKortWrapper = styled.div`
-  padding-left: 6rem;
-  padding-right: 6rem;
-
-  padding-bottom: 3rem;
-
-  @media all and (max-width: 420px) {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-`;
-
-const InfoBoksContainer = styled.div`
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
-
-  background-color: ${AGray100};
-  width: ${størrelse.panelInnholdBredde};
-  min-height: 5rem;
-  margin: 0 auto;
-  margin-top: 4rem;
-
-  animation: blur-in 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-  animation: text-focus-in 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-
-  @keyframes blur-in, text-focus-in {
-    0% {
-      filter: blur(12px);
-      opacity: 0;
-    }
-    100% {
-      filter: blur(0);
-      opacity: 1;
-    }
-  }
-
-  @media ${device.tablet} {
-    max-width: ${størrelse.panelInnholdBredde};
-    width: 100%;
-  }
-
-  @media ${device.mobile} {
-    padding-left: 0;
-    margin-left: 0;
-  }
-
-  ul {
-    padding: 0;
-  }
-
-  hr {
-    margin-top: 4rem;
-    width: 70%;
-    border: solid 0.5px #151515;
-  }
-
-  .liste-element {
-    display: inline;
-    margin-left: 1rem;
-    margin-right: 2rem;
-  }
-
-  .undertittel-flere,
-  .undertittel-singel,
-  .andre-stonader {
-    margin-top: 4rem;
-
-    padding-left: 6rem;
-    padding-right: 6rem;
-
-    @media ${device.mobile} {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-
-    ul {
-      margin-left: 1rem;
-      margin-right: 1rem;
-    }
-  }
-
-  .undertittel-singel {
-    padding-bottom: 6rem;
-  }
-
-  .bare-brodtekst {
-    margin-top: 0;
-
-    padding-left: 6rem;
-    padding-right: 6rem;
-
-    @media ${device.mobile} {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-
-    &-0 {
-      padding-left: 6rem;
-      padding-right: 6rem;
-
-      @media ${device.mobile} {
-        padding-top: 2rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
-      }
-    }
-  }
-
-  .informasjonsboks-header {
-    position: relative;
-    width: 100%;
-    height: 140px;
-    border-bottom: 0.4rem ${APurple400} solid;
-    background-color: ${APurple200};
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    -webkit-border-top-left-radius: 8px;
-    -webkit-border-top-right-radius: 8px;
-
-    .ball-ikon {
-      position: absolute;
-      top: 108px;
-      left: 18%;
-
-      @media ${device.mobile} {
-        left: 22%;
-      }
-    }
-
-    .bamse-ikon {
-      position: absolute;
-      top: 98px;
-      left: 13%;
-    }
-
-    .bord-ikon {
-      position: absolute;
-      top: 118px;
-      left: 55%;
-
-      @media ${device.mobile} {
-        left: 35%;
-      }
-    }
-
-    .barn-ikon {
-      position: absolute;
-      top: 54px;
-      left: 70%;
-
-      @media ${device.mobile} {
-        left: 70%;
-      }
-    }
-
-    .barn2-ikon {
-      position: absolute;
-      top: 64px;
-      left: 60%;
-
-      @media ${device.mobile} {
-        left: 50%;
-      }
-    }
-
-    .brodskive-ikon {
-      position: absolute;
-      top: 109px;
-      left: 72%;
-
-      @media ${device.mobile} {
-        left: 73%;
-      }
-    }
-
-    .taateflaske-ikon {
-      position: absolute;
-      top: 95px;
-      left: 59%;
-
-      @media ${device.mobile} {
-        left: 49%;
-      }
-    }
-  }
-
-  .informasjonsboks-innhold {
-    h2 {
-      margin-block-start: 4rem;
-      margin-block-end: 0;
-    }
-
-    .disclaimer {
-      padding: 2rem 6rem 4rem 6rem;
-
-      @media ${device.mobile} {
-        padding-right: 2rem;
-        padding-left: 2rem;
-      }
-    }
-
-    @media ${device.mobile} {
-      padding: 0;
-    }
-  }
-`;
 
 const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   steg,
@@ -273,7 +56,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   }, [steg]);
 
   if (henter || !(info && info.undertitler)) {
-    return <Loader className="spinner" />;
+    return <Loader className={styles.spinner} />;
   }
 
   if (feil) {
@@ -324,49 +107,55 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
 
   return (
     <>
-      {alert ? (
+      {alert && (
         <StyledAlertstripeAdvarsel variant="warning">
           {alert}
         </StyledAlertstripeAdvarsel>
-      ) : null}
-      <InfoBoksContainer className="blur-in" id={`informasjonsboks-${steg}`}>
-        <div className="informasjonsboks-header">
-          <BallIkon className="ball-ikon" />
-          <BamseIkon className="bamse-ikon" />
-          <BarnIkon className="barn-ikon" />
-          <Barn2Ikon className="barn2-ikon" />
-          <BordIkon className="bord-ikon" />
-          <BrodskiveIkon className="brodskive-ikon" />
-          <TaateflaskeIkon className="taateflaske-ikon" />
+      )}
+
+      <div
+        className={`${styles.informasjonsboksContainer} ${styles.blurIn}`}
+        id={`informasjonsboks-${steg}`}
+      >
+        <div className={styles.informasjonsboksHeader}>
+          <BallIkon className={styles.ballIkon} />
+          <BamseIkon className={styles.bamseIkon} />
+          <BarnIkon className={styles.barnIkon} />
+          <Barn2Ikon className={styles.barn2Ikon} />
+          <BordIkon className={styles.bordIkon} />
+          <BrodskiveIkon className={styles.brodskiveIkon} />
+          <TaateflaskeIkon className={styles.taateflaskeIkon} />
         </div>
-        <InformasjonsboksInnhold>
+        <VStack
+          gap={{ xs: '2', md: '8' }}
+          style={{
+            padding: '0 2rem 1rem 2rem',
+          }}
+        >
           {rett_til_liste.length ? (
             <RettTilListe
               tekster_i_liste={rett_til_liste}
               ikke_rett_til={false}
             />
           ) : null}
-          <UndertitlerPanel
-            undertitler={rett_til_undertitler}
-            antall_undertitler_totalt={info.undertitler.length}
-          />
+
+          <UndertitlerPanel undertitler={rett_til_undertitler} />
+
           {ikke_rett_til_liste.length ? (
             <RettTilListe
               tekster_i_liste={ikke_rett_til_liste}
               ikke_rett_til={true}
             />
           ) : null}
+
           <UndertitlerPanel
             undertitler={ikke_rett_til_undertitler}
             antall_undertitler_totalt={info.undertitler.length}
           />
-          {disclaimer ? (
-            <div className="disclaimer">
-              <MarkdownViewer markdown={disclaimer} />
-            </div>
-          ) : null}
 
-          <MikroKortWrapper>
+          {disclaimer && <Disclaimer tekst={disclaimer} />}
+
+          <div>
             <h3>Les mer om hva du kan ha rett til når du</h3>
             <MikroKort
               href="https://www.nav.no/alene-med-barn"
@@ -380,9 +169,9 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
             >
               Er helt eller delvis alene med barn
             </MikroKort>
-          </MikroKortWrapper>
-        </InformasjonsboksInnhold>
-      </InfoBoksContainer>
+          </div>
+        </VStack>
+      </div>
     </>
   );
 };

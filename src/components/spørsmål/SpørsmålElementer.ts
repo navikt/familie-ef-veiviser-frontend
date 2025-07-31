@@ -4,7 +4,6 @@ import { Panel } from '@navikt/ds-react';
 
 export const Spørsmålstekst = styled.span`
   display: inline-block;
-  padding-left: ${størrelse.spørsmålTekstPadding};
   padding-right: 2rem;
   font-weight: bold;
   font-size: 20px;
@@ -23,7 +22,6 @@ export const Hjelpetekst = styled(Panel)`
   .lesMerPanel {
     &__toggle {
       justify-content: flex-start;
-      padding-left: ${størrelse.spørsmålTekstPadding};
 
       @media ${device.mobile} {
         padding-left: 0;
@@ -52,7 +50,6 @@ export const SpørsmålElement = styled.div`
   margin-top: 4rem;
 
   p {
-    padding-left: ${størrelse.spørsmålTekstPadding};
     max-width: 500px;
 
     margin-top: -0.5rem;
@@ -66,8 +63,6 @@ export const SpørsmålElement = styled.div`
 export const RadioknappWrapper = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
-
-  padding-left: ${størrelse.spørsmålTekstPadding};
 
   .inputPanel {
     margin: 0 auto;

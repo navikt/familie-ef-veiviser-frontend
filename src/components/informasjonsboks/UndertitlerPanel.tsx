@@ -11,21 +11,7 @@ interface IUndertitlerPanelProps {
 
 const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
   undertitler,
-  antall_undertitler_totalt,
-  className,
 }) => {
-  const undertitlerIPanel = undertitler.filter(
-    (undertittel) => undertittel.tekst_i_panel
-  );
-
-  const undertittelClass = className
-    ? className
-    : !undertitlerIPanel.length
-    ? 'bare-brodtekst'
-    : antall_undertitler_totalt && antall_undertitler_totalt > 1
-    ? 'undertittel-flere'
-    : 'undertittel-singel';
-
   const undertitlerMedInnhold = undertitler.filter(
     (undertittel) =>
       undertittel.tekst_i_panel ||
@@ -43,17 +29,11 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
     <>
       {undertitlerMedInnhold.map((undertittel: IUndertittel, i: number) => {
         return (
-          <div
-            className={
-              i === 0 && undertittel.ikke_rett_til
-                ? `${undertittelClass}-0`
-                : undertittelClass
-            }
-            key={i}
-          >
-            {undertittel.tekst_i_panel ? (
+          <div key={i}>
+            {undertittel.tekst_i_panel && (
               <Heading size="small">{undertittel.tekst_i_panel}</Heading>
-            ) : null}
+            )}
+
             {undertittel.brodtekster &&
               undertittel.brodtekster.map(
                 (brodtekst: IBrodtekst, i: number) => {
@@ -69,7 +49,8 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
                   );
                 }
               )}
-            {visKnapp(undertittel) ? (
+
+            {visKnapp(undertittel) && (
               <a
                 href={undertittel.knapp.lenke}
                 target="_blank"
@@ -78,7 +59,7 @@ const UndertitlerPanel: React.FC<IUndertitlerPanelProps> = ({
               >
                 {undertittel.knapp.tekst}
               </a>
-            ) : null}
+            )}
           </div>
         );
       })}
