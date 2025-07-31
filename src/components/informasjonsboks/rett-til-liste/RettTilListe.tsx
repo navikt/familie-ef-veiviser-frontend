@@ -23,11 +23,6 @@ const RettTilListeWrapper = styled.div`
       padding-bottom: 1rem;
     }
   }
-
-  @media ${device.mobile} {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
 `;
 
 const Grid = styled.span`
@@ -48,11 +43,13 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
   const overskrift = ikke_rett_til
     ? 'Det ser ikke ut til at du har rett til'
     : 'Du kan ha rett til';
+
   const ikon = ikke_rett_til ? (
     <ErrorIkon title={'det ser ikke ut til at du har rett til'} />
   ) : (
     <SuccessIkon title={'du kan ha rett til'} />
   );
+
   const listeLabel = ikke_rett_til
     ? 'Det ser ikke ut til at du har rett til'
     : 'Du kan ha rett til';
