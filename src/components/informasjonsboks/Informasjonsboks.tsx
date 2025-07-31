@@ -56,6 +56,20 @@ const InfoBoksContainer = styled.div`
   margin: 0 auto;
   margin-top: 4rem;
 
+  animation: blur-in 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  animation: text-focus-in 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+
+  @keyframes blur-in, text-focus-in {
+    0% {
+      filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+
   @media ${device.tablet} {
     max-width: ${størrelse.panelInnholdBredde};
     width: 100%;

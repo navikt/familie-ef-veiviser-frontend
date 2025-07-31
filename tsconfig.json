@@ -24,6 +24,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "./src/backend/server.ts",
+    "./src/backend/server.ts" , "global.d.ts",
   ]
 }
