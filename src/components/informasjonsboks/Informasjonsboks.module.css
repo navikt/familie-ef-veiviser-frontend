@@ -1,0 +1,128 @@
+.informasjonsboksContainer {
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+
+  background-color: var(--a-gray-100);
+  width: 588px;
+  min-height: 5rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+
+  animation: blurIn 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  animation: text-focus-in 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+
+  @keyframes blurIn, text-focus-in {
+    0% {
+      filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+
+  @media all and (max-width: 959px) {
+    max-width: 588px;
+    width: 100%;
+  }
+
+  @media all and (max-width: 420px) {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  hr {
+    margin-top: 4rem;
+    width: 70%;
+    border: solid 0.5px #151515;
+  }
+
+  .listeElement {
+    display: inline;
+    margin-left: 1rem;
+    margin-right: 2rem;
+  }
+
+  .informasjonsboksHeader {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    border-bottom: 0.4rem var(--a-purple-400) solid;
+    background-color: var(--a-purple-200);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+
+    .ballIkon {
+      position: absolute;
+      top: 108px;
+      left: 18%;
+
+      @media all and (max-width: 420px) {
+        left: 22%;
+      }
+    }
+
+    .bamseIkon {
+      position: absolute;
+      top: 98px;
+      left: 13%;
+    }
+
+    .bordIkon {
+      position: absolute;
+      top: 118px;
+      left: 55%;
+
+      @media all and (max-width: 420px) {
+        left: 35%;
+      }
+    }
+
+    .barnIkon {
+      position: absolute;
+      top: 54px;
+      left: 70%;
+
+      @media all and (max-width: 420px) {
+        left: 70%;
+      }
+    }
+
+    .barn2Ikon {
+      position: absolute;
+      top: 64px;
+      left: 60%;
+
+      @media all and (max-width: 420px) {
+        left: 50%;
+      }
+    }
+
+    .brodskiveIkon {
+      position: absolute;
+      top: 109px;
+      left: 72%;
+
+      @media all and (max-width: 420px) {
+        left: 73%;
+      }
+    }
+
+    .taateflaskeIkon {
+      position: absolute;
+      top: 95px;
+      left: 59%;
+
+      @media all and (max-width: 420px) {
+        left: 49%;
+      }
+    }
+  }
+}

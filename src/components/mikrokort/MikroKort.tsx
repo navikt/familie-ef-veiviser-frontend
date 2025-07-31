@@ -1,45 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import {
-  ABorderAction,
-  ABorderFocus,
-  AOrange200,
-  ATextAction,
-  ATextDefault,
-  ASurfaceAction,
-  AWhite,
-} from '@navikt/ds-tokens/dist/tokens';
-
-const StyledMikroKort = styled.a`
-  border-radius: 1rem;
-  color: ${ATextDefault};
-  display: inline-flex;
-  padding: 0.25rem 0.5rem;
-  text-decoration: none;
-  background-color: ${AOrange200};
-  border: 1px solid transparent;
-  font-weight: bold;
-  font-size: 14px;
-
-  &:hover {
-    background-color: ${AWhite};
-    border-color: ${ABorderAction};
-    color: ${ATextAction};
-    transition: 0.3s;
-    cursor: pointer;
-  }
-
-  &:focus-visible {
-    background-color: ${AOrange200};
-    color: ${ATextDefault};
-    outline: 3px solid ${ABorderFocus};
-  }
-
-  &:active {
-    background-color: ${ASurfaceAction};
-    color: ${AWhite};
-  }
-`;
+import { Chips } from '@navikt/ds-react';
 
 interface MikroKortProps {
   href: string;
@@ -47,12 +7,20 @@ interface MikroKortProps {
   onClick?: () => void;
 }
 
-const MikroKort = ({ href, children, onClick, ...rest }: MikroKortProps) => {
+export const MikroKort = ({ href, children, onClick }: MikroKortProps) => {
   return (
-    <StyledMikroKort href={href} onClick={onClick} {...rest}>
-      {children}
-    </StyledMikroKort>
+    <>
+      <Chips style={{ padding: '0' }}>
+        <Chips.Toggle
+          key={'1'}
+          onClick={onClick}
+          checkmark={false}
+          as="a"
+          href={href}
+        >
+          {children}
+        </Chips.Toggle>
+      </Chips>
+    </>
   );
 };
-
-export default MikroKort;

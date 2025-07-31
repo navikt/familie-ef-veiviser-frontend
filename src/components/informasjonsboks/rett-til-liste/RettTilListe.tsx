@@ -24,8 +24,6 @@ const RettTilListeWrapper = styled.div`
     }
   }
 
-  padding-left: 6rem;
-
   @media ${device.mobile} {
     padding-left: 2rem;
     padding-right: 2rem;

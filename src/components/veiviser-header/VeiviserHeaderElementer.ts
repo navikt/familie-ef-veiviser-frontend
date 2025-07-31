@@ -4,18 +4,6 @@ import VeiviserIkon from '../../icons/VeiviserIkon';
 import { device, størrelse } from '../../utils/styles';
 import { AGray900, APurple200 } from '@navikt/ds-tokens/dist/tokens';
 
-export const MikroKortWrapper = styled.div`
-  padding-left: 3rem;
-
-  @media ${device.mobile} {
-    padding-left: 0;
-  }
-
-  @media ${device.tablet} {
-    padding-left: 0;
-  }
-`;
-
 export const VeiviserHeader = styled.div`
   @media ${device.mobile} {
     padding-left: 2rem;
@@ -28,8 +16,6 @@ export const VeiviserHeader = styled.div`
   }
 
   p {
-    padding-left: ${størrelse.spørsmålTekstPadding};
-
     width: ${størrelse.panelInnholdBredde};
     font-size: 20px;
 
@@ -53,8 +39,6 @@ export const VeiviserHeader = styled.div`
   }
 
   ul {
-    padding-left: 4.5rem;
-
     @media ${device.tablet} {
       width: 100%;
       margin: 0 auto;
@@ -81,8 +65,6 @@ export const StyledVeiviserIkon = styled(VeiviserIkon)`
 
 export const Ingress = styled(MarkdownViewer)`
   ul {
-    padding-left: 4.5rem;
-
     @media ${device.tablet} {
       width: 100%;
       margin: 0 auto;
