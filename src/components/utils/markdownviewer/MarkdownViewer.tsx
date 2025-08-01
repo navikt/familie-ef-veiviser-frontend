@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { marked } from 'marked';
+import styles from './MarkdownViewer.module.css';
 
 const renderer = new marked.Renderer();
 
@@ -18,22 +18,17 @@ interface IMarkdownViewerProps {
   markdown: string;
 }
 
-const MarkdownViewer: React.FC<IMarkdownViewerProps> = ({ markdown }) => {
+export const MarkdownViewer: React.FC<IMarkdownViewerProps> = ({
+  markdown,
+}) => {
   // Sender vi ikke sender inn async: true i options, så kan ikke returverdien være et Promise.
   // Caster derfor retur-verdien til string.
   const md = marked.parse(markdown, { renderer: renderer }) as string;
 
-  return <div className="markdown" dangerouslySetInnerHTML={{ __html: md }} />;
+  return (
+    <div
+      className={`markdown ${styles.markdownViewer}`}
+      dangerouslySetInnerHTML={{ __html: md }}
+    />
+  );
 };
-
-const StyledMarkdownViewer = styled(MarkdownViewer)`
-  p {
-    margin-top: 1rem;
-
-    a {
-      margin-bottom: 200px;
-    }
-  }
-`;
-
-export default StyledMarkdownViewer;

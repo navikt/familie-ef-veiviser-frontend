@@ -1,50 +1,5 @@
 import styled from 'styled-components';
 import { device, størrelse } from '../../utils/styles';
-import { Panel } from '@navikt/ds-react';
-
-export const Spørsmålstekst = styled.span`
-  display: inline-block;
-  padding-right: 2rem;
-  font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-
-  @media ${device.tablet} {
-    padding: 0;
-  }
-
-  @media ${device.mobile} {
-    padding: 0;
-  }
-`;
-
-export const Hjelpetekst = styled(Panel)`
-  .lesMerPanel {
-    &__toggle {
-      justify-content: flex-start;
-
-      @media ${device.mobile} {
-        padding-left: 0;
-      }
-    }
-
-    &__togglelink {
-      flex-direction: row-reverse;
-
-      .chevron--ned {
-        margin-top: 0.2rem;
-      }
-
-      .chevron--opp {
-        margin-top: 0.3rem;
-      }
-    }
-
-    &__toggleTekst {
-      font-size: 16px;
-    }
-  }
-`;
 
 export const SpørsmålElement = styled.div`
   margin-top: 4rem;

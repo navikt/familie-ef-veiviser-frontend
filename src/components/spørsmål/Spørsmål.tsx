@@ -4,8 +4,8 @@ import {
   ISvar,
   ISvarstiTilInformasjonsboksMapping,
 } from '../../models/Spørsmål';
-import { Radio, RadioGroup } from '@navikt/ds-react';
-import Informasjonsboks from '../informasjonsboks/Informasjonsboks';
+import { BodyShort, Box, Radio, RadioGroup } from '@navikt/ds-react';
+import { Informasjonsboks } from '../informasjonsboks/Informasjonsboks';
 import {
   besvarteSvar,
   finnInformasjonsboksMedFlestMatchendeSvar,
@@ -13,13 +13,8 @@ import {
   hoppTilSpørsmål,
   scrollTilNesteSpørsmal,
 } from './SpørsmålUtils';
-import MarkdownViewer from '../utils/MarkdownViewer';
-import {
-  Hjelpetekst,
-  RadioknappWrapper,
-  SpørsmålElement,
-  Spørsmålstekst,
-} from './SpørsmålElementer';
+import { MarkdownViewer } from '../utils/markdownviewer/MarkdownViewer';
+import { RadioknappWrapper, SpørsmålElement } from './SpørsmålElementer';
 import { logSpørsmålBesvart } from '../../utils/amplitude';
 
 interface ISpørsmålProps {
@@ -112,16 +107,22 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
             {index === spørsmålSti.length - 1 && !ferdig ? (
               <div ref={nesteSpørsmål} />
             ) : null}
-            <Spørsmålstekst id={spørsmål.sporsmal_tekst}>
+            <BodyShort
+              size="large"
+              weight="semibold"
+              id={spørsmål.sporsmal_tekst}
+            >
               {spørsmål.sporsmal_tekst}
-            </Spørsmålstekst>
+            </BodyShort>
+
             {spørsmål &&
-            spørsmål.hjelpetekst_overskrift &&
-            spørsmål.hjelpetekst ? (
-              <Hjelpetekst apneTekst={spørsmål.hjelpetekst_overskrift}>
-                <MarkdownViewer markdown={spørsmål.hjelpetekst} />
-              </Hjelpetekst>
-            ) : null}
+              spørsmål.hjelpetekst_overskrift &&
+              spørsmål.hjelpetekst && (
+                <Box padding={'4'}>
+                  <MarkdownViewer markdown={spørsmål.hjelpetekst} />
+                </Box>
+              )}
+
             <RadioGroup legend={spørsmål.sporsmal_tekst} hideLegend={true}>
               {spørsmål.svarliste.map((svar: ISvar) => {
                 return (
@@ -145,12 +146,13 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
           </SpørsmålElement>
         );
       })}
-      {ferdig ? (
+
+      {ferdig && (
         <>
           <div ref={nesteSpørsmål} />
           <Informasjonsboks steg={steg} disclaimer={disclaimer} alert={alert} />
         </>
-      ) : null}
+      )}
     </div>
   );
 };

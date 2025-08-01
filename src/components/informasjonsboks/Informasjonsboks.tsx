@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { client } from '../../utils/sanity';
-import { Loader, VStack } from '@navikt/ds-react';
+import { Alert, Loader, VStack } from '@navikt/ds-react';
 import RettTilListe from './rett-til-liste/RettTilListe';
 import { IInformasjonsboks, IUndertittel } from '../../models/Informasjonsboks';
 import UndertitlerPanel from './UndertitlerPanel';
@@ -13,7 +13,6 @@ import BrodskiveIkon from '../../icons/BrodskiveIkon';
 import TaateflaskeIkon from '../../icons/TaateflaskeIkon';
 import Feilside from '../feilside/Feilside';
 import { hentInformasjonsboksQuery } from '../../utils/sanity';
-import { StyledAlertstripeAdvarsel } from './InformasjonsboksElementer';
 import { MikroKort } from '../mikrokort/MikroKort';
 import { logNavigering } from '../../utils/amplitude';
 import { Disclaimer } from './Disclaimer';
@@ -24,7 +23,7 @@ interface IInformasjonstekstProps {
   alert?: string;
 }
 
-const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
+export const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
   steg,
   disclaimer,
   alert,
@@ -107,11 +106,7 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
 
   return (
     <>
-      {alert && (
-        <StyledAlertstripeAdvarsel variant="warning">
-          {alert}
-        </StyledAlertstripeAdvarsel>
-      )}
+      {alert && <Alert variant="warning">{alert}</Alert>}
 
       <div
         className={`${styles.informasjonsboksContainer} ${styles.blurIn}`}
@@ -175,5 +170,3 @@ const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
     </>
   );
 };
-
-export default Informasjonsboks;
