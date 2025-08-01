@@ -1,40 +1,14 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { BodyShort } from '@navikt/ds-react';
-import { device } from '../../../utils/styles';
 import ErrorIkon from '../../../icons/ErrorIkon';
 import SuccessIkon from '../../../icons/SuccessIkon';
 import { logVeiviserFullført } from '../../../utils/amplitude';
+import styles from './RettTilListe.module.css';
 
 interface IRettTilListeProps {
   tekster_i_liste: string[];
   ikke_rett_til: boolean;
 }
-
-const RettTilListeWrapper = styled.div`
-  ul {
-    list-style-type: none;
-
-    li {
-      padding-bottom: 0;
-    }
-
-    li:not(:last-child) {
-      padding-bottom: 1rem;
-    }
-  }
-`;
-
-const Grid = styled.span`
-  display: inline-grid;
-  grid-template-columns: 1.75rem auto;
-  align-items: center;
-  column-gap: 1rem;
-`;
-
-const ListeElement = styled(BodyShort)`
-  display: inline;
-`;
 
 const RettTilListe: React.FC<IRettTilListeProps> = ({
   tekster_i_liste,
@@ -64,19 +38,19 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
   });
 
   return (
-    <RettTilListeWrapper>
+    <div>
       <h2>{overskrift}</h2>
-      <ul aria-label={listeLabel}>
+      <ul aria-label={listeLabel} className={styles.rettTilListe}>
         {tekster_i_liste.map((tekst: string) => (
           <li key={tekst}>
-            <Grid>
+            <span className={styles.grid}>
               {ikon}
-              <ListeElement>{tekst}</ListeElement>
-            </Grid>
+              <BodyShort>{tekst}</BodyShort>
+            </span>
           </li>
         ))}
       </ul>
-    </RettTilListeWrapper>
+    </div>
   );
 };
 

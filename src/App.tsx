@@ -96,7 +96,6 @@ const App = () => {
           }
         })
         .catch((err: Error) => {
-          console.error('Oh no, feil occured: ', err);
           settFeil(true);
         })
         .finally(() => settHenter(false));

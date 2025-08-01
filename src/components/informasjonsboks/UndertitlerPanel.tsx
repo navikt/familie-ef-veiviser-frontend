@@ -1,6 +1,6 @@
 import React from 'react';
 import { IUndertittel, IBrodtekst } from '../../models/Informasjonsboks';
-import MarkdownViewer from '../utils/MarkdownViewer';
+import { MarkdownViewer } from '../utils/markdownviewer/MarkdownViewer';
 import { Heading } from '@navikt/ds-react';
 
 interface IUndertitlerPanelProps {
