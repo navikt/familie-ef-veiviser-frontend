@@ -14,8 +14,8 @@ import {
   scrollTilNesteSpørsmal,
 } from './SpørsmålUtils';
 import { MarkdownViewer } from '../utils/markdownviewer/MarkdownViewer';
-import { RadioknappWrapper, SpørsmålElement } from './SpørsmålElementer';
 import { logSpørsmålBesvart } from '../../utils/amplitude';
+import styles from './Spørsmål.module.css';
 
 interface ISpørsmålProps {
   steg: number;
@@ -103,7 +103,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     <div>
       {spørsmålSti.map((spørsmål: ISpørsmål, index: number) => {
         return (
-          <div key={spørsmål._id}>
+          <div className={styles.spørsmålElement} key={spørsmål._id}>
             {index === spørsmålSti.length - 1 && !ferdig ? (
               <div ref={nesteSpørsmål} />
             ) : null}
