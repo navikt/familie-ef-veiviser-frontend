@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Spørsmål from './components/spørsmål/Spørsmål';
 import { Button, Loader, Heading, VStack } from '@navikt/ds-react';
 import Feilside from './components/feilside/Feilside';
-import Header from './components/veiviser-header/Header';
+import { Header } from './components/veiviser-header/Header';
 import {
   client,
   hentHeaderQuery,

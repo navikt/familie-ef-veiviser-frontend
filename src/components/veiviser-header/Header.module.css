@@ -1,0 +1,17 @@
+.veiviserIkon {
+  margin: 0 auto;
+  background-color: var(--a-purple-200);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.veiviserHeader {
+  ul {
+    padding: 0 0 0 1.1rem;
+
+    li {
+      padding-bottom: 0.5rem;
+    }
+  }
+}

@@ -2,7 +2,15 @@
   background-color: var(--a-white);
   padding: 3rem 4rem;
 
+  p {
+    font-size: 20px;
+  }
+
   @media all and (max-width: 420px) {
     padding: 1rem;
+  }
+
+  @media all and (min-width: 1024px) {
+    max-width: 830px;
   }
 }

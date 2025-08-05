@@ -103,7 +103,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     <div>
       {spørsmålSti.map((spørsmål: ISpørsmål, index: number) => {
         return (
-          <SpørsmålElement key={spørsmål._id}>
+          <div key={spørsmål._id}>
             {index === spørsmålSti.length - 1 && !ferdig ? (
               <div ref={nesteSpørsmål} />
             ) : null}
@@ -126,7 +126,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
             <RadioGroup legend={spørsmål.sporsmal_tekst} hideLegend={true}>
               {spørsmål.svarliste.map((svar: ISvar) => {
                 return (
-                  <RadioknappWrapper key={svar._id}>
+                  <div key={svar._id}>
                     <Radio
                       value={svar.tekst}
                       onKeyDown={(e) =>
@@ -139,11 +139,11 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
                     >
                       {svar.tekst}
                     </Radio>
-                  </RadioknappWrapper>
+                  </div>
                 );
               })}
             </RadioGroup>
-          </SpørsmålElement>
+          </div>
         );
       })}
 
