@@ -5,11 +5,11 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "@navikt/ds-css": "^7.32.0",
-    "@navikt/ds-react": "^7.32.0",
+    "@navikt/ds-css": "^7.34.0",
+    "@navikt/ds-react": "^7.34.0",
     "@navikt/ds-tokens": "^7.32.0",
-    "@navikt/nav-dekoratoren-moduler": "^3.5.0",
-    "@sanity/client": "^7.12.0",
+    "@navikt/nav-dekoratoren-moduler": "^3.6.0",
+    "@sanity/client": "^7.13.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
     "express": "^5.1.0",
@@ -43,7 +43,7 @@
     "prettier": "^3.6.2",
     "pretty-quick": "^4.2.2",
     "typescript": "^5.9.2",
-    "vite": "^7.1.7",
+    "vite": "^7.2.4",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "husky": {
