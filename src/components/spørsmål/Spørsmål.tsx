@@ -95,12 +95,6 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     scroll && scrollTilNesteSpørsmal(nesteSpørsmål);
   };
 
-  const museklikk = (xKoordinat: number, yKoordinat: number) =>
-    xKoordinat !== 0 && yKoordinat !== 0;
-
-  const valgtVedTastetrykk = (knapp: string) =>
-    knapp === 'Space' || knapp === 'Enter';
-
   return (
     <div>
       {spørsmålSti.map((spørsmål: ISpørsmål, index: number) => {
