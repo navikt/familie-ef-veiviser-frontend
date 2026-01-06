@@ -4,7 +4,7 @@ import {
   ISvar,
   ISvarstiTilInformasjonsboksMapping,
 } from '../../models/Spørsmål';
-import { BodyShort, Box, Radio, RadioGroup } from '@navikt/ds-react';
+import { Box, Radio, RadioGroup } from '@navikt/ds-react';
 import { Informasjonsboks } from '../informasjonsboks/Informasjonsboks';
 import {
   besvarteSvar,
@@ -26,12 +26,14 @@ interface ISpørsmålProps {
   svarstiTilInformasjonsboksMapping: ISvarstiTilInformasjonsboksMapping[];
   startet: boolean;
   nesteSpørsmål: RefObject<HTMLDivElement | null>;
+  førsteSpørsmål: RefObject<HTMLFieldSetElement | null>;
   disclaimer?: string;
   alert?: string;
 }
 
 const Spørsmål: React.FC<ISpørsmålProps> = ({
   nesteSpørsmål,
+  førsteSpørsmål,
   spørsmålListe,
   steg,
   settSteg,
@@ -107,13 +109,6 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
             {index === spørsmålSti.length - 1 && !ferdig ? (
               <div ref={nesteSpørsmål} />
             ) : null}
-            <BodyShort
-              size="large"
-              weight="semibold"
-              id={spørsmål.sporsmal_tekst}
-            >
-              {spørsmål.sporsmal_tekst}
-            </BodyShort>
 
             {spørsmål &&
               spørsmål.hjelpetekst_overskrift &&
@@ -123,23 +118,23 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
                 </Box>
               )}
 
-            <RadioGroup legend={spørsmål.sporsmal_tekst} hideLegend={true}>
+            <RadioGroup
+              legend={spørsmål.sporsmal_tekst}
+              ref={index === 0 ? førsteSpørsmål : null}
+              tabIndex={index === 0 ? -1 : undefined}
+              value={spørsmål.svarliste.find((s) => s.checked)?.tekst}
+              onChange={(val: string) => {
+                const svar = spørsmål.svarliste.find((s) => s.tekst === val);
+                if (svar) {
+                  klikkPåSvar(spørsmål, svar, true);
+                }
+              }}
+            >
               {spørsmål.svarliste.map((svar: ISvar) => {
                 return (
-                  <div key={svar._id}>
-                    <Radio
-                      value={svar.tekst}
-                      onKeyDown={(e) =>
-                        klikkPåSvar(spørsmål, svar, valgtVedTastetrykk(e.code))
-                      }
-                      onClick={(e) =>
-                        museklikk(e.clientX, e.clientY) &&
-                        klikkPåSvar(spørsmål, svar, true)
-                      }
-                    >
-                      {svar.tekst}
-                    </Radio>
-                  </div>
+                  <Radio key={svar._id} value={svar.tekst}>
+                    {svar.tekst}
+                  </Radio>
                 );
               })}
             </RadioGroup>

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { BodyShort } from '@navikt/ds-react';
+import { Heading, HStack, List, VStack } from '@navikt/ds-react';
 import ErrorIkon from '../../../icons/ErrorIkon';
 import SuccessIkon from '../../../icons/SuccessIkon';
 import { logVeiviserFullført } from '../../../utils/amplitude';
-import styles from './RettTilListe.module.css';
 
 interface IRettTilListeProps {
   tekster_i_liste: string[];
@@ -39,17 +38,18 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
 
   return (
     <div>
-      <h2>{overskrift}</h2>
-      <ul aria-label={listeLabel} className={styles.rettTilListe}>
+      <HStack gap={'2'}>
+        {ikon}
+        <Heading size="medium" level="3">
+          {overskrift}
+        </Heading>
+      </HStack>
+
+      <List as="ul" aria-label={listeLabel} size="large">
         {tekster_i_liste.map((tekst: string) => (
-          <li key={tekst}>
-            <span className={styles.grid}>
-              {ikon}
-              <BodyShort>{tekst}</BodyShort>
-            </span>
-          </li>
+          <List.Item key={tekst}>{tekst}</List.Item>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
