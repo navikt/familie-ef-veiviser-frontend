@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Spørsmål from './components/spørsmål/Spørsmål';
-import { Button, Loader, Heading, VStack } from '@navikt/ds-react';
+import { Button, Loader, VStack } from '@navikt/ds-react';
 import Feilside from './components/feilside/Feilside';
 import { Header } from './components/veiviser-header/Header';
 import {
@@ -17,7 +17,6 @@ import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils
 import { logStartVeiviser } from './utils/amplitude';
 import { IHeader, tomHeaderTekst } from './models/Header';
 import { InnholdsContainer } from './components/innholdscontainer/InnholdsContainer';
-import styles from './App.module.css';
 import './global.css';
 
 const App = () => {
@@ -34,6 +33,7 @@ const App = () => {
   ] = useState<ISvarstiTilInformasjonsboksMapping[]>([]);
   const [startet, settStartet] = useState<boolean>(false);
   const nesteSpørsmål = useRef(null);
+  const førsteSpørsmål = useRef<HTMLFieldSetElement>(null);
   const [headerTekst, settHeaderTekst] = useState<IHeader>(tomHeaderTekst);
 
   useEffect(() => {
@@ -113,7 +113,11 @@ const App = () => {
 
     logStartVeiviser();
 
-    scrollTilNesteSpørsmal(nesteSpørsmål);
+    setTimeout(() => {
+      if (førsteSpørsmål.current) {
+        førsteSpørsmål.current.focus();
+      }
+    }, 150);
   };
 
   const skalViseApp = !feil && spørsmålListe && spørsmålListe.length > 0;
@@ -127,45 +131,51 @@ const App = () => {
   }
 
   return (
-    <React.Fragment>
-      <VStack justify={'center'} align={'center'}>
-        <div className={styles.sideHeader}>
-          <Heading size="xlarge">Hva kan du få?</Heading>
-        </div>
-        <div className={styles.innholdspanel}>
-          <InnholdsContainer>
-            <Header tekst={headerTekst} />
+    <>
+      <VStack
+        justify={'center'}
+        align={'center'}
+        style={{
+          marginTop: '5rem',
+          marginBottom: '8rem',
+        }}
+      >
+        <InnholdsContainer>
+          <Header tekst={headerTekst} />
 
-            {!startet && (
-              <div className={styles.knappwrapper}>
-                <Button
-                  variant="primary"
-                  className={styles.startknapp}
-                  onClick={startVeiviser}
-                >
-                  Start veiviseren
-                </Button>
-              </div>
-            )}
+          {!startet && (
+            <div>
+              <Button
+                variant="primary"
+                onClick={startVeiviser}
+                style={{
+                  marginTop: '1.5rem',
+                  textAlign: 'center',
+                }}
+              >
+                Start veiviseren
+              </Button>
+            </div>
+          )}
 
-            <Spørsmål
-              nesteSpørsmål={nesteSpørsmål}
-              startet={startet}
-              spørsmålListe={spørsmålListe}
-              settSteg={settSteg}
-              settFerdig={settFerdig}
-              ferdig={ferdig}
-              steg={steg}
-              svarstiTilInformasjonsboksMapping={
-                svarstiTilInformasjonsboksMapping
-              }
-              disclaimer={disclaimer}
-              alert={alert}
-            />
-          </InnholdsContainer>
-        </div>
+          <Spørsmål
+            nesteSpørsmål={nesteSpørsmål}
+            førsteSpørsmål={førsteSpørsmål}
+            startet={startet}
+            spørsmålListe={spørsmålListe}
+            settSteg={settSteg}
+            settFerdig={settFerdig}
+            ferdig={ferdig}
+            steg={steg}
+            svarstiTilInformasjonsboksMapping={
+              svarstiTilInformasjonsboksMapping
+            }
+            disclaimer={disclaimer}
+            alert={alert}
+          />
+        </InnholdsContainer>
       </VStack>
-    </React.Fragment>
+    </>
   );
 };
 

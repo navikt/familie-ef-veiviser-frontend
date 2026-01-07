@@ -124,7 +124,7 @@ export const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
         <VStack
           gap={{ xs: '2', md: '8' }}
           style={{
-            padding: '0 2rem 1rem 2rem',
+            padding: '1rem 2rem',
           }}
         >
           {rett_til_liste.length ? (
