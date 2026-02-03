@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@navikt/ds-css": "7.40.0",
-    "@navikt/ds-react": "7.40.0",
+    "@navikt/ds-react": "8.2.0",
     "@navikt/ds-tokens": "7.40.0",
     "@navikt/nav-dekoratoren-moduler": "3.6.1",
     "@sanity/client": "7.14.1",
