@@ -18,6 +18,7 @@ import { logStartVeiviser } from './utils/amplitude';
 import { IHeader, tomHeaderTekst } from './models/Header';
 import { InnholdsContainer } from './components/innholdscontainer/InnholdsContainer';
 import './global.css';
+import { InfoNyRegelverksendring } from './components/InfoNyRegelverksendring';
 
 const App = () => {
   const [spørsmålListe, settSpørsmålListe] = useState<ISpørsmål[]>([]);
@@ -143,6 +144,7 @@ const App = () => {
         <InnholdsContainer>
           <Header tekst={headerTekst} />
 
+          <InfoNyRegelverksendring />
           {!startet && (
             <div>
               <Button
