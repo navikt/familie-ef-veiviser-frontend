@@ -1,7 +1,5 @@
-FROM gcr.io/distroless/nodejs24-debian12
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:24-slim
 
-USER root
-USER apprunner
 ENV TZ="Europe/Oslo"
 WORKDIR /var/server
 
