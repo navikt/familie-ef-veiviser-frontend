@@ -14,7 +14,7 @@
     "@navikt/ds-react": "7.40.0",
     "@navikt/ds-tokens": "7.40.0",
     "@navikt/nav-dekoratoren-moduler": "3.7.1",
-    "@sanity/client": "7.20.0",
+    "@sanity/client": "7.22.0",
     "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
     "express": "5.2.1",
