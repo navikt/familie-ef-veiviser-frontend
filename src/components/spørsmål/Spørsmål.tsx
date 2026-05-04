@@ -14,7 +14,6 @@ import {
   scrollTilNesteSpørsmal,
 } from './SpørsmålUtils';
 import { MarkdownViewer } from '../utils/markdownviewer/MarkdownViewer';
-import { logSpørsmålBesvart } from '../../utils/amplitude';
 import styles from './Spørsmål.module.css';
 
 interface ISpørsmålProps {
@@ -61,8 +60,6 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
   ): void => {
     svar.checked = true;
 
-    logSpørsmålBesvart(spørsmål.sporsmal_tekst, svar.tekst);
-
     if (svar.done) {
       settFerdig(true);
     } else {
@@ -107,7 +104,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
             {spørsmål &&
               spørsmål.hjelpetekst_overskrift &&
               spørsmål.hjelpetekst && (
-                <Box padding={'4'}>
+                <Box padding={'space-8'}>
                   <MarkdownViewer markdown={spørsmål.hjelpetekst} />
                 </Box>
               )}

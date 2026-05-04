@@ -13,8 +13,6 @@ import {
   ISvarstiTilInformasjonsboksMapping,
   ISpørsmål,
 } from './models/Spørsmål';
-import { scrollTilNesteSpørsmal } from './components/spørsmål/SpørsmålUtils';
-import { logStartVeiviser } from './utils/amplitude';
 import { IHeader, tomHeaderTekst } from './models/Header';
 import { InnholdsContainer } from './components/innholdscontainer/InnholdsContainer';
 import './global.css';
@@ -111,8 +109,6 @@ const App = () => {
 
   const startVeiviser = () => {
     settStartet(true);
-
-    logStartVeiviser();
 
     setTimeout(() => {
       if (førsteSpørsmål.current) {

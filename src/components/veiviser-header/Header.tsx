@@ -1,6 +1,5 @@
 import { IHeader } from '../../models/Header';
 import { MikroKort } from '../mikrokort/MikroKort';
-import { logNavigering } from '../../utils/amplitude';
 import { Heading, VStack } from '@navikt/ds-react';
 import VeiviserIkon from '../../icons/VeiviserIkon';
 import styles from './Header.module.css';
@@ -25,18 +24,9 @@ export const Header: React.FC<IProps> = ({ tekst }) => {
       </Heading>
       <hr aria-hidden={true} />
       <MarkdownViewer markdown={tekst.ingress} />
-      <VStack gap={'2'}>
+      <VStack gap={'space-4'}>
         <h3 id={'mikrokort_tittel'}>Mer om hva du kan ha rett til når du</h3>
-        <MikroKort
-          href="https://www.nav.no/alene-med-barn"
-          onClick={() => {
-            logNavigering(
-              'https://www.nav.no/alene-med-barn',
-              'Mer om hva du kan ha rett til når du er helt eller delvis alene med barn',
-              'header'
-            );
-          }}
-        >
+        <MikroKort href="https://www.nav.no/alene-med-barn">
           Er helt eller delvis alene med barn
         </MikroKort>
       </VStack>

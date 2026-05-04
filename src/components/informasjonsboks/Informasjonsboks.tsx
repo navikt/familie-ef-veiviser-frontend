@@ -14,7 +14,6 @@ import TaateflaskeIkon from '../../icons/TaateflaskeIkon';
 import Feilside from '../feilside/Feilside';
 import { hentInformasjonsboksQuery } from '../../utils/sanity';
 import { MikroKort } from '../mikrokort/MikroKort';
-import { logNavigering } from '../../utils/amplitude';
 import { Disclaimer } from './Disclaimer';
 import styles from './Informasjonsboks.module.css';
 interface IInformasjonstekstProps {
@@ -122,7 +121,7 @@ export const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
           <TaateflaskeIkon className={styles.taateflaskeIkon} />
         </div>
         <VStack
-          gap={{ xs: '2', md: '8' }}
+          gap={{ xs: 'space-4', md: 'space-16' }}
           style={{
             padding: '1rem 2rem',
           }}
@@ -152,16 +151,7 @@ export const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
 
           <div>
             <h3>Les mer om hva du kan ha rett til når du</h3>
-            <MikroKort
-              href="https://www.nav.no/alene-med-barn"
-              onClick={() => {
-                logNavigering(
-                  'https://www.nav.no/alene-med-barn',
-                  'Mer om hva du kan ha rett til når du er helt eller delvis alene med barn',
-                  'informasjonsboks'
-                );
-              }}
-            >
+            <MikroKort href="https://www.nav.no/alene-med-barn">
               Er helt eller delvis alene med barn
             </MikroKort>
           </div>
