@@ -25,7 +25,7 @@ export const Header: React.FC<IProps> = ({ tekst }) => {
       </Heading>
       <hr aria-hidden={true} />
       <MarkdownViewer markdown={tekst.ingress} />
-      <VStack gap={'2'}>
+      <VStack gap={'space-4'}>
         <h3 id={'mikrokort_tittel'}>Mer om hva du kan ha rett til når du</h3>
         <MikroKort
           href="https://www.nav.no/alene-med-barn"

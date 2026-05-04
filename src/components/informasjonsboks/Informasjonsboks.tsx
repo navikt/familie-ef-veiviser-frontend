@@ -122,7 +122,7 @@ export const Informasjonsboks: React.FC<IInformasjonstekstProps> = ({
           <TaateflaskeIkon className={styles.taateflaskeIkon} />
         </div>
         <VStack
-          gap={{ xs: '2', md: '8' }}
+          gap={{ xs: 'space-4', md: 'space-16' }}
           style={{
             padding: '1rem 2rem',
           }}

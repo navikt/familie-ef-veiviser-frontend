@@ -38,7 +38,7 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
 
   return (
     <div>
-      <HStack gap={'2'}>
+      <HStack gap={'space-4'}>
         {ikon}
         <Heading size="medium" level="3">
           {overskrift}

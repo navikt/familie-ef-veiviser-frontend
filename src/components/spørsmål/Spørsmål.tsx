@@ -107,7 +107,7 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
             {spørsmål &&
               spørsmål.hjelpetekst_overskrift &&
               spørsmål.hjelpetekst && (
-                <Box padding={'4'}>
+                <Box padding={'space-8'}>
                   <MarkdownViewer markdown={spørsmål.hjelpetekst} />
                 </Box>
               )}
