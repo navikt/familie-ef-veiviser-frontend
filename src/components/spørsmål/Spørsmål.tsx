@@ -14,7 +14,6 @@ import {
   scrollTilNesteSpørsmal,
 } from './SpørsmålUtils';
 import { MarkdownViewer } from '../utils/markdownviewer/MarkdownViewer';
-import { logSpørsmålBesvart } from '../../utils/amplitude';
 import styles from './Spørsmål.module.css';
 
 interface ISpørsmålProps {
@@ -60,8 +59,6 @@ const Spørsmål: React.FC<ISpørsmålProps> = ({
     scroll: boolean
   ): void => {
     svar.checked = true;
-
-    logSpørsmålBesvart(spørsmål.sporsmal_tekst, svar.tekst);
 
     if (svar.done) {
       settFerdig(true);

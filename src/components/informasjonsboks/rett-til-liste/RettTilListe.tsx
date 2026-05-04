@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Heading, HStack, List, VStack } from '@navikt/ds-react';
 import ErrorIkon from '../../../icons/ErrorIkon';
 import SuccessIkon from '../../../icons/SuccessIkon';
-import { logVeiviserFullført } from '../../../utils/amplitude';
 
 interface IRettTilListeProps {
   tekster_i_liste: string[];
@@ -26,15 +25,6 @@ const RettTilListe: React.FC<IRettTilListeProps> = ({
   const listeLabel = ikke_rett_til
     ? 'Det ser ikke ut til at du har rett til'
     : 'Du kan ha rett til';
-
-  useEffect(() => {
-    if (ikke_rett_til) {
-      logVeiviserFullført(tekster_i_liste, undefined);
-    }
-    if (!ikke_rett_til) {
-      logVeiviserFullført(undefined, tekster_i_liste);
-    }
-  });
 
   return (
     <div>
