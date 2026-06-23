@@ -13,7 +13,7 @@
     "@navikt/ds-css": "8.11.0",
     "@navikt/ds-react": "8.11.0",
     "@navikt/ds-tokens": "8.11.0",
-    "@navikt/nav-dekoratoren-moduler": "4.1.1",
+    "@navikt/nav-dekoratoren-moduler": "4.2.2",
     "@sanity/client": "7.22.0",
     "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
